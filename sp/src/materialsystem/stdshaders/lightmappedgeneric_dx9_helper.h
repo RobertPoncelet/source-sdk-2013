@@ -87,6 +87,10 @@ struct LightmappedGeneric_DX9_Vars_t
 	int m_nOutlineEnd0;
 	int m_nOutlineEnd1;
 
+	// SIRE: adding to this
+	int m_nPhong;
+	int m_nPhongExponent;
+	int m_nPhongBoost;
 };
 
 void InitParamsLightmappedGeneric_DX9( CBaseVSShader *pShader, IMaterialVar** params, const char *pMaterialName, LightmappedGeneric_DX9_Vars_t &info );

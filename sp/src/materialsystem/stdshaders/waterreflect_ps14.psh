@@ -1,6 +1,6 @@
 ps.1.4
 
-texld r0, t0_dw.xyw		; sample dudv map
+texld r0, t0		; sample dudv map
 
 phase 
 

@@ -54,3 +54,19 @@ config.cfg
 # shader files
 *.tmp
 
+# build files
+*.exe
+*.pdb
+*.dll
+*.lib
+
+# material system build files
+*.vcs
+*.inc
+sp/src/materialsystem/stdshaders/vshtmp9_tmp/*
+
+# game stuff
+sp/game/mod_episodic/save/*
+sp/game/mod_episodic/screenshots/*
+*.sav
+*.cache

@@ -1,7 +1,7 @@
 "GameInfo"
 {
-	game 		"My First Episodic Mod"
-	title 		"HALF-LIFE'"
+	game 		"sdfg"
+	title 		"sdfg"
 	title2		""
 	supportsvr	1
 

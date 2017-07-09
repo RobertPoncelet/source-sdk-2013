@@ -154,7 +154,7 @@ public:
 	void SetColorPixelShaderConstant( int nPixelReg, int colorVar, int alphaVar );
 
 
-#ifndef GAME_SHADER_DLL
+//#ifndef GAME_SHADER_DLL
 	//
 	// Standard shader passes!
 	//
@@ -307,12 +307,15 @@ public:
 		int m_nTeethForwardVar;
 		int m_nTeethIllumFactorVar;
 		int m_nAlphaTestReference;
+		int m_nPhongVar; // SIRE: stuff
+		int m_nPhongExponent;
+		int m_nPhongBoost;
 		bool m_bSSBump;
 		float m_fSeamlessScale;								// 0.0 = not seamless
 	};
 	void DrawFlashlight_dx90( IMaterialVar** params, 
 		IShaderDynamicAPI *pShaderAPI, IShaderShadow* pShaderShadow, DrawFlashlight_dx90_Vars_t &vars );
-#endif // GAME_SHADER_DLL
+//#endif // GAME_SHADER_DLL
 
 	BlendType_t EvaluateBlendRequirements( int textureVar, bool isBaseTexture, int detailTextureVar = -1 );
 

@@ -1,0 +1,576 @@
+default:  fxctmp9_tmp\example_model_ps20b.inc shaders\fxc\example_model_ps20b.vcs fxctmp9_tmp\example_model_vs20.inc shaders\fxc\example_model_vs20.vcs fxctmp9_tmp\SDK_Bloom_ps20.inc shaders\fxc\SDK_Bloom_ps20.vcs fxctmp9_tmp\SDK_Bloom_ps20b.inc shaders\fxc\SDK_Bloom_ps20b.vcs fxctmp9_tmp\SDK_screenspaceeffect_vs20.inc shaders\fxc\SDK_screenspaceeffect_vs20.vcs fxctmp9_tmp\SDK_bloomadd_ps20.inc shaders\fxc\SDK_bloomadd_ps20.vcs fxctmp9_tmp\SDK_bloomadd_ps20b.inc shaders\fxc\SDK_bloomadd_ps20b.vcs shaders\psh\SDK_LightmappedGeneric.vcs shaders\psh\SDK_LightmappedGeneric_AddBaseAlphaMaskedEnvMap.vcs shaders\psh\SDK_LightmappedGeneric_AddEnvMapMaskNoTexture.vcs shaders\psh\SDK_LightmappedGeneric_AddEnvMapNoTexture.vcs shaders\psh\SDK_lightmappedgeneric_basealphamaskedenvmap.vcs shaders\psh\SDK_LightmappedGeneric_BaseAlphaMaskedEnvMapV2.vcs shaders\psh\SDK_LightmappedGeneric_BaseTexture.vcs vshtmp9_tmp\SDK_LightmappedGeneric_BaseTexture.inc shaders\vsh\SDK_LightmappedGeneric_BaseTexture.vcs shaders\psh\SDK_lightmappedgeneric_basetextureblend.vcs vshtmp9_tmp\SDK_LightmappedGeneric_BaseTextureBlend.inc shaders\vsh\SDK_LightmappedGeneric_BaseTextureBlend.vcs shaders\psh\SDK_LightmappedGeneric_BumpmappedEnvmap.vcs vshtmp9_tmp\SDK_LightmappedGeneric_BumpmappedEnvmap.inc shaders\vsh\SDK_LightmappedGeneric_BumpmappedEnvmap.vcs shaders\psh\SDK_LightmappedGeneric_BumpmappedEnvmap_ps14.vcs vshtmp9_tmp\SDK_LightmappedGeneric_BumpmappedEnvmap_ps14.inc shaders\vsh\SDK_LightmappedGeneric_BumpmappedEnvmap_ps14.vcs shaders\psh\SDK_LightmappedGeneric_BumpmappedLightmap.vcs vshtmp9_tmp\SDK_LightmappedGeneric_BumpmappedLightmap.inc shaders\vsh\SDK_LightmappedGeneric_BumpmappedLightmap.vcs shaders\psh\SDK_LightmappedGeneric_BumpmappedLightmap_base_ps14.vcs vshtmp9_tmp\SDK_LightmappedGeneric_BumpmappedLightmap_base_ps14.inc shaders\vsh\SDK_LightmappedGeneric_BumpmappedLightmap_base_ps14.vcs shaders\psh\SDK_LightmappedGeneric_BumpmappedLightmap_blend_ps14.vcs vshtmp9_tmp\SDK_LightmappedGeneric_BumpmappedLightmap_blend_ps14.inc shaders\vsh\SDK_LightmappedGeneric_BumpmappedLightmap_blend_ps14.vcs shaders\psh\SDK_LightmappedGeneric_Decal.vcs vshtmp9_tmp\SDK_LightmappedGeneric_Decal.inc shaders\vsh\SDK_LightmappedGeneric_Decal.vcs fxctmp9_tmp\SDK_lightmappedgeneric_decal_ps20.inc shaders\fxc\SDK_lightmappedgeneric_decal_ps20.vcs fxctmp9_tmp\SDK_lightmappedgeneric_decal_ps20b.inc shaders\fxc\SDK_lightmappedgeneric_decal_ps20b.vcs fxctmp9_tmp\SDK_lightmappedgeneric_decal_vs20.inc shaders\fxc\SDK_lightmappedgeneric_decal_vs20.vcs shaders\psh\SDK_LightmappedGeneric_Detail.vcs shaders\psh\SDK_LightmappedGeneric_DetailNoTexture.vcs shaders\psh\SDK_LightmappedGeneric_DetailSelfIlluminated.vcs shaders\psh\SDK_lightmappedgeneric_envmap.vcs shaders\psh\SDK_LightmappedGeneric_EnvMapNoTexture.vcs shaders\psh\SDK_LightmappedGeneric_EnvMapV2.vcs fxctmp9_tmp\SDK_lightmappedgeneric_flashlight_vs11.inc shaders\fxc\SDK_lightmappedgeneric_flashlight_vs11.vcs fxctmp9_tmp\SDK_lightmappedgeneric_flashlight_vs20.inc shaders\fxc\SDK_lightmappedgeneric_flashlight_vs20.vcs vshtmp9_tmp\SDK_lightmappedgeneric_inc.inc shaders\vsh\SDK_lightmappedgeneric_inc.vcs vshtmp9_tmp\SDK_LightmappedGeneric_LightingOnly.inc shaders\vsh\SDK_LightmappedGeneric_LightingOnly.vcs shaders\psh\SDK_LightmappedGeneric_LightingOnly_Overbright2.vcs fxctmp9_tmp\SDK_lightmappedgeneric_lightingonly_overbright2_ps11.inc shaders\fxc\SDK_lightmappedgeneric_lightingonly_overbright2_ps11.vcs fxctmp9_tmp\SDK_lightmappedgeneric_lightingonly_vs11.inc shaders\fxc\SDK_lightmappedgeneric_lightingonly_vs11.vcs shaders\psh\SDK_lightmappedgeneric_maskedenvmap.vcs shaders\psh\SDK_LightmappedGeneric_MaskedEnvMapNoTexture.vcs shaders\psh\SDK_LightmappedGeneric_MaskedEnvMapV2.vcs shaders\psh\SDK_LightmappedGeneric_MultiplyByLighting.vcs shaders\psh\SDK_lightmappedgeneric_multiplybylightingbasealphamaskedselfillum.vcs shaders\psh\SDK_lightmappedgeneric_multiplybylightingbasenotexture.vcs shaders\psh\SDK_LightmappedGeneric_MultiplyByLightingNoTexture.vcs shaders\psh\SDK_LightmappedGeneric_MultiplyByLightingSelfIllum.vcs shaders\psh\SDK_LightmappedGeneric_NoTexture.vcs fxctmp9_tmp\SDK_lightmappedgeneric_ps11.inc shaders\fxc\SDK_lightmappedgeneric_ps11.vcs fxctmp9_tmp\SDK_lightmappedgeneric_ps20.inc shaders\fxc\SDK_lightmappedgeneric_ps20.vcs fxctmp9_tmp\SDK_lightmappedgeneric_ps20b.inc shaders\fxc\SDK_lightmappedgeneric_ps20b.vcs shaders\psh\SDK_LightmappedGeneric_SelfIlluminated.vcs shaders\psh\SDK_lightmappedgeneric_selfilluminatedenvmap.vcs shaders\psh\SDK_LightmappedGeneric_SelfIlluminatedEnvMapV2.vcs shaders\psh\SDK_lightmappedgeneric_selfilluminatedmaskedenvmap.vcs shaders\psh\SDK_LightmappedGeneric_SelfIlluminatedMaskedEnvMapV2.vcs shaders\psh\SDK_LightmappedGeneric_SSBumpmappedLightmap.vcs vshtmp9_tmp\SDK_LightmappedGeneric_VertexColor.inc shaders\vsh\SDK_LightmappedGeneric_VertexColor.vcs vshtmp9_tmp\SDK_lightmappedgeneric_vs11.inc shaders\vsh\SDK_lightmappedgeneric_vs11.vcs fxctmp9_tmp\SDK_lightmappedgeneric_vs20.inc shaders\fxc\SDK_lightmappedgeneric_vs20.vcs shaders\psh\WorldTexture.vcs shaders\psh\WorldTwoTextureBlend.vcs shaders\psh\WorldTwoTextureBlend_DetailAlpha.vcs fxctmp9_tmp\worldtwotextureblend_ps20.inc shaders\fxc\worldtwotextureblend_ps20.vcs fxctmp9_tmp\worldtwotextureblend_ps20b.inc shaders\fxc\worldtwotextureblend_ps20b.vcs shaders\psh\WorldTwoTextureBlend_SelfIlluminated.vcs shaders\psh\WorldVertexAlpha.vcs vshtmp9_tmp\WorldVertexAlpha.inc shaders\vsh\WorldVertexAlpha.vcs fxctmp9_tmp\WorldVertexAlpha_ps20.inc shaders\fxc\WorldVertexAlpha_ps20.vcs fxctmp9_tmp\WorldVertexAlpha_ps20b.inc shaders\fxc\WorldVertexAlpha_ps20b.vcs shaders\psh\WorldVertexTransition.vcs vshtmp9_tmp\WorldVertexTransition.inc shaders\vsh\WorldVertexTransition.vcs shaders\psh\WorldVertexTransition_BlendBase2.vcs shaders\psh\WorldVertexTransition_Editor.vcs shaders\psh\WorldVertexTransition_ps14.vcs fxctmp9_tmp\WorldVertexTransition_ps20.inc shaders\fxc\WorldVertexTransition_ps20.vcs fxctmp9_tmp\WorldVertexTransition_ps20b.inc shaders\fxc\WorldVertexTransition_ps20b.vcs shaders\psh\WorldVertexTransition_Seamless.vcs vshtmp9_tmp\WorldVertexTransition_Seamless.inc shaders\vsh\WorldVertexTransition_Seamless.vcs vshtmp9_tmp\WorldVertexTransition_vs14.inc shaders\vsh\WorldVertexTransition_vs14.vcs fxctmp9_tmp\WorldVertexTransition_vs20.inc shaders\fxc\WorldVertexTransition_vs20.vcs fxctmp9_tmp\flashlight_ps20.inc shaders\fxc\flashlight_ps20.vcs fxctmp9_tmp\flashlight_ps20b.inc shaders\fxc\flashlight_ps20b.vcs fxctmp9_tmp\flashlight_ps11.inc shaders\fxc\flashlight_ps11.vcs vshtmp9_tmp\VertexLitGeneric_EnvmappedBumpmap_NoLighting.inc shaders\vsh\VertexLitGeneric_EnvmappedBumpmap_NoLighting.vcs vshtmp9_tmp\VertexLitGeneric_EnvmappedBumpmap_NoLighting_ps14.inc shaders\vsh\VertexLitGeneric_EnvmappedBumpmap_NoLighting_ps14.vcs vshtmp9_tmp\vertexlitgeneric_flashlight_vs11.inc shaders\vsh\vertexlitgeneric_flashlight_vs11.vcs vshtmp9_tmp\unlitgeneric_vs11.inc shaders\vsh\unlitgeneric_vs11.vcs fxctmp9_tmp\ssao_ps30.inc shaders\fxc\ssao_ps30.vcs fxctmp9_tmp\ssao_vs30.inc shaders\fxc\ssao_vs30.vcs fxctmp9_tmp\ssao_combine_ps30.inc shaders\fxc\ssao_combine_ps30.vcs fxctmp9_tmp\ssao_combine_vs30.inc shaders\fxc\ssao_combine_vs30.vcs fxctmp9_tmp\gauss_blur_3x3_ps30.inc shaders\fxc\gauss_blur_3x3_ps30.vcs fxctmp9_tmp\gauss_blur_3x3_vs30.inc shaders\fxc\gauss_blur_3x3_vs30.vcs
+
+fxctmp9_tmp\example_model_ps20b.inc shaders\fxc\example_model_ps20b.vcs: example_model_ps20b.fxc common_flashlight_fxc.h common_fxc.h common_ps_fxc.h shader_constant_register_map.h common_vertexlitgeneric_dx9.h common_hlsl_cpp_consts.h common_pragmas.h
+	perl ..\..\devtools\bin\fxc_prep.pl   -source "..\.." example_model_ps20b.fxc-----example_model_ps20b
+	echo example_model_ps20b.fxc>> filestocopy.txt
+	echo common_flashlight_fxc.h>> filestocopy.txt
+	echo common_fxc.h>> filestocopy.txt
+	echo common_ps_fxc.h>> filestocopy.txt
+	echo shader_constant_register_map.h>> filestocopy.txt
+	echo common_vertexlitgeneric_dx9.h>> filestocopy.txt
+	echo common_hlsl_cpp_consts.h>> filestocopy.txt
+	echo common_pragmas.h>> filestocopy.txt
+
+fxctmp9_tmp\example_model_vs20.inc shaders\fxc\example_model_vs20.vcs: example_model_vs20.fxc common_hlsl_cpp_consts.h common_pragmas.h common_vs_fxc.h common_fxc.h
+	perl ..\..\devtools\bin\fxc_prep.pl   -source "..\.." example_model_vs20.fxc-----example_model_vs20
+	echo example_model_vs20.fxc>> filestocopy.txt
+	echo common_hlsl_cpp_consts.h>> filestocopy.txt
+	echo common_pragmas.h>> filestocopy.txt
+	echo common_vs_fxc.h>> filestocopy.txt
+	echo common_fxc.h>> filestocopy.txt
+
+fxctmp9_tmp\SDK_Bloom_ps20.inc shaders\fxc\SDK_Bloom_ps20.vcs: SDK_Bloom_ps2x.fxc common_ps_fxc.h common_fxc.h common_pragmas.h common_hlsl_cpp_consts.h
+	perl ..\..\devtools\bin\fxc_prep.pl   -source "..\.." SDK_Bloom_ps2x.fxc-----SDK_Bloom_ps20
+	echo SDK_Bloom_ps2x.fxc>> filestocopy.txt
+	echo common_ps_fxc.h>> filestocopy.txt
+	echo common_fxc.h>> filestocopy.txt
+	echo common_pragmas.h>> filestocopy.txt
+	echo common_hlsl_cpp_consts.h>> filestocopy.txt
+
+fxctmp9_tmp\SDK_Bloom_ps20b.inc shaders\fxc\SDK_Bloom_ps20b.vcs: SDK_Bloom_ps2x.fxc common_ps_fxc.h common_fxc.h common_pragmas.h common_hlsl_cpp_consts.h
+	perl ..\..\devtools\bin\fxc_prep.pl   -source "..\.." SDK_Bloom_ps2x.fxc-----SDK_Bloom_ps20b
+	echo SDK_Bloom_ps2x.fxc>> filestocopy.txt
+	echo common_ps_fxc.h>> filestocopy.txt
+	echo common_fxc.h>> filestocopy.txt
+	echo common_pragmas.h>> filestocopy.txt
+	echo common_hlsl_cpp_consts.h>> filestocopy.txt
+
+fxctmp9_tmp\SDK_screenspaceeffect_vs20.inc shaders\fxc\SDK_screenspaceeffect_vs20.vcs: SDK_screenspaceeffect_vs20.fxc common_fxc.h common_vs_fxc.h common_pragmas.h common_hlsl_cpp_consts.h
+	perl ..\..\devtools\bin\fxc_prep.pl   -source "..\.." SDK_screenspaceeffect_vs20.fxc-----SDK_screenspaceeffect_vs20
+	echo SDK_screenspaceeffect_vs20.fxc>> filestocopy.txt
+	echo common_fxc.h>> filestocopy.txt
+	echo common_vs_fxc.h>> filestocopy.txt
+	echo common_pragmas.h>> filestocopy.txt
+	echo common_hlsl_cpp_consts.h>> filestocopy.txt
+
+fxctmp9_tmp\SDK_bloomadd_ps20.inc shaders\fxc\SDK_bloomadd_ps20.vcs: SDK_bloomadd_ps2x.fxc common_ps_fxc.h common_fxc.h common_pragmas.h common_hlsl_cpp_consts.h
+	perl ..\..\devtools\bin\fxc_prep.pl   -source "..\.." SDK_bloomadd_ps2x.fxc-----SDK_bloomadd_ps20
+	echo SDK_bloomadd_ps2x.fxc>> filestocopy.txt
+	echo common_ps_fxc.h>> filestocopy.txt
+	echo common_fxc.h>> filestocopy.txt
+	echo common_pragmas.h>> filestocopy.txt
+	echo common_hlsl_cpp_consts.h>> filestocopy.txt
+
+fxctmp9_tmp\SDK_bloomadd_ps20b.inc shaders\fxc\SDK_bloomadd_ps20b.vcs: SDK_bloomadd_ps2x.fxc common_ps_fxc.h common_fxc.h common_pragmas.h common_hlsl_cpp_consts.h
+	perl ..\..\devtools\bin\fxc_prep.pl   -source "..\.." SDK_bloomadd_ps2x.fxc-----SDK_bloomadd_ps20b
+	echo SDK_bloomadd_ps2x.fxc>> filestocopy.txt
+	echo common_ps_fxc.h>> filestocopy.txt
+	echo common_fxc.h>> filestocopy.txt
+	echo common_pragmas.h>> filestocopy.txt
+	echo common_hlsl_cpp_consts.h>> filestocopy.txt
+
+shaders\psh\SDK_LightmappedGeneric.vcs: SDK_LightmappedGeneric.psh 
+	perl ..\..\devtools\bin\psh_prep.pl   -source "..\.." SDK_LightmappedGeneric.psh-----SDK_LightmappedGeneric
+	echo SDK_LightmappedGeneric.psh>> filestocopy.txt
+
+shaders\psh\SDK_LightmappedGeneric_AddBaseAlphaMaskedEnvMap.vcs: SDK_LightmappedGeneric_AddBaseAlphaMaskedEnvMap.psh 
+	perl ..\..\devtools\bin\psh_prep.pl   -source "..\.." SDK_LightmappedGeneric_AddBaseAlphaMaskedEnvMap.psh-----SDK_LightmappedGeneric_AddBaseAlphaMaskedEnvMap
+	echo SDK_LightmappedGeneric_AddBaseAlphaMaskedEnvMap.psh>> filestocopy.txt
+
+shaders\psh\SDK_LightmappedGeneric_AddEnvMapMaskNoTexture.vcs: SDK_LightmappedGeneric_AddEnvMapMaskNoTexture.psh 
+	perl ..\..\devtools\bin\psh_prep.pl   -source "..\.." SDK_LightmappedGeneric_AddEnvMapMaskNoTexture.psh-----SDK_LightmappedGeneric_AddEnvMapMaskNoTexture
+	echo SDK_LightmappedGeneric_AddEnvMapMaskNoTexture.psh>> filestocopy.txt
+
+shaders\psh\SDK_LightmappedGeneric_AddEnvMapNoTexture.vcs: SDK_LightmappedGeneric_AddEnvMapNoTexture.psh 
+	perl ..\..\devtools\bin\psh_prep.pl   -source "..\.." SDK_LightmappedGeneric_AddEnvMapNoTexture.psh-----SDK_LightmappedGeneric_AddEnvMapNoTexture
+	echo SDK_LightmappedGeneric_AddEnvMapNoTexture.psh>> filestocopy.txt
+
+shaders\psh\SDK_lightmappedgeneric_basealphamaskedenvmap.vcs: SDK_lightmappedgeneric_basealphamaskedenvmap.psh 
+	perl ..\..\devtools\bin\psh_prep.pl   -source "..\.." SDK_lightmappedgeneric_basealphamaskedenvmap.psh-----SDK_lightmappedgeneric_basealphamaskedenvmap
+	echo SDK_lightmappedgeneric_basealphamaskedenvmap.psh>> filestocopy.txt
+
+shaders\psh\SDK_LightmappedGeneric_BaseAlphaMaskedEnvMapV2.vcs: SDK_LightmappedGeneric_BaseAlphaMaskedEnvMapV2.psh 
+	perl ..\..\devtools\bin\psh_prep.pl   -source "..\.." SDK_LightmappedGeneric_BaseAlphaMaskedEnvMapV2.psh-----SDK_LightmappedGeneric_BaseAlphaMaskedEnvMapV2
+	echo SDK_LightmappedGeneric_BaseAlphaMaskedEnvMapV2.psh>> filestocopy.txt
+
+shaders\psh\SDK_LightmappedGeneric_BaseTexture.vcs: SDK_LightmappedGeneric_BaseTexture.psh 
+	perl ..\..\devtools\bin\psh_prep.pl   -source "..\.." SDK_LightmappedGeneric_BaseTexture.psh-----SDK_LightmappedGeneric_BaseTexture
+	echo SDK_LightmappedGeneric_BaseTexture.psh>> filestocopy.txt
+
+vshtmp9_tmp\SDK_LightmappedGeneric_BaseTexture.inc shaders\vsh\SDK_LightmappedGeneric_BaseTexture.vcs: SDK_LightmappedGeneric_BaseTexture.vsh macros.vsh
+	perl ..\..\devtools\bin\vsh_prep.pl   -source "..\.." SDK_LightmappedGeneric_BaseTexture.vsh-----SDK_LightmappedGeneric_BaseTexture
+	echo SDK_LightmappedGeneric_BaseTexture.vsh>> filestocopy.txt
+	echo macros.vsh>> filestocopy.txt
+
+shaders\psh\SDK_lightmappedgeneric_basetextureblend.vcs: SDK_lightmappedgeneric_basetextureblend.psh 
+	perl ..\..\devtools\bin\psh_prep.pl   -source "..\.." SDK_lightmappedgeneric_basetextureblend.psh-----SDK_lightmappedgeneric_basetextureblend
+	echo SDK_lightmappedgeneric_basetextureblend.psh>> filestocopy.txt
+
+vshtmp9_tmp\SDK_LightmappedGeneric_BaseTextureBlend.inc shaders\vsh\SDK_LightmappedGeneric_BaseTextureBlend.vcs: SDK_LightmappedGeneric_BaseTextureBlend.vsh macros.vsh
+	perl ..\..\devtools\bin\vsh_prep.pl   -source "..\.." SDK_LightmappedGeneric_BaseTextureBlend.vsh-----SDK_LightmappedGeneric_BaseTextureBlend
+	echo SDK_LightmappedGeneric_BaseTextureBlend.vsh>> filestocopy.txt
+	echo macros.vsh>> filestocopy.txt
+
+shaders\psh\SDK_LightmappedGeneric_BumpmappedEnvmap.vcs: SDK_LightmappedGeneric_BumpmappedEnvmap.psh 
+	perl ..\..\devtools\bin\psh_prep.pl   -source "..\.." SDK_LightmappedGeneric_BumpmappedEnvmap.psh-----SDK_LightmappedGeneric_BumpmappedEnvmap
+	echo SDK_LightmappedGeneric_BumpmappedEnvmap.psh>> filestocopy.txt
+
+vshtmp9_tmp\SDK_LightmappedGeneric_BumpmappedEnvmap.inc shaders\vsh\SDK_LightmappedGeneric_BumpmappedEnvmap.vcs: SDK_LightmappedGeneric_BumpmappedEnvmap.vsh macros.vsh
+	perl ..\..\devtools\bin\vsh_prep.pl   -source "..\.." SDK_LightmappedGeneric_BumpmappedEnvmap.vsh-----SDK_LightmappedGeneric_BumpmappedEnvmap
+	echo SDK_LightmappedGeneric_BumpmappedEnvmap.vsh>> filestocopy.txt
+	echo macros.vsh>> filestocopy.txt
+
+shaders\psh\SDK_LightmappedGeneric_BumpmappedEnvmap_ps14.vcs: SDK_LightmappedGeneric_BumpmappedEnvmap_ps14.psh 
+	perl ..\..\devtools\bin\psh_prep.pl   -source "..\.." SDK_LightmappedGeneric_BumpmappedEnvmap_ps14.psh-----SDK_LightmappedGeneric_BumpmappedEnvmap_ps14
+	echo SDK_LightmappedGeneric_BumpmappedEnvmap_ps14.psh>> filestocopy.txt
+
+vshtmp9_tmp\SDK_LightmappedGeneric_BumpmappedEnvmap_ps14.inc shaders\vsh\SDK_LightmappedGeneric_BumpmappedEnvmap_ps14.vcs: SDK_LightmappedGeneric_BumpmappedEnvmap_ps14.vsh macros.vsh
+	perl ..\..\devtools\bin\vsh_prep.pl   -source "..\.." SDK_LightmappedGeneric_BumpmappedEnvmap_ps14.vsh-----SDK_LightmappedGeneric_BumpmappedEnvmap_ps14
+	echo SDK_LightmappedGeneric_BumpmappedEnvmap_ps14.vsh>> filestocopy.txt
+	echo macros.vsh>> filestocopy.txt
+
+shaders\psh\SDK_LightmappedGeneric_BumpmappedLightmap.vcs: SDK_LightmappedGeneric_BumpmappedLightmap.psh 
+	perl ..\..\devtools\bin\psh_prep.pl   -source "..\.." SDK_LightmappedGeneric_BumpmappedLightmap.psh-----SDK_LightmappedGeneric_BumpmappedLightmap
+	echo SDK_LightmappedGeneric_BumpmappedLightmap.psh>> filestocopy.txt
+
+vshtmp9_tmp\SDK_LightmappedGeneric_BumpmappedLightmap.inc shaders\vsh\SDK_LightmappedGeneric_BumpmappedLightmap.vcs: SDK_LightmappedGeneric_BumpmappedLightmap.vsh macros.vsh
+	perl ..\..\devtools\bin\vsh_prep.pl   -source "..\.." SDK_LightmappedGeneric_BumpmappedLightmap.vsh-----SDK_LightmappedGeneric_BumpmappedLightmap
+	echo SDK_LightmappedGeneric_BumpmappedLightmap.vsh>> filestocopy.txt
+	echo macros.vsh>> filestocopy.txt
+
+shaders\psh\SDK_LightmappedGeneric_BumpmappedLightmap_base_ps14.vcs: SDK_LightmappedGeneric_BumpmappedLightmap_base_ps14.psh 
+	perl ..\..\devtools\bin\psh_prep.pl   -source "..\.." SDK_LightmappedGeneric_BumpmappedLightmap_base_ps14.psh-----SDK_LightmappedGeneric_BumpmappedLightmap_base_ps14
+	echo SDK_LightmappedGeneric_BumpmappedLightmap_base_ps14.psh>> filestocopy.txt
+
+vshtmp9_tmp\SDK_LightmappedGeneric_BumpmappedLightmap_base_ps14.inc shaders\vsh\SDK_LightmappedGeneric_BumpmappedLightmap_base_ps14.vcs: SDK_LightmappedGeneric_BumpmappedLightmap_base_ps14.vsh macros.vsh
+	perl ..\..\devtools\bin\vsh_prep.pl   -source "..\.." SDK_LightmappedGeneric_BumpmappedLightmap_base_ps14.vsh-----SDK_LightmappedGeneric_BumpmappedLightmap_base_ps14
+	echo SDK_LightmappedGeneric_BumpmappedLightmap_base_ps14.vsh>> filestocopy.txt
+	echo macros.vsh>> filestocopy.txt
+
+shaders\psh\SDK_LightmappedGeneric_BumpmappedLightmap_blend_ps14.vcs: SDK_LightmappedGeneric_BumpmappedLightmap_blend_ps14.psh 
+	perl ..\..\devtools\bin\psh_prep.pl   -source "..\.." SDK_LightmappedGeneric_BumpmappedLightmap_blend_ps14.psh-----SDK_LightmappedGeneric_BumpmappedLightmap_blend_ps14
+	echo SDK_LightmappedGeneric_BumpmappedLightmap_blend_ps14.psh>> filestocopy.txt
+
+vshtmp9_tmp\SDK_LightmappedGeneric_BumpmappedLightmap_blend_ps14.inc shaders\vsh\SDK_LightmappedGeneric_BumpmappedLightmap_blend_ps14.vcs: SDK_LightmappedGeneric_BumpmappedLightmap_blend_ps14.vsh macros.vsh
+	perl ..\..\devtools\bin\vsh_prep.pl   -source "..\.." SDK_LightmappedGeneric_BumpmappedLightmap_blend_ps14.vsh-----SDK_LightmappedGeneric_BumpmappedLightmap_blend_ps14
+	echo SDK_LightmappedGeneric_BumpmappedLightmap_blend_ps14.vsh>> filestocopy.txt
+	echo macros.vsh>> filestocopy.txt
+
+shaders\psh\SDK_LightmappedGeneric_Decal.vcs: SDK_LightmappedGeneric_Decal.psh 
+	perl ..\..\devtools\bin\psh_prep.pl   -source "..\.." SDK_LightmappedGeneric_Decal.psh-----SDK_LightmappedGeneric_Decal
+	echo SDK_LightmappedGeneric_Decal.psh>> filestocopy.txt
+
+vshtmp9_tmp\SDK_LightmappedGeneric_Decal.inc shaders\vsh\SDK_LightmappedGeneric_Decal.vcs: SDK_LightmappedGeneric_Decal.vsh macros.vsh
+	perl ..\..\devtools\bin\vsh_prep.pl   -source "..\.." SDK_LightmappedGeneric_Decal.vsh-----SDK_LightmappedGeneric_Decal
+	echo SDK_LightmappedGeneric_Decal.vsh>> filestocopy.txt
+	echo macros.vsh>> filestocopy.txt
+
+fxctmp9_tmp\SDK_lightmappedgeneric_decal_ps20.inc shaders\fxc\SDK_lightmappedgeneric_decal_ps20.vcs: SDK_lightmappedgeneric_decal_ps2x.fxc common_hlsl_cpp_consts.h common_pragmas.h common_vertexlitgeneric_dx9.h shader_constant_register_map.h common_ps_fxc.h common_fxc.h
+	perl ..\..\devtools\bin\fxc_prep.pl   -source "..\.." SDK_lightmappedgeneric_decal_ps2x.fxc-----SDK_lightmappedgeneric_decal_ps20
+	echo SDK_lightmappedgeneric_decal_ps2x.fxc>> filestocopy.txt
+	echo common_hlsl_cpp_consts.h>> filestocopy.txt
+	echo common_pragmas.h>> filestocopy.txt
+	echo common_vertexlitgeneric_dx9.h>> filestocopy.txt
+	echo shader_constant_register_map.h>> filestocopy.txt
+	echo common_ps_fxc.h>> filestocopy.txt
+	echo common_fxc.h>> filestocopy.txt
+
+fxctmp9_tmp\SDK_lightmappedgeneric_decal_ps20b.inc shaders\fxc\SDK_lightmappedgeneric_decal_ps20b.vcs: SDK_lightmappedgeneric_decal_ps2x.fxc common_hlsl_cpp_consts.h common_pragmas.h common_vertexlitgeneric_dx9.h shader_constant_register_map.h common_ps_fxc.h common_fxc.h
+	perl ..\..\devtools\bin\fxc_prep.pl   -source "..\.." SDK_lightmappedgeneric_decal_ps2x.fxc-----SDK_lightmappedgeneric_decal_ps20b
+	echo SDK_lightmappedgeneric_decal_ps2x.fxc>> filestocopy.txt
+	echo common_hlsl_cpp_consts.h>> filestocopy.txt
+	echo common_pragmas.h>> filestocopy.txt
+	echo common_vertexlitgeneric_dx9.h>> filestocopy.txt
+	echo shader_constant_register_map.h>> filestocopy.txt
+	echo common_ps_fxc.h>> filestocopy.txt
+	echo common_fxc.h>> filestocopy.txt
+
+fxctmp9_tmp\SDK_lightmappedgeneric_decal_vs20.inc shaders\fxc\SDK_lightmappedgeneric_decal_vs20.vcs: SDK_lightmappedgeneric_decal_vs20.fxc common_fxc.h common_hlsl_cpp_consts.h common_pragmas.h common_vs_fxc.h
+	perl ..\..\devtools\bin\fxc_prep.pl   -source "..\.." SDK_lightmappedgeneric_decal_vs20.fxc-----SDK_lightmappedgeneric_decal_vs20
+	echo SDK_lightmappedgeneric_decal_vs20.fxc>> filestocopy.txt
+	echo common_fxc.h>> filestocopy.txt
+	echo common_hlsl_cpp_consts.h>> filestocopy.txt
+	echo common_pragmas.h>> filestocopy.txt
+	echo common_vs_fxc.h>> filestocopy.txt
+
+shaders\psh\SDK_LightmappedGeneric_Detail.vcs: SDK_LightmappedGeneric_Detail.psh 
+	perl ..\..\devtools\bin\psh_prep.pl   -source "..\.." SDK_LightmappedGeneric_Detail.psh-----SDK_LightmappedGeneric_Detail
+	echo SDK_LightmappedGeneric_Detail.psh>> filestocopy.txt
+
+shaders\psh\SDK_LightmappedGeneric_DetailNoTexture.vcs: SDK_LightmappedGeneric_DetailNoTexture.psh 
+	perl ..\..\devtools\bin\psh_prep.pl   -source "..\.." SDK_LightmappedGeneric_DetailNoTexture.psh-----SDK_LightmappedGeneric_DetailNoTexture
+	echo SDK_LightmappedGeneric_DetailNoTexture.psh>> filestocopy.txt
+
+shaders\psh\SDK_LightmappedGeneric_DetailSelfIlluminated.vcs: SDK_LightmappedGeneric_DetailSelfIlluminated.psh 
+	perl ..\..\devtools\bin\psh_prep.pl   -source "..\.." SDK_LightmappedGeneric_DetailSelfIlluminated.psh-----SDK_LightmappedGeneric_DetailSelfIlluminated
+	echo SDK_LightmappedGeneric_DetailSelfIlluminated.psh>> filestocopy.txt
+
+shaders\psh\SDK_lightmappedgeneric_envmap.vcs: SDK_lightmappedgeneric_envmap.psh 
+	perl ..\..\devtools\bin\psh_prep.pl   -source "..\.." SDK_lightmappedgeneric_envmap.psh-----SDK_lightmappedgeneric_envmap
+	echo SDK_lightmappedgeneric_envmap.psh>> filestocopy.txt
+
+shaders\psh\SDK_LightmappedGeneric_EnvMapNoTexture.vcs: SDK_LightmappedGeneric_EnvMapNoTexture.psh 
+	perl ..\..\devtools\bin\psh_prep.pl   -source "..\.." SDK_LightmappedGeneric_EnvMapNoTexture.psh-----SDK_LightmappedGeneric_EnvMapNoTexture
+	echo SDK_LightmappedGeneric_EnvMapNoTexture.psh>> filestocopy.txt
+
+shaders\psh\SDK_LightmappedGeneric_EnvMapV2.vcs: SDK_LightmappedGeneric_EnvMapV2.psh 
+	perl ..\..\devtools\bin\psh_prep.pl   -source "..\.." SDK_LightmappedGeneric_EnvMapV2.psh-----SDK_LightmappedGeneric_EnvMapV2
+	echo SDK_LightmappedGeneric_EnvMapV2.psh>> filestocopy.txt
+
+fxctmp9_tmp\SDK_lightmappedgeneric_flashlight_vs11.inc shaders\fxc\SDK_lightmappedgeneric_flashlight_vs11.vcs: SDK_lightmappedgeneric_flashlight_vs11.fxc common_hlsl_cpp_consts.h common_pragmas.h common_vs_fxc.h common_fxc.h
+	perl ..\..\devtools\bin\fxc_prep.pl   -source "..\.." SDK_lightmappedgeneric_flashlight_vs11.fxc-----SDK_lightmappedgeneric_flashlight_vs11
+	echo SDK_lightmappedgeneric_flashlight_vs11.fxc>> filestocopy.txt
+	echo common_hlsl_cpp_consts.h>> filestocopy.txt
+	echo common_pragmas.h>> filestocopy.txt
+	echo common_vs_fxc.h>> filestocopy.txt
+	echo common_fxc.h>> filestocopy.txt
+
+fxctmp9_tmp\SDK_lightmappedgeneric_flashlight_vs20.inc shaders\fxc\SDK_lightmappedgeneric_flashlight_vs20.vcs: SDK_lightmappedgeneric_flashlight_vs20.fxc common_fxc.h common_hlsl_cpp_consts.h common_pragmas.h common_vs_fxc.h
+	perl ..\..\devtools\bin\fxc_prep.pl   -source "..\.." SDK_lightmappedgeneric_flashlight_vs20.fxc-----SDK_lightmappedgeneric_flashlight_vs20
+	echo SDK_lightmappedgeneric_flashlight_vs20.fxc>> filestocopy.txt
+	echo common_fxc.h>> filestocopy.txt
+	echo common_hlsl_cpp_consts.h>> filestocopy.txt
+	echo common_pragmas.h>> filestocopy.txt
+	echo common_vs_fxc.h>> filestocopy.txt
+
+vshtmp9_tmp\SDK_lightmappedgeneric_inc.inc shaders\vsh\SDK_lightmappedgeneric_inc.vcs: SDK_lightmappedgeneric_inc.vsh macros.vsh
+	perl ..\..\devtools\bin\vsh_prep.pl   -source "..\.." SDK_lightmappedgeneric_inc.vsh-----SDK_lightmappedgeneric_inc
+	echo SDK_lightmappedgeneric_inc.vsh>> filestocopy.txt
+	echo macros.vsh>> filestocopy.txt
+
+vshtmp9_tmp\SDK_LightmappedGeneric_LightingOnly.inc shaders\vsh\SDK_LightmappedGeneric_LightingOnly.vcs: SDK_LightmappedGeneric_LightingOnly.vsh macros.vsh
+	perl ..\..\devtools\bin\vsh_prep.pl   -source "..\.." SDK_LightmappedGeneric_LightingOnly.vsh-----SDK_LightmappedGeneric_LightingOnly
+	echo SDK_LightmappedGeneric_LightingOnly.vsh>> filestocopy.txt
+	echo macros.vsh>> filestocopy.txt
+
+shaders\psh\SDK_LightmappedGeneric_LightingOnly_Overbright2.vcs: SDK_LightmappedGeneric_LightingOnly_Overbright2.psh 
+	perl ..\..\devtools\bin\psh_prep.pl   -source "..\.." SDK_LightmappedGeneric_LightingOnly_Overbright2.psh-----SDK_LightmappedGeneric_LightingOnly_Overbright2
+	echo SDK_LightmappedGeneric_LightingOnly_Overbright2.psh>> filestocopy.txt
+
+fxctmp9_tmp\SDK_lightmappedgeneric_lightingonly_overbright2_ps11.inc shaders\fxc\SDK_lightmappedgeneric_lightingonly_overbright2_ps11.vcs: SDK_lightmappedgeneric_lightingonly_overbright2_ps11.fxc 
+	perl ..\..\devtools\bin\fxc_prep.pl   -source "..\.." SDK_lightmappedgeneric_lightingonly_overbright2_ps11.fxc-----SDK_lightmappedgeneric_lightingonly_overbright2_ps11
+	echo SDK_lightmappedgeneric_lightingonly_overbright2_ps11.fxc>> filestocopy.txt
+
+fxctmp9_tmp\SDK_lightmappedgeneric_lightingonly_vs11.inc shaders\fxc\SDK_lightmappedgeneric_lightingonly_vs11.vcs: SDK_lightmappedgeneric_lightingonly_vs11.fxc common_vs_fxc.h common_pragmas.h common_hlsl_cpp_consts.h common_fxc.h
+	perl ..\..\devtools\bin\fxc_prep.pl   -source "..\.." SDK_lightmappedgeneric_lightingonly_vs11.fxc-----SDK_lightmappedgeneric_lightingonly_vs11
+	echo SDK_lightmappedgeneric_lightingonly_vs11.fxc>> filestocopy.txt
+	echo common_vs_fxc.h>> filestocopy.txt
+	echo common_pragmas.h>> filestocopy.txt
+	echo common_hlsl_cpp_consts.h>> filestocopy.txt
+	echo common_fxc.h>> filestocopy.txt
+
+shaders\psh\SDK_lightmappedgeneric_maskedenvmap.vcs: SDK_lightmappedgeneric_maskedenvmap.psh 
+	perl ..\..\devtools\bin\psh_prep.pl   -source "..\.." SDK_lightmappedgeneric_maskedenvmap.psh-----SDK_lightmappedgeneric_maskedenvmap
+	echo SDK_lightmappedgeneric_maskedenvmap.psh>> filestocopy.txt
+
+shaders\psh\SDK_LightmappedGeneric_MaskedEnvMapNoTexture.vcs: SDK_LightmappedGeneric_MaskedEnvMapNoTexture.psh 
+	perl ..\..\devtools\bin\psh_prep.pl   -source "..\.." SDK_LightmappedGeneric_MaskedEnvMapNoTexture.psh-----SDK_LightmappedGeneric_MaskedEnvMapNoTexture
+	echo SDK_LightmappedGeneric_MaskedEnvMapNoTexture.psh>> filestocopy.txt
+
+shaders\psh\SDK_LightmappedGeneric_MaskedEnvMapV2.vcs: SDK_LightmappedGeneric_MaskedEnvMapV2.psh 
+	perl ..\..\devtools\bin\psh_prep.pl   -source "..\.." SDK_LightmappedGeneric_MaskedEnvMapV2.psh-----SDK_LightmappedGeneric_MaskedEnvMapV2
+	echo SDK_LightmappedGeneric_MaskedEnvMapV2.psh>> filestocopy.txt
+
+shaders\psh\SDK_LightmappedGeneric_MultiplyByLighting.vcs: SDK_LightmappedGeneric_MultiplyByLighting.psh 
+	perl ..\..\devtools\bin\psh_prep.pl   -source "..\.." SDK_LightmappedGeneric_MultiplyByLighting.psh-----SDK_LightmappedGeneric_MultiplyByLighting
+	echo SDK_LightmappedGeneric_MultiplyByLighting.psh>> filestocopy.txt
+
+shaders\psh\SDK_lightmappedgeneric_multiplybylightingbasealphamaskedselfillum.vcs: SDK_lightmappedgeneric_multiplybylightingbasealphamaskedselfillum.psh 
+	perl ..\..\devtools\bin\psh_prep.pl   -source "..\.." SDK_lightmappedgeneric_multiplybylightingbasealphamaskedselfillum.psh-----SDK_lightmappedgeneric_multiplybylightingbasealphamaskedselfillum
+	echo SDK_lightmappedgeneric_multiplybylightingbasealphamaskedselfillum.psh>> filestocopy.txt
+
+shaders\psh\SDK_lightmappedgeneric_multiplybylightingbasenotexture.vcs: SDK_lightmappedgeneric_multiplybylightingbasenotexture.psh 
+	perl ..\..\devtools\bin\psh_prep.pl   -source "..\.." SDK_lightmappedgeneric_multiplybylightingbasenotexture.psh-----SDK_lightmappedgeneric_multiplybylightingbasenotexture
+	echo SDK_lightmappedgeneric_multiplybylightingbasenotexture.psh>> filestocopy.txt
+
+shaders\psh\SDK_LightmappedGeneric_MultiplyByLightingNoTexture.vcs: SDK_LightmappedGeneric_MultiplyByLightingNoTexture.psh 
+	perl ..\..\devtools\bin\psh_prep.pl   -source "..\.." SDK_LightmappedGeneric_MultiplyByLightingNoTexture.psh-----SDK_LightmappedGeneric_MultiplyByLightingNoTexture
+	echo SDK_LightmappedGeneric_MultiplyByLightingNoTexture.psh>> filestocopy.txt
+
+shaders\psh\SDK_LightmappedGeneric_MultiplyByLightingSelfIllum.vcs: SDK_LightmappedGeneric_MultiplyByLightingSelfIllum.psh 
+	perl ..\..\devtools\bin\psh_prep.pl   -source "..\.." SDK_LightmappedGeneric_MultiplyByLightingSelfIllum.psh-----SDK_LightmappedGeneric_MultiplyByLightingSelfIllum
+	echo SDK_LightmappedGeneric_MultiplyByLightingSelfIllum.psh>> filestocopy.txt
+
+shaders\psh\SDK_LightmappedGeneric_NoTexture.vcs: SDK_LightmappedGeneric_NoTexture.psh 
+	perl ..\..\devtools\bin\psh_prep.pl   -source "..\.." SDK_LightmappedGeneric_NoTexture.psh-----SDK_LightmappedGeneric_NoTexture
+	echo SDK_LightmappedGeneric_NoTexture.psh>> filestocopy.txt
+
+fxctmp9_tmp\SDK_lightmappedgeneric_ps11.inc shaders\fxc\SDK_lightmappedgeneric_ps11.vcs: SDK_lightmappedgeneric_ps11.fxc 
+	perl ..\..\devtools\bin\fxc_prep.pl   -source "..\.." SDK_lightmappedgeneric_ps11.fxc-----SDK_lightmappedgeneric_ps11
+	echo SDK_lightmappedgeneric_ps11.fxc>> filestocopy.txt
+
+fxctmp9_tmp\SDK_lightmappedgeneric_ps20.inc shaders\fxc\SDK_lightmappedgeneric_ps20.vcs: SDK_lightmappedgeneric_ps2x.fxc common_flashlight_fxc.h common_fxc.h common_ps_fxc.h lightmappedgeneric_ps2_3_x.h common_pragmas.h common_hlsl_cpp_consts.h common_lightmappedgeneric_fxc.h
+	perl ..\..\devtools\bin\fxc_prep.pl   -source "..\.." SDK_lightmappedgeneric_ps2x.fxc-----SDK_lightmappedgeneric_ps20
+	echo SDK_lightmappedgeneric_ps2x.fxc>> filestocopy.txt
+	echo common_flashlight_fxc.h>> filestocopy.txt
+	echo common_fxc.h>> filestocopy.txt
+	echo common_ps_fxc.h>> filestocopy.txt
+	echo lightmappedgeneric_ps2_3_x.h>> filestocopy.txt
+	echo common_pragmas.h>> filestocopy.txt
+	echo common_hlsl_cpp_consts.h>> filestocopy.txt
+	echo common_lightmappedgeneric_fxc.h>> filestocopy.txt
+
+fxctmp9_tmp\SDK_lightmappedgeneric_ps20b.inc shaders\fxc\SDK_lightmappedgeneric_ps20b.vcs: SDK_lightmappedgeneric_ps2x.fxc common_flashlight_fxc.h common_fxc.h common_ps_fxc.h lightmappedgeneric_ps2_3_x.h common_pragmas.h common_hlsl_cpp_consts.h common_lightmappedgeneric_fxc.h
+	perl ..\..\devtools\bin\fxc_prep.pl   -source "..\.." SDK_lightmappedgeneric_ps2x.fxc-----SDK_lightmappedgeneric_ps20b
+	echo SDK_lightmappedgeneric_ps2x.fxc>> filestocopy.txt
+	echo common_flashlight_fxc.h>> filestocopy.txt
+	echo common_fxc.h>> filestocopy.txt
+	echo common_ps_fxc.h>> filestocopy.txt
+	echo lightmappedgeneric_ps2_3_x.h>> filestocopy.txt
+	echo common_pragmas.h>> filestocopy.txt
+	echo common_hlsl_cpp_consts.h>> filestocopy.txt
+	echo common_lightmappedgeneric_fxc.h>> filestocopy.txt
+
+shaders\psh\SDK_LightmappedGeneric_SelfIlluminated.vcs: SDK_LightmappedGeneric_SelfIlluminated.psh 
+	perl ..\..\devtools\bin\psh_prep.pl   -source "..\.." SDK_LightmappedGeneric_SelfIlluminated.psh-----SDK_LightmappedGeneric_SelfIlluminated
+	echo SDK_LightmappedGeneric_SelfIlluminated.psh>> filestocopy.txt
+
+shaders\psh\SDK_lightmappedgeneric_selfilluminatedenvmap.vcs: SDK_lightmappedgeneric_selfilluminatedenvmap.psh 
+	perl ..\..\devtools\bin\psh_prep.pl   -source "..\.." SDK_lightmappedgeneric_selfilluminatedenvmap.psh-----SDK_lightmappedgeneric_selfilluminatedenvmap
+	echo SDK_lightmappedgeneric_selfilluminatedenvmap.psh>> filestocopy.txt
+
+shaders\psh\SDK_LightmappedGeneric_SelfIlluminatedEnvMapV2.vcs: SDK_LightmappedGeneric_SelfIlluminatedEnvMapV2.psh 
+	perl ..\..\devtools\bin\psh_prep.pl   -source "..\.." SDK_LightmappedGeneric_SelfIlluminatedEnvMapV2.psh-----SDK_LightmappedGeneric_SelfIlluminatedEnvMapV2
+	echo SDK_LightmappedGeneric_SelfIlluminatedEnvMapV2.psh>> filestocopy.txt
+
+shaders\psh\SDK_lightmappedgeneric_selfilluminatedmaskedenvmap.vcs: SDK_lightmappedgeneric_selfilluminatedmaskedenvmap.psh 
+	perl ..\..\devtools\bin\psh_prep.pl   -source "..\.." SDK_lightmappedgeneric_selfilluminatedmaskedenvmap.psh-----SDK_lightmappedgeneric_selfilluminatedmaskedenvmap
+	echo SDK_lightmappedgeneric_selfilluminatedmaskedenvmap.psh>> filestocopy.txt
+
+shaders\psh\SDK_LightmappedGeneric_SelfIlluminatedMaskedEnvMapV2.vcs: SDK_LightmappedGeneric_SelfIlluminatedMaskedEnvMapV2.psh 
+	perl ..\..\devtools\bin\psh_prep.pl   -source "..\.." SDK_LightmappedGeneric_SelfIlluminatedMaskedEnvMapV2.psh-----SDK_LightmappedGeneric_SelfIlluminatedMaskedEnvMapV2
+	echo SDK_LightmappedGeneric_SelfIlluminatedMaskedEnvMapV2.psh>> filestocopy.txt
+
+shaders\psh\SDK_LightmappedGeneric_SSBumpmappedLightmap.vcs: SDK_LightmappedGeneric_SSBumpmappedLightmap.psh 
+	perl ..\..\devtools\bin\psh_prep.pl   -source "..\.." SDK_LightmappedGeneric_SSBumpmappedLightmap.psh-----SDK_LightmappedGeneric_SSBumpmappedLightmap
+	echo SDK_LightmappedGeneric_SSBumpmappedLightmap.psh>> filestocopy.txt
+
+vshtmp9_tmp\SDK_LightmappedGeneric_VertexColor.inc shaders\vsh\SDK_LightmappedGeneric_VertexColor.vcs: SDK_LightmappedGeneric_VertexColor.vsh macros.vsh SDK_LightmappedGeneric_inc.vsh
+	perl ..\..\devtools\bin\vsh_prep.pl   -source "..\.." SDK_LightmappedGeneric_VertexColor.vsh-----SDK_LightmappedGeneric_VertexColor
+	echo SDK_LightmappedGeneric_VertexColor.vsh>> filestocopy.txt
+	echo macros.vsh>> filestocopy.txt
+	echo SDK_LightmappedGeneric_inc.vsh>> filestocopy.txt
+
+vshtmp9_tmp\SDK_lightmappedgeneric_vs11.inc shaders\vsh\SDK_lightmappedgeneric_vs11.vcs: SDK_lightmappedgeneric_vs11.vsh macros.vsh SDK_LightmappedGeneric_inc.vsh
+	perl ..\..\devtools\bin\vsh_prep.pl   -source "..\.." SDK_lightmappedgeneric_vs11.vsh-----SDK_lightmappedgeneric_vs11
+	echo SDK_lightmappedgeneric_vs11.vsh>> filestocopy.txt
+	echo macros.vsh>> filestocopy.txt
+	echo SDK_LightmappedGeneric_inc.vsh>> filestocopy.txt
+
+fxctmp9_tmp\SDK_lightmappedgeneric_vs20.inc shaders\fxc\SDK_lightmappedgeneric_vs20.vcs: SDK_lightmappedgeneric_vs20.fxc common_fxc.h common_vs_fxc.h common_pragmas.h common_hlsl_cpp_consts.h
+	perl ..\..\devtools\bin\fxc_prep.pl   -source "..\.." SDK_lightmappedgeneric_vs20.fxc-----SDK_lightmappedgeneric_vs20
+	echo SDK_lightmappedgeneric_vs20.fxc>> filestocopy.txt
+	echo common_fxc.h>> filestocopy.txt
+	echo common_vs_fxc.h>> filestocopy.txt
+	echo common_pragmas.h>> filestocopy.txt
+	echo common_hlsl_cpp_consts.h>> filestocopy.txt
+
+shaders\psh\WorldTexture.vcs: WorldTexture.psh 
+	perl ..\..\devtools\bin\psh_prep.pl   -source "..\.." WorldTexture.psh-----WorldTexture
+	echo WorldTexture.psh>> filestocopy.txt
+
+shaders\psh\WorldTwoTextureBlend.vcs: WorldTwoTextureBlend.psh 
+	perl ..\..\devtools\bin\psh_prep.pl   -source "..\.." WorldTwoTextureBlend.psh-----WorldTwoTextureBlend
+	echo WorldTwoTextureBlend.psh>> filestocopy.txt
+
+shaders\psh\WorldTwoTextureBlend_DetailAlpha.vcs: WorldTwoTextureBlend_DetailAlpha.psh 
+	perl ..\..\devtools\bin\psh_prep.pl   -source "..\.." WorldTwoTextureBlend_DetailAlpha.psh-----WorldTwoTextureBlend_DetailAlpha
+	echo WorldTwoTextureBlend_DetailAlpha.psh>> filestocopy.txt
+
+fxctmp9_tmp\worldtwotextureblend_ps20.inc shaders\fxc\worldtwotextureblend_ps20.vcs: worldtwotextureblend_ps2x.fxc common_hlsl_cpp_consts.h common_pragmas.h common_ps_fxc.h common_fxc.h common_flashlight_fxc.h
+	perl ..\..\devtools\bin\fxc_prep.pl   -source "..\.." worldtwotextureblend_ps2x.fxc-----worldtwotextureblend_ps20
+	echo worldtwotextureblend_ps2x.fxc>> filestocopy.txt
+	echo common_hlsl_cpp_consts.h>> filestocopy.txt
+	echo common_pragmas.h>> filestocopy.txt
+	echo common_ps_fxc.h>> filestocopy.txt
+	echo common_fxc.h>> filestocopy.txt
+	echo common_flashlight_fxc.h>> filestocopy.txt
+
+fxctmp9_tmp\worldtwotextureblend_ps20b.inc shaders\fxc\worldtwotextureblend_ps20b.vcs: worldtwotextureblend_ps2x.fxc common_hlsl_cpp_consts.h common_pragmas.h common_ps_fxc.h common_fxc.h common_flashlight_fxc.h
+	perl ..\..\devtools\bin\fxc_prep.pl   -source "..\.." worldtwotextureblend_ps2x.fxc-----worldtwotextureblend_ps20b
+	echo worldtwotextureblend_ps2x.fxc>> filestocopy.txt
+	echo common_hlsl_cpp_consts.h>> filestocopy.txt
+	echo common_pragmas.h>> filestocopy.txt
+	echo common_ps_fxc.h>> filestocopy.txt
+	echo common_fxc.h>> filestocopy.txt
+	echo common_flashlight_fxc.h>> filestocopy.txt
+
+shaders\psh\WorldTwoTextureBlend_SelfIlluminated.vcs: WorldTwoTextureBlend_SelfIlluminated.psh 
+	perl ..\..\devtools\bin\psh_prep.pl   -source "..\.." WorldTwoTextureBlend_SelfIlluminated.psh-----WorldTwoTextureBlend_SelfIlluminated
+	echo WorldTwoTextureBlend_SelfIlluminated.psh>> filestocopy.txt
+
+shaders\psh\WorldVertexAlpha.vcs: WorldVertexAlpha.psh 
+	perl ..\..\devtools\bin\psh_prep.pl   -source "..\.." WorldVertexAlpha.psh-----WorldVertexAlpha
+	echo WorldVertexAlpha.psh>> filestocopy.txt
+
+vshtmp9_tmp\WorldVertexAlpha.inc shaders\vsh\WorldVertexAlpha.vcs: WorldVertexAlpha.vsh macros.vsh
+	perl ..\..\devtools\bin\vsh_prep.pl   -source "..\.." WorldVertexAlpha.vsh-----WorldVertexAlpha
+	echo WorldVertexAlpha.vsh>> filestocopy.txt
+	echo macros.vsh>> filestocopy.txt
+
+fxctmp9_tmp\WorldVertexAlpha_ps20.inc shaders\fxc\WorldVertexAlpha_ps20.vcs: WorldVertexAlpha_ps2x.fxc common_hlsl_cpp_consts.h common_pragmas.h common_ps_fxc.h common_fxc.h
+	perl ..\..\devtools\bin\fxc_prep.pl   -source "..\.." WorldVertexAlpha_ps2x.fxc-----WorldVertexAlpha_ps20
+	echo WorldVertexAlpha_ps2x.fxc>> filestocopy.txt
+	echo common_hlsl_cpp_consts.h>> filestocopy.txt
+	echo common_pragmas.h>> filestocopy.txt
+	echo common_ps_fxc.h>> filestocopy.txt
+	echo common_fxc.h>> filestocopy.txt
+
+fxctmp9_tmp\WorldVertexAlpha_ps20b.inc shaders\fxc\WorldVertexAlpha_ps20b.vcs: WorldVertexAlpha_ps2x.fxc common_hlsl_cpp_consts.h common_pragmas.h common_ps_fxc.h common_fxc.h
+	perl ..\..\devtools\bin\fxc_prep.pl   -source "..\.." WorldVertexAlpha_ps2x.fxc-----WorldVertexAlpha_ps20b
+	echo WorldVertexAlpha_ps2x.fxc>> filestocopy.txt
+	echo common_hlsl_cpp_consts.h>> filestocopy.txt
+	echo common_pragmas.h>> filestocopy.txt
+	echo common_ps_fxc.h>> filestocopy.txt
+	echo common_fxc.h>> filestocopy.txt
+
+shaders\psh\WorldVertexTransition.vcs: WorldVertexTransition.psh 
+	perl ..\..\devtools\bin\psh_prep.pl   -source "..\.." WorldVertexTransition.psh-----WorldVertexTransition
+	echo WorldVertexTransition.psh>> filestocopy.txt
+
+vshtmp9_tmp\WorldVertexTransition.inc shaders\vsh\WorldVertexTransition.vcs: WorldVertexTransition.vsh macros.vsh
+	perl ..\..\devtools\bin\vsh_prep.pl   -source "..\.." WorldVertexTransition.vsh-----WorldVertexTransition
+	echo WorldVertexTransition.vsh>> filestocopy.txt
+	echo macros.vsh>> filestocopy.txt
+
+shaders\psh\WorldVertexTransition_BlendBase2.vcs: WorldVertexTransition_BlendBase2.psh 
+	perl ..\..\devtools\bin\psh_prep.pl   -source "..\.." WorldVertexTransition_BlendBase2.psh-----WorldVertexTransition_BlendBase2
+	echo WorldVertexTransition_BlendBase2.psh>> filestocopy.txt
+
+shaders\psh\WorldVertexTransition_Editor.vcs: WorldVertexTransition_Editor.psh 
+	perl ..\..\devtools\bin\psh_prep.pl   -source "..\.." WorldVertexTransition_Editor.psh-----WorldVertexTransition_Editor
+	echo WorldVertexTransition_Editor.psh>> filestocopy.txt
+
+shaders\psh\WorldVertexTransition_ps14.vcs: WorldVertexTransition_ps14.psh 
+	perl ..\..\devtools\bin\psh_prep.pl   -source "..\.." WorldVertexTransition_ps14.psh-----WorldVertexTransition_ps14
+	echo WorldVertexTransition_ps14.psh>> filestocopy.txt
+
+fxctmp9_tmp\WorldVertexTransition_ps20.inc shaders\fxc\WorldVertexTransition_ps20.vcs: WorldVertexTransition_ps2x.fxc common_pragmas.h common_hlsl_cpp_consts.h common_ps_fxc.h common_fxc.h
+	perl ..\..\devtools\bin\fxc_prep.pl   -source "..\.." WorldVertexTransition_ps2x.fxc-----WorldVertexTransition_ps20
+	echo WorldVertexTransition_ps2x.fxc>> filestocopy.txt
+	echo common_pragmas.h>> filestocopy.txt
+	echo common_hlsl_cpp_consts.h>> filestocopy.txt
+	echo common_ps_fxc.h>> filestocopy.txt
+	echo common_fxc.h>> filestocopy.txt
+
+fxctmp9_tmp\WorldVertexTransition_ps20b.inc shaders\fxc\WorldVertexTransition_ps20b.vcs: WorldVertexTransition_ps2x.fxc common_pragmas.h common_hlsl_cpp_consts.h common_ps_fxc.h common_fxc.h
+	perl ..\..\devtools\bin\fxc_prep.pl   -source "..\.." WorldVertexTransition_ps2x.fxc-----WorldVertexTransition_ps20b
+	echo WorldVertexTransition_ps2x.fxc>> filestocopy.txt
+	echo common_pragmas.h>> filestocopy.txt
+	echo common_hlsl_cpp_consts.h>> filestocopy.txt
+	echo common_ps_fxc.h>> filestocopy.txt
+	echo common_fxc.h>> filestocopy.txt
+
+shaders\psh\WorldVertexTransition_Seamless.vcs: WorldVertexTransition_Seamless.psh 
+	perl ..\..\devtools\bin\psh_prep.pl   -source "..\.." WorldVertexTransition_Seamless.psh-----WorldVertexTransition_Seamless
+	echo WorldVertexTransition_Seamless.psh>> filestocopy.txt
+
+vshtmp9_tmp\WorldVertexTransition_Seamless.inc shaders\vsh\WorldVertexTransition_Seamless.vcs: WorldVertexTransition_Seamless.vsh macros.vsh
+	perl ..\..\devtools\bin\vsh_prep.pl   -source "..\.." WorldVertexTransition_Seamless.vsh-----WorldVertexTransition_Seamless
+	echo WorldVertexTransition_Seamless.vsh>> filestocopy.txt
+	echo macros.vsh>> filestocopy.txt
+
+vshtmp9_tmp\WorldVertexTransition_vs14.inc shaders\vsh\WorldVertexTransition_vs14.vcs: WorldVertexTransition_vs14.vsh macros.vsh
+	perl ..\..\devtools\bin\vsh_prep.pl   -source "..\.." WorldVertexTransition_vs14.vsh-----WorldVertexTransition_vs14
+	echo WorldVertexTransition_vs14.vsh>> filestocopy.txt
+	echo macros.vsh>> filestocopy.txt
+
+fxctmp9_tmp\WorldVertexTransition_vs20.inc shaders\fxc\WorldVertexTransition_vs20.vcs: WorldVertexTransition_vs20.fxc common_fxc.h common_vs_fxc.h common_pragmas.h common_hlsl_cpp_consts.h
+	perl ..\..\devtools\bin\fxc_prep.pl   -source "..\.." WorldVertexTransition_vs20.fxc-----WorldVertexTransition_vs20
+	echo WorldVertexTransition_vs20.fxc>> filestocopy.txt
+	echo common_fxc.h>> filestocopy.txt
+	echo common_vs_fxc.h>> filestocopy.txt
+	echo common_pragmas.h>> filestocopy.txt
+	echo common_hlsl_cpp_consts.h>> filestocopy.txt
+
+fxctmp9_tmp\flashlight_ps20.inc shaders\fxc\flashlight_ps20.vcs: flashlight_ps2x.fxc common_fxc.h common_ps_fxc.h common_flashlight_fxc.h common_pragmas.h common_hlsl_cpp_consts.h common_vertexlitgeneric_dx9.h common_lightmappedgeneric_fxc.h shader_constant_register_map.h
+	perl ..\..\devtools\bin\fxc_prep.pl   -source "..\.." flashlight_ps2x.fxc-----flashlight_ps20
+	echo flashlight_ps2x.fxc>> filestocopy.txt
+	echo common_fxc.h>> filestocopy.txt
+	echo common_ps_fxc.h>> filestocopy.txt
+	echo common_flashlight_fxc.h>> filestocopy.txt
+	echo common_pragmas.h>> filestocopy.txt
+	echo common_hlsl_cpp_consts.h>> filestocopy.txt
+	echo common_vertexlitgeneric_dx9.h>> filestocopy.txt
+	echo common_lightmappedgeneric_fxc.h>> filestocopy.txt
+	echo shader_constant_register_map.h>> filestocopy.txt
+
+fxctmp9_tmp\flashlight_ps20b.inc shaders\fxc\flashlight_ps20b.vcs: flashlight_ps2x.fxc common_fxc.h common_ps_fxc.h common_flashlight_fxc.h common_pragmas.h common_hlsl_cpp_consts.h common_vertexlitgeneric_dx9.h common_lightmappedgeneric_fxc.h shader_constant_register_map.h
+	perl ..\..\devtools\bin\fxc_prep.pl   -source "..\.." flashlight_ps2x.fxc-----flashlight_ps20b
+	echo flashlight_ps2x.fxc>> filestocopy.txt
+	echo common_fxc.h>> filestocopy.txt
+	echo common_ps_fxc.h>> filestocopy.txt
+	echo common_flashlight_fxc.h>> filestocopy.txt
+	echo common_pragmas.h>> filestocopy.txt
+	echo common_hlsl_cpp_consts.h>> filestocopy.txt
+	echo common_vertexlitgeneric_dx9.h>> filestocopy.txt
+	echo common_lightmappedgeneric_fxc.h>> filestocopy.txt
+	echo shader_constant_register_map.h>> filestocopy.txt
+
+fxctmp9_tmp\flashlight_ps11.inc shaders\fxc\flashlight_ps11.vcs: flashlight_ps11.fxc common_fxc.h common_ps_fxc.h common_hlsl_cpp_consts.h common_pragmas.h
+	perl ..\..\devtools\bin\fxc_prep.pl   -source "..\.." flashlight_ps11.fxc-----flashlight_ps11
+	echo flashlight_ps11.fxc>> filestocopy.txt
+	echo common_fxc.h>> filestocopy.txt
+	echo common_ps_fxc.h>> filestocopy.txt
+	echo common_hlsl_cpp_consts.h>> filestocopy.txt
+	echo common_pragmas.h>> filestocopy.txt
+
+vshtmp9_tmp\VertexLitGeneric_EnvmappedBumpmap_NoLighting.inc shaders\vsh\VertexLitGeneric_EnvmappedBumpmap_NoLighting.vcs: VertexLitGeneric_EnvmappedBumpmap_NoLighting.vsh macros.vsh
+	perl ..\..\devtools\bin\vsh_prep.pl   -source "..\.." VertexLitGeneric_EnvmappedBumpmap_NoLighting.vsh-----VertexLitGeneric_EnvmappedBumpmap_NoLighting
+	echo VertexLitGeneric_EnvmappedBumpmap_NoLighting.vsh>> filestocopy.txt
+	echo macros.vsh>> filestocopy.txt
+
+vshtmp9_tmp\VertexLitGeneric_EnvmappedBumpmap_NoLighting_ps14.inc shaders\vsh\VertexLitGeneric_EnvmappedBumpmap_NoLighting_ps14.vcs: VertexLitGeneric_EnvmappedBumpmap_NoLighting_ps14.vsh macros.vsh
+	perl ..\..\devtools\bin\vsh_prep.pl   -source "..\.." VertexLitGeneric_EnvmappedBumpmap_NoLighting_ps14.vsh-----VertexLitGeneric_EnvmappedBumpmap_NoLighting_ps14
+	echo VertexLitGeneric_EnvmappedBumpmap_NoLighting_ps14.vsh>> filestocopy.txt
+	echo macros.vsh>> filestocopy.txt
+
+vshtmp9_tmp\vertexlitgeneric_flashlight_vs11.inc shaders\vsh\vertexlitgeneric_flashlight_vs11.vcs: vertexlitgeneric_flashlight_vs11.vsh macros.vsh
+	perl ..\..\devtools\bin\vsh_prep.pl   -source "..\.." vertexlitgeneric_flashlight_vs11.vsh-----vertexlitgeneric_flashlight_vs11
+	echo vertexlitgeneric_flashlight_vs11.vsh>> filestocopy.txt
+	echo macros.vsh>> filestocopy.txt
+
+vshtmp9_tmp\unlitgeneric_vs11.inc shaders\vsh\unlitgeneric_vs11.vcs: unlitgeneric_vs11.vsh macros.vsh UnlitGeneric_inc.vsh
+	perl ..\..\devtools\bin\vsh_prep.pl   -source "..\.." unlitgeneric_vs11.vsh-----unlitgeneric_vs11
+	echo unlitgeneric_vs11.vsh>> filestocopy.txt
+	echo macros.vsh>> filestocopy.txt
+	echo UnlitGeneric_inc.vsh>> filestocopy.txt
+
+fxctmp9_tmp\ssao_ps30.inc shaders\fxc\ssao_ps30.vcs: ssao_ps30.fxc common_hlsl_cpp_consts.h common_pragmas.h common_ps_fxc.h common_fxc.h
+	perl ..\..\devtools\bin\fxc_prep.pl   -source "..\.." ssao_ps30.fxc-----ssao_ps30
+	echo ssao_ps30.fxc>> filestocopy.txt
+	echo common_hlsl_cpp_consts.h>> filestocopy.txt
+	echo common_pragmas.h>> filestocopy.txt
+	echo common_ps_fxc.h>> filestocopy.txt
+	echo common_fxc.h>> filestocopy.txt
+
+fxctmp9_tmp\ssao_vs30.inc shaders\fxc\ssao_vs30.vcs: ssao_vs30.fxc common_vs_fxc.h common_pragmas.h common_hlsl_cpp_consts.h common_fxc.h
+	perl ..\..\devtools\bin\fxc_prep.pl   -source "..\.." ssao_vs30.fxc-----ssao_vs30
+	echo ssao_vs30.fxc>> filestocopy.txt
+	echo common_vs_fxc.h>> filestocopy.txt
+	echo common_pragmas.h>> filestocopy.txt
+	echo common_hlsl_cpp_consts.h>> filestocopy.txt
+	echo common_fxc.h>> filestocopy.txt
+
+fxctmp9_tmp\ssao_combine_ps30.inc shaders\fxc\ssao_combine_ps30.vcs: ssao_combine_ps30.fxc common_fxc.h common_ps_fxc.h common_hlsl_cpp_consts.h common_pragmas.h
+	perl ..\..\devtools\bin\fxc_prep.pl   -source "..\.." ssao_combine_ps30.fxc-----ssao_combine_ps30
+	echo ssao_combine_ps30.fxc>> filestocopy.txt
+	echo common_fxc.h>> filestocopy.txt
+	echo common_ps_fxc.h>> filestocopy.txt
+	echo common_hlsl_cpp_consts.h>> filestocopy.txt
+	echo common_pragmas.h>> filestocopy.txt
+
+fxctmp9_tmp\ssao_combine_vs30.inc shaders\fxc\ssao_combine_vs30.vcs: ssao_combine_vs30.fxc common_hlsl_cpp_consts.h common_pragmas.h common_vs_fxc.h common_fxc.h
+	perl ..\..\devtools\bin\fxc_prep.pl   -source "..\.." ssao_combine_vs30.fxc-----ssao_combine_vs30
+	echo ssao_combine_vs30.fxc>> filestocopy.txt
+	echo common_hlsl_cpp_consts.h>> filestocopy.txt
+	echo common_pragmas.h>> filestocopy.txt
+	echo common_vs_fxc.h>> filestocopy.txt
+	echo common_fxc.h>> filestocopy.txt
+
+fxctmp9_tmp\gauss_blur_3x3_ps30.inc shaders\fxc\gauss_blur_3x3_ps30.vcs: gauss_blur_3x3_ps30.fxc common_hlsl_cpp_consts.h common_pragmas.h common_ps_fxc.h common_fxc.h
+	perl ..\..\devtools\bin\fxc_prep.pl   -source "..\.." gauss_blur_3x3_ps30.fxc-----gauss_blur_3x3_ps30
+	echo gauss_blur_3x3_ps30.fxc>> filestocopy.txt
+	echo common_hlsl_cpp_consts.h>> filestocopy.txt
+	echo common_pragmas.h>> filestocopy.txt
+	echo common_ps_fxc.h>> filestocopy.txt
+	echo common_fxc.h>> filestocopy.txt
+
+fxctmp9_tmp\gauss_blur_3x3_vs30.inc shaders\fxc\gauss_blur_3x3_vs30.vcs: gauss_blur_3x3_vs30.fxc common_hlsl_cpp_consts.h common_pragmas.h common_vs_fxc.h common_fxc.h
+	perl ..\..\devtools\bin\fxc_prep.pl   -source "..\.." gauss_blur_3x3_vs30.fxc-----gauss_blur_3x3_vs30
+	echo gauss_blur_3x3_vs30.fxc>> filestocopy.txt
+	echo common_hlsl_cpp_consts.h>> filestocopy.txt
+	echo common_pragmas.h>> filestocopy.txt
+	echo common_vs_fxc.h>> filestocopy.txt
+	echo common_fxc.h>> filestocopy.txt
+
