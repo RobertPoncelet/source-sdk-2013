@@ -3514,6 +3514,9 @@
     <ClCompile Include="npc_abh_demon.cpp">
       <Filter>Sire</Filter>
     </ClCompile>
+    <ClCompile Include="npc_abh_pedestrian.cpp">
+      <Filter>Sire</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
   </ItemGroup>

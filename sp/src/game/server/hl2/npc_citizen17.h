@@ -76,7 +76,7 @@ public:
 	bool			CreateBehaviors();
 	void			Precache();
 	void			PrecacheAllOfType( CitizenType_t );
-	void			Spawn();
+	virtual void	Spawn(); // SIRE: gotta override this for the pedestrian
 	void			PostNPCInit();
 	virtual void	SelectModel();
 	void			SelectExpressionType();
