@@ -120,6 +120,10 @@ class CAbhPedestrian : public CNPC_Citizen
 	DECLARE_CLASS(CAbhPedestrian, CNPC_Citizen);
 
 public:
+	void Spawn(void);
+	void BecomeDemon(inputdata_t &inputData);
+
+public:
 	//DEFINE_CUSTOM_AI;
 	DECLARE_DATADESC();
 };
@@ -183,6 +187,8 @@ DEFINE_INPUTFUNC(FIELD_VOID, "SetAmmoResupplierOn", InputSetAmmoResupplierOn),
 DEFINE_INPUTFUNC(FIELD_VOID, "SetAmmoResupplierOff", InputSetAmmoResupplierOff),
 DEFINE_INPUTFUNC(FIELD_VOID, "SpeakIdleResponse", InputSpeakIdleResponse),
 
+DEFINE_INPUTFUNC(FIELD_VOID, "BecomeDemon", BecomeDemon),
+
 #if HL2_EPISODIC
 DEFINE_INPUTFUNC(FIELD_VOID, "ThrowHealthKit", InputForceHealthKitToss),
 #endif
@@ -195,3 +201,50 @@ END_DATADESC()
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
+void CAbhPedestrian::Spawn(void) {
+	Precache();
+	SetRenderColor(0, 0, 0);
+	BaseClass::Spawn();
+}
+
+void CAbhPedestrian::BecomeDemon(inputdata_t &inputData) {
+	Msg("oh no spooky moster!!!!");
+
+	CAI_BaseNPC		*pDemon;
+
+	pDemon = (CAI_BaseNPC*)CreateEntityByName("npc_abhdemon");
+
+	if (!pDemon)
+	{
+		Warning("**%s: Can't make %s!\n", GetClassname(), "npc_abhdemon");
+		return;
+	}
+
+	// Stick the crab in whatever squad the zombie was in.
+	pDemon->SetSquadName(m_SquadName);
+
+	// don't pop to floor, fall
+	pDemon->AddSpawnFlags(SF_NPC_FALL_TO_GROUND);
+
+	// make me the crab's owner to avoid collision issues
+	pDemon->SetOwnerEntity(this);
+
+	pDemon->SetAbsOrigin(GetAbsOrigin());
+	pDemon->SetAbsAngles(GetAbsAngles());
+	DispatchSpawn(pDemon);
+
+	pDemon->GetMotor()->SetIdealYaw(GetAbsAngles().y);
+
+	pDemon->SetActivity(ACT_IDLE);
+	pDemon->SetNextThink(gpGlobals->curtime);
+	pDemon->PhysicsSimulate();
+	//pDemon->SetAbsVelocity(vecVelocity);
+
+	// if I have an enemy, stuff that to the headcrab.
+	CBaseEntity *pEnemy;
+	pEnemy = GetEnemy();
+
+	pDemon->m_flNextAttack = gpGlobals->curtime + 1.0f;
+
+	pDemon->Activate();
+}
