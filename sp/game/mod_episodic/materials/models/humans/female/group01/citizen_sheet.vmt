@@ -1,0 +1,16 @@
+"VertexLitGeneric"
+{
+	// Original shader: VertexLitTexture
+	"$basetexture" "Tools/toolsblack"
+	"$halflambert" 0
+	
+	"$bumpmap" "effects/flat_normal"
+	"$phong" 1
+	"$phongexponent" 3
+	"$phongboost" 0.2
+	"$phongfresnelranges" "[0 0.05 8]"
+
+	"$rimlight" 1
+	"$rimlightexponent" 3
+	"$rimboost" 8
+}

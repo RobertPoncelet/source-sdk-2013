@@ -2,7 +2,7 @@
 {
 	"$basetexture" "dev/dev_measuregeneric01b"
 	//"$basetexture" "concrete/concretefloor028a"
-	"$bumpmap" "concrete/concretefloor028a_normal"
+	//"$bumpmap" "concrete/concretefloor028a_normal"
 
 	"$phong" 1
 	"$phongexponent" 32

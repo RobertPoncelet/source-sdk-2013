@@ -7,6 +7,7 @@
 #include "cbase.h"
 
 #include "npc_citizen17.h"
+#include "npc_BaseZombie.h"
 
 #include "ammodef.h"
 #include "globalstate.h"
@@ -113,6 +114,8 @@ static const char *g_ppszModelLocs[] =
 
 #define IsExcludedHead( type, bMedic, iHead) false // see XBox codeline for an implementation
 
+ConVar	abh_pedestrian_radius("abh_pedestrian_radius", "128");
+
 //---------------------------------------------------------
 
 class CAbhPedestrian : public CNPC_Citizen
@@ -120,8 +123,17 @@ class CAbhPedestrian : public CNPC_Citizen
 	DECLARE_CLASS(CAbhPedestrian, CNPC_Citizen);
 
 public:
-	void Spawn(void);
-	void BecomeDemon(inputdata_t &inputData);
+	void Spawn();
+	void Precache();
+	void PrescheduleThink();
+	void InputBecomeDemon(inputdata_t &inputData);
+	void InputStopBeingDemon(inputdata_t &inputData);
+	Class_T Classify();
+
+private:
+	bool bIsDemon;
+	// Don't talk to me or my demon son ever again
+	EHANDLE m_demonHandle;
 
 public:
 	//DEFINE_CUSTOM_AI;
@@ -187,7 +199,9 @@ DEFINE_INPUTFUNC(FIELD_VOID, "SetAmmoResupplierOn", InputSetAmmoResupplierOn),
 DEFINE_INPUTFUNC(FIELD_VOID, "SetAmmoResupplierOff", InputSetAmmoResupplierOff),
 DEFINE_INPUTFUNC(FIELD_VOID, "SpeakIdleResponse", InputSpeakIdleResponse),
 
-DEFINE_INPUTFUNC(FIELD_VOID, "BecomeDemon", BecomeDemon),
+// New stuff
+DEFINE_INPUTFUNC(FIELD_VOID, "BecomeDemon", InputBecomeDemon),
+DEFINE_INPUTFUNC(FIELD_VOID, "StopBeingDemon", InputStopBeingDemon),
 
 #if HL2_EPISODIC
 DEFINE_INPUTFUNC(FIELD_VOID, "ThrowHealthKit", InputForceHealthKitToss),
@@ -201,50 +215,161 @@ END_DATADESC()
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
-void CAbhPedestrian::Spawn(void) {
+void CAbhPedestrian::Spawn(void) 
+{
+	bIsDemon = false;
 	Precache();
 	SetRenderColor(0, 0, 0);
 	BaseClass::Spawn();
 }
 
-void CAbhPedestrian::BecomeDemon(inputdata_t &inputData) {
-	Msg("oh no spooky moster!!!!");
+void CAbhPedestrian::Precache(void) 
+{
+	// Demon stuff
+	PrecacheModel("models/zombie/fast.mdl");
+	PrecacheModel("models/headcrab.mdl");
+#ifdef HL2_EPISODIC
+	PrecacheModel("models/zombie/Fast_torso.mdl");
+	PrecacheScriptSound("NPC_FastZombie.CarEnter1");
+	PrecacheScriptSound("NPC_FastZombie.CarEnter2");
+	PrecacheScriptSound("NPC_FastZombie.CarEnter3");
+	PrecacheScriptSound("NPC_FastZombie.CarEnter4");
+	PrecacheScriptSound("NPC_FastZombie.CarScream");
+#endif
+	PrecacheModel("models/gibs/fast_zombie_torso.mdl");
+	PrecacheModel("models/gibs/fast_zombie_legs.mdl");
 
-	CAI_BaseNPC		*pDemon;
+	PrecacheScriptSound("NPC_FastZombie.LeapAttack");
+	PrecacheScriptSound("NPC_FastZombie.FootstepRight");
+	PrecacheScriptSound("NPC_FastZombie.FootstepLeft");
+	PrecacheScriptSound("NPC_FastZombie.AttackHit");
+	PrecacheScriptSound("NPC_FastZombie.AttackMiss");
+	PrecacheScriptSound("NPC_FastZombie.LeapAttack");
+	PrecacheScriptSound("NPC_FastZombie.Attack");
+	PrecacheScriptSound("NPC_FastZombie.Idle");
+	PrecacheScriptSound("NPC_FastZombie.AlertFar");
+	PrecacheScriptSound("NPC_FastZombie.AlertNear");
+	PrecacheScriptSound("NPC_FastZombie.GallopLeft");
+	PrecacheScriptSound("NPC_FastZombie.GallopRight");
+	PrecacheScriptSound("NPC_FastZombie.Scream");
+	PrecacheScriptSound("NPC_FastZombie.RangeAttack");
+	PrecacheScriptSound("NPC_FastZombie.Frenzy");
+	PrecacheScriptSound("NPC_FastZombie.NoSound");
+	PrecacheScriptSound("NPC_FastZombie.Die");
 
-	pDemon = (CAI_BaseNPC*)CreateEntityByName("npc_abhdemon");
+	PrecacheScriptSound("NPC_FastZombie.Gurgle");
 
-	if (!pDemon)
+	PrecacheScriptSound("NPC_FastZombie.Moan1");
+
+	PrecacheScriptSound("E3_Phystown.Slicer");
+	PrecacheScriptSound("NPC_BaseZombie.PoundDoor");
+	PrecacheScriptSound("NPC_BaseZombie.Swat");
+
+	PrecacheParticleSystem("blood_impact_zombie_01");
+
+	BaseClass::Precache();
+}
+
+void CAbhPedestrian::InputBecomeDemon(inputdata_t &inputData) 
+{
+	bIsDemon = true;
+
+	SetRenderMode(kRenderNone);
+	SetCollisionGroup(COLLISION_GROUP_NONE);
+	if (!IsCurSchedule(SCHED_NPC_FREEZE))
+	{
+		ToggleFreeze();
+	}
+
+	// Spawn the demon
+	CAI_BaseNPC	*demonEnt;
+
+	demonEnt = (CAI_BaseNPC*)CreateEntityByName("npc_abhdemon");
+
+	if (!demonEnt)
 	{
 		Warning("**%s: Can't make %s!\n", GetClassname(), "npc_abhdemon");
 		return;
 	}
 
 	// Stick the crab in whatever squad the zombie was in.
-	pDemon->SetSquadName(m_SquadName);
+	//demonEnt->SetSquadName(m_SquadName);
 
 	// don't pop to floor, fall
-	pDemon->AddSpawnFlags(SF_NPC_FALL_TO_GROUND);
+	demonEnt->AddSpawnFlags(SF_NPC_FALL_TO_GROUND);
 
 	// make me the crab's owner to avoid collision issues
-	pDemon->SetOwnerEntity(this);
+	demonEnt->SetOwnerEntity(this);
 
-	pDemon->SetAbsOrigin(GetAbsOrigin());
-	pDemon->SetAbsAngles(GetAbsAngles());
-	DispatchSpawn(pDemon);
+	demonEnt->SetAbsOrigin(GetAbsOrigin());
+	demonEnt->SetAbsAngles(GetAbsAngles());
+	DispatchSpawn(demonEnt);
 
-	pDemon->GetMotor()->SetIdealYaw(GetAbsAngles().y);
+	demonEnt->GetMotor()->SetIdealYaw(GetAbsAngles().y);
 
-	pDemon->SetActivity(ACT_IDLE);
-	pDemon->SetNextThink(gpGlobals->curtime);
-	pDemon->PhysicsSimulate();
-	//pDemon->SetAbsVelocity(vecVelocity);
+	demonEnt->SetActivity(ACT_IDLE);
+	demonEnt->SetNextThink(gpGlobals->curtime);
+	demonEnt->PhysicsSimulate();
+	//demonEnt->SetAbsVelocity(vecVelocity);
 
 	// if I have an enemy, stuff that to the headcrab.
 	CBaseEntity *pEnemy;
 	pEnemy = GetEnemy();
 
-	pDemon->m_flNextAttack = gpGlobals->curtime + 1.0f;
+	demonEnt->m_flNextAttack = gpGlobals->curtime + 1.0f;
 
-	pDemon->Activate();
+	demonEnt->Activate();
+	
+	m_demonHandle.Set(demonEnt);
+}
+
+void CAbhPedestrian::InputStopBeingDemon(inputdata_t &inputData) 
+{
+	bIsDemon = false;
+
+	SetRenderMode(kRenderNormal);
+	SetCollisionGroup(COLLISION_GROUP_NPC);
+	if (IsCurSchedule(SCHED_NPC_FREEZE))
+	{
+		ToggleFreeze();
+	}
+
+	// stfu
+	CAI_BaseNPC* demon = (CAI_BaseNPC*)m_demonHandle.Get();
+	CTakeDamageInfo info;
+	demon->Event_Killed(info);
+
+	//UTIL_Remove(m_demonHandle);
+}
+
+Class_T	CAbhPedestrian::Classify()
+{
+	return CLASS_CITIZEN_PASSIVE;
+}
+
+void CAbhPedestrian::PrescheduleThink()
+{
+	BaseClass::PrescheduleThink();
+
+	if (bIsDemon || !UTIL_FindClientInPVS(edict()))
+	{
+		return;
+	}
+ 
+	float flThreshold = abh_pedestrian_radius.GetFloat();
+	flThreshold *= flThreshold;
+
+	// check the player.
+	CBasePlayer *pPlayer = UTIL_GetLocalPlayer();
+
+	if (pPlayer && !(pPlayer->GetFlags() & FL_NOTARGET))
+	{
+		float flDist = (pPlayer->GetAbsOrigin() - GetAbsOrigin()).LengthSqr();
+
+		if (flDist < flThreshold && FVisible(pPlayer, MASK_SOLID_BRUSHONLY))
+		{
+			inputdata_t data;
+			InputBecomeDemon(data);
+		}
+	}
 }

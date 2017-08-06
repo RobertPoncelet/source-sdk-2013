@@ -103,7 +103,7 @@ public:
 	bool			ShouldBehaviorSelectSchedule( CAI_BehaviorBase *pBehavior );
 	void 			GatherConditions();
 	void			PredictPlayerPush();
-	void 			PrescheduleThink();
+	virtual void 	PrescheduleThink(); // SIRE: this too
 	void			BuildScheduleTestBits();
 
 	bool			FInViewCone( CBaseEntity *pEntity );
