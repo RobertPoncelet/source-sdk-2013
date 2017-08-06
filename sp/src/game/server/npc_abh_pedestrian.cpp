@@ -115,6 +115,7 @@ static const char *g_ppszModelLocs[] =
 #define IsExcludedHead( type, bMedic, iHead) false // see XBox codeline for an implementation
 
 ConVar	abh_pedestrian_radius("abh_pedestrian_radius", "128");
+ConVar	abh_pedestrian_demon_time("abh_pedestrian_demon_time", "10");
 
 //---------------------------------------------------------
 
@@ -132,6 +133,7 @@ public:
 
 private:
 	bool bIsDemon;
+	float m_timeBecameDemon;
 	// Don't talk to me or my demon son ever again
 	EHANDLE m_demonHandle;
 
@@ -218,6 +220,7 @@ END_DATADESC()
 void CAbhPedestrian::Spawn(void) 
 {
 	bIsDemon = false;
+	m_timeBecameDemon = 0.0f;
 	Precache();
 	SetRenderColor(0, 0, 0);
 	BaseClass::Spawn();
@@ -273,6 +276,7 @@ void CAbhPedestrian::Precache(void)
 void CAbhPedestrian::InputBecomeDemon(inputdata_t &inputData) 
 {
 	bIsDemon = true;
+	m_timeBecameDemon = gpGlobals->curtime;
 
 	SetRenderMode(kRenderNone);
 	SetCollisionGroup(COLLISION_GROUP_NONE);
@@ -325,13 +329,12 @@ void CAbhPedestrian::InputBecomeDemon(inputdata_t &inputData)
 
 void CAbhPedestrian::InputStopBeingDemon(inputdata_t &inputData) 
 {
-	bIsDemon = false;
-
 	SetRenderMode(kRenderNormal);
 	SetCollisionGroup(COLLISION_GROUP_NPC);
-	if (IsCurSchedule(SCHED_NPC_FREEZE))
+	if (bIsDemon) // TODO: Fix this
 	{
 		ToggleFreeze();
+		bIsDemon = false;
 	}
 
 	// stfu
@@ -351,7 +354,17 @@ void CAbhPedestrian::PrescheduleThink()
 {
 	BaseClass::PrescheduleThink();
 
-	if (bIsDemon || !UTIL_FindClientInPVS(edict()))
+	if (bIsDemon)
+	{
+		if (gpGlobals->curtime > m_timeBecameDemon + abh_pedestrian_demon_time.GetFloat())
+		{
+			inputdata_t data;
+			InputStopBeingDemon(data);
+		}
+		return;
+	}
+
+	if (!UTIL_FindClientInPVS(edict()))
 	{
 		return;
 	}
@@ -366,7 +379,7 @@ void CAbhPedestrian::PrescheduleThink()
 	{
 		float flDist = (pPlayer->GetAbsOrigin() - GetAbsOrigin()).LengthSqr();
 
-		if (flDist < flThreshold && FVisible(pPlayer, MASK_SOLID_BRUSHONLY))
+		if (flDist < flThreshold && FInViewCone(pPlayer))//FVisible(pPlayer, MASK_SOLID_BRUSHONLY))
 		{
 			inputdata_t data;
 			InputBecomeDemon(data);

@@ -64,9 +64,22 @@ config.cfg
 *.vcs
 *.inc
 sp/src/materialsystem/stdshaders/vshtmp9_tmp/*
+sp/src/materialsystem/stdshaders/filelist.txt
+sp/src/materialsystem/stdshaders/filelistgen.txt
+sp/src/materialsystem/stdshaders/filestocopy.txt
+sp/src/materialsystem/stdshaders/inclist.txt
+sp/src/materialsystem/stdshaders/makefile*.txt
+sp/src/materialsystem/stdshaders/uniquefilestocopy.txt
+sp/src/materialsystem/stdshaders/vcslist.txt
 
 # game stuff
 sp/game/mod_episodic/save/*
 sp/game/mod_episodic/screenshots/*
+sp/game/mod_episodic/*.dat
 *.sav
 *.cache
+
+# maps 
+*.ain
+*.bsp
+*.prt

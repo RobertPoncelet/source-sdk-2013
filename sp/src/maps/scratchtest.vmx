@@ -1,0 +1,77 @@
+versioninfo
+{
+	"editorversion" "400"
+    "editorbuild" "3325"
+    "mapversion" "0"
+    "formatversion" "100"
+    "prefab" "0"
+}
+visgroups
+{
+}
+world
+{
+	"id" "1"
+    "mapversion" "1"
+    "classname" "worldspawn"
+    "skyname" "sky_wasteland02"
+    solid
+	{
+		"id" "1"
+		side
+		{
+			  "id" "2"
+			  "plane" "(0 0 0) (0 32 0) (32 0 0)"
+			  "material" "tools/toolsnodraw"
+			  "uaxis" "[1 0 0 0] 0.25"
+			  "vaxis" "[0 0 -1 0] 0.25"
+			  "rotation" "0"
+			  "lightmapscale" "16"
+			  "smoothing_groups" "0"
+			  dispinfo{}
+		}
+		side
+		{
+			  "id" "3"
+			  "plane" "(0 0 0) (0 0 32) (0 32 0)"
+			  "material" "tools/toolsnodraw"
+			  "uaxis" "[1 0 0 0] 0.25"
+			  "vaxis" "[0 0 -1 0] 0.25"
+			  "rotation" "0"
+			  "lightmapscale" "16"
+			  "smoothing_groups" "0"
+			  dispinfo{}
+		}
+		side
+		{
+			  "id" "4"
+			  "plane" "(0 0 0) (32 0 0) (0 0 32)"
+			  "material" "tools/toolsnodraw"
+			  "uaxis" "[1 0 0 0] 0.25"
+			  "vaxis" "[0 0 -1 0] 0.25"
+			  "rotation" "0"
+			  "lightmapscale" "16"
+			  "smoothing_groups" "0"
+			  dispinfo{}
+		}
+		side
+		{
+			  "id" "5"
+			  "plane" "(0 32 0) (0 0 32) (32 0 0)"
+			  "material" "tools/toolsnodraw"
+			  "uaxis" "[1 0 0 0] 0.25"
+			  "vaxis" "[0 0 -1 0] 0.25"
+			  "rotation" "0"
+			  "lightmapscale" "16"
+			  "smoothing_groups" "0"
+			  dispinfo{}
+		}
+		editor{}
+	}
+    Hidden{}
+    Group{}
+}
+entity{}
+hidden{}
+cameras{}
+cordon{}

@@ -1,0 +1,25 @@
+versioninfo
+{
+	"editorversion" "400"
+    "editorbuild" "3325"
+    "mapversion" "0"
+    "formatversion" "100"
+    "prefab" "0"
+}
+visgroups
+{
+}
+world
+{
+	"id" "1"
+    "mapversion" "1"
+    "classname" "worldspawn"
+    "skyname" "sky_wasteland02"
+    Solid{}
+    Hidden{}
+    Group{}
+}
+entity{}
+hidden{}
+cameras{}
+cordon{}
