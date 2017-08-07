@@ -51,8 +51,8 @@
 #ifdef HL2_EPISODIC
 
 int AE_PASSENGER_PHYSICS_PUSH;
-int AE_FASTZOMBIE_VEHICLE_LEAP;
-int AE_FASTZOMBIE_VEHICLE_SS_DIE;	// Killed while doing scripted sequence on vehicle
+int AE_TEMP_FASTZOMBIE_VEHICLE_LEAP;
+int AE_TEMP_FASTZOMBIE_VEHICLE_SS_DIE;	// Killed while doing scripted sequence on vehicle
 
 #endif // HL2_EPISODIC
 
@@ -158,11 +158,11 @@ envelopePoint_t envFastZombieVolumeFrenzy[] =
 //=========================================================
 // animation events
 //=========================================================
-int AE_FASTZOMBIE_LEAP;
-int AE_FASTZOMBIE_GALLOP_LEFT;
-int AE_FASTZOMBIE_GALLOP_RIGHT;
-int AE_FASTZOMBIE_CLIMB_LEFT;
-int AE_FASTZOMBIE_CLIMB_RIGHT;
+int AE_TEMP_FASTZOMBIE_LEAP;
+int AE_TEMP_FASTZOMBIE_GALLOP_LEFT;
+int AE_TEMP_FASTZOMBIE_GALLOP_RIGHT;
+int AE_TEMP_FASTZOMBIE_CLIMB_LEFT;
+int AE_TEMP_FASTZOMBIE_CLIMB_RIGHT;
 
 //=========================================================
 // tasks
@@ -179,12 +179,12 @@ enum
 //=========================================================
 // activities
 //=========================================================
-int ACT_FASTZOMBIE_LEAP_SOAR;
-int ACT_FASTZOMBIE_LEAP_STRIKE;
-int ACT_FASTZOMBIE_LAND_RIGHT;
-int ACT_FASTZOMBIE_LAND_LEFT;
-int ACT_FASTZOMBIE_FRENZY;
-int ACT_FASTZOMBIE_BIG_SLASH;
+int ACT_TEMP_FASTZOMBIE_LEAP_SOAR;
+int ACT_TEMP_FASTZOMBIE_LEAP_STRIKE;
+int ACT_TEMP_FASTZOMBIE_LAND_RIGHT;
+int ACT_TEMP_FASTZOMBIE_LAND_LEFT;
+int ACT_TEMP_FASTZOMBIE_FRENZY;
+int ACT_TEMP_FASTZOMBIE_BIG_SLASH;
 
 //=========================================================
 // schedules
@@ -1048,7 +1048,7 @@ int CFastZombie::RangeAttack1Conditions( float flDot, float flDist )
 //-----------------------------------------------------------------------------
 void CFastZombie::HandleAnimEvent( animevent_t *pEvent )
 {
-	if ( pEvent->event == AE_FASTZOMBIE_CLIMB_LEFT || pEvent->event == AE_FASTZOMBIE_CLIMB_RIGHT )
+	if ( pEvent->event == AE_TEMP_FASTZOMBIE_CLIMB_LEFT || pEvent->event == AE_TEMP_FASTZOMBIE_CLIMB_RIGHT )
 	{
 		if( ++m_iClimbCount % 3 == 0 )
 		{
@@ -1059,19 +1059,19 @@ void CFastZombie::HandleAnimEvent( animevent_t *pEvent )
 		return;
 	}
 
-	if ( pEvent->event == AE_FASTZOMBIE_LEAP )
+	if ( pEvent->event == AE_TEMP_FASTZOMBIE_LEAP )
 	{
 		LeapAttack();
 		return;
 	}
 	
-	if ( pEvent->event == AE_FASTZOMBIE_GALLOP_LEFT )
+	if ( pEvent->event == AE_TEMP_FASTZOMBIE_GALLOP_LEFT )
 	{
 		EmitSound( "NPC_FastZombie.GallopLeft" );
 		return;
 	}
 
-	if ( pEvent->event == AE_FASTZOMBIE_GALLOP_RIGHT )
+	if ( pEvent->event == AE_TEMP_FASTZOMBIE_GALLOP_RIGHT )
 	{
 		EmitSound( "NPC_FastZombie.GallopRight" );
 		return;
@@ -1102,14 +1102,14 @@ void CFastZombie::HandleAnimEvent( animevent_t *pEvent )
 #ifdef HL2_EPISODIC
 
 	// Do the leap attack
-	if ( pEvent->event == AE_FASTZOMBIE_VEHICLE_LEAP )
+	if ( pEvent->event == AE_TEMP_FASTZOMBIE_VEHICLE_LEAP )
 	{
 		VehicleLeapAttack();
 		return;
 	}
 
 	// Die while doing an SS in a vehicle
-	if ( pEvent->event == AE_FASTZOMBIE_VEHICLE_SS_DIE )
+	if ( pEvent->event == AE_TEMP_FASTZOMBIE_VEHICLE_SS_DIE )
 	{
 		if ( IsInAVehicle() )
 		{
@@ -1326,11 +1326,11 @@ void CFastZombie::StartTask( const Task_t *pTask )
 
 			if( flDeltaYaw < 0 )
 			{
-				SetIdealActivity( (Activity)ACT_FASTZOMBIE_LAND_RIGHT );
+				SetIdealActivity( (Activity)ACT_TEMP_FASTZOMBIE_LAND_RIGHT );
 			}
 			else
 			{
-				SetIdealActivity( (Activity)ACT_FASTZOMBIE_LAND_LEFT );
+				SetIdealActivity( (Activity)ACT_TEMP_FASTZOMBIE_LAND_LEFT );
 			}
 
 
@@ -1347,7 +1347,7 @@ void CFastZombie::StartTask( const Task_t *pTask )
 		break;
 
 	case TASK_FASTZOMBIE_DO_ATTACK:
-		SetActivity( (Activity)ACT_FASTZOMBIE_LEAP_SOAR );
+		SetActivity( (Activity)ACT_TEMP_FASTZOMBIE_LEAP_SOAR );
 		break;
 
 	default:
@@ -1639,7 +1639,7 @@ void CFastZombie::OnNavJumpHitApex( void )
 //---------------------------------------------------------
 void CFastZombie::OnChangeActivity( Activity NewActivity )
 {
-	if ( NewActivity == ACT_FASTZOMBIE_FRENZY )
+	if ( NewActivity == ACT_TEMP_FASTZOMBIE_FRENZY )
 	{
 		// Scream!!!!
 		EmitSound( "NPC_FastZombie.Frenzy" );
@@ -2031,12 +2031,12 @@ void CFastZombie::UpdateEfficiency( bool bInPVS )
 
 AI_BEGIN_CUSTOM_NPC( npc_fastzombie, CFastZombie )
 
-	DECLARE_ACTIVITY( ACT_FASTZOMBIE_LEAP_SOAR )
-	DECLARE_ACTIVITY( ACT_FASTZOMBIE_LEAP_STRIKE )
-	DECLARE_ACTIVITY( ACT_FASTZOMBIE_LAND_RIGHT )
-	DECLARE_ACTIVITY( ACT_FASTZOMBIE_LAND_LEFT )
-	DECLARE_ACTIVITY( ACT_FASTZOMBIE_FRENZY )
-	DECLARE_ACTIVITY( ACT_FASTZOMBIE_BIG_SLASH )
+	DECLARE_ACTIVITY( ACT_TEMP_FASTZOMBIE_LEAP_SOAR )
+	DECLARE_ACTIVITY( ACT_TEMP_FASTZOMBIE_LEAP_STRIKE )
+	DECLARE_ACTIVITY( ACT_TEMP_FASTZOMBIE_LAND_RIGHT )
+	DECLARE_ACTIVITY( ACT_TEMP_FASTZOMBIE_LAND_LEFT )
+	DECLARE_ACTIVITY( ACT_TEMP_FASTZOMBIE_FRENZY )
+	DECLARE_ACTIVITY( ACT_TEMP_FASTZOMBIE_BIG_SLASH )
 	
 	DECLARE_TASK( TASK_FASTZOMBIE_DO_ATTACK )
 	DECLARE_TASK( TASK_FASTZOMBIE_LAND_RECOVER )
@@ -2047,17 +2047,17 @@ AI_BEGIN_CUSTOM_NPC( npc_fastzombie, CFastZombie )
 	DECLARE_CONDITION( COND_FASTZOMBIE_CLIMB_TOUCH )
 
 	//Adrian: events go here
-	DECLARE_ANIMEVENT( AE_FASTZOMBIE_LEAP )
-	DECLARE_ANIMEVENT( AE_FASTZOMBIE_GALLOP_LEFT )
-	DECLARE_ANIMEVENT( AE_FASTZOMBIE_GALLOP_RIGHT )
-	DECLARE_ANIMEVENT( AE_FASTZOMBIE_CLIMB_LEFT )
-	DECLARE_ANIMEVENT( AE_FASTZOMBIE_CLIMB_RIGHT )
+	DECLARE_ANIMEVENT( AE_TEMP_FASTZOMBIE_LEAP )
+	DECLARE_ANIMEVENT( AE_TEMP_FASTZOMBIE_GALLOP_LEFT )
+	DECLARE_ANIMEVENT( AE_TEMP_FASTZOMBIE_GALLOP_RIGHT )
+	DECLARE_ANIMEVENT( AE_TEMP_FASTZOMBIE_CLIMB_LEFT )
+	DECLARE_ANIMEVENT( AE_TEMP_FASTZOMBIE_CLIMB_RIGHT )
 
 #ifdef HL2_EPISODIC
 	// FIXME: Move!
 	DECLARE_ANIMEVENT( AE_PASSENGER_PHYSICS_PUSH )
-	DECLARE_ANIMEVENT( AE_FASTZOMBIE_VEHICLE_LEAP )
-	DECLARE_ANIMEVENT( AE_FASTZOMBIE_VEHICLE_SS_DIE )
+	DECLARE_ANIMEVENT( AE_TEMP_FASTZOMBIE_VEHICLE_LEAP )
+	DECLARE_ANIMEVENT( AE_TEMP_FASTZOMBIE_VEHICLE_SS_DIE )
 #endif	// HL2_EPISODIC
 
 	//=========================================================
@@ -2069,7 +2069,7 @@ AI_BEGIN_CUSTOM_NPC( npc_fastzombie, CFastZombie )
 
 		"	Tasks"
 		"		TASK_PLAY_SEQUENCE				ACTIVITY:ACT_RANGE_ATTACK1"
-		"		TASK_SET_ACTIVITY				ACTIVITY:ACT_FASTZOMBIE_LEAP_STRIKE"
+		"		TASK_SET_ACTIVITY				ACTIVITY:ACT_TEMP_FASTZOMBIE_LEAP_STRIKE"
 		"		TASK_RANGE_ATTACK1				0"
 		"		TASK_WAIT						0.1"
 		"		TASK_FASTZOMBIE_LAND_RECOVER	0" // essentially just figure out which way to turn.
@@ -2117,10 +2117,10 @@ AI_BEGIN_CUSTOM_NPC( npc_fastzombie, CFastZombie )
 		"		TASK_FACE_ENEMY					0"
 		"		TASK_MELEE_ATTACK1				0"
 		"		TASK_MELEE_ATTACK1				0"
-		"		TASK_PLAY_SEQUENCE				ACTIVITY:ACT_FASTZOMBIE_FRENZY"
+		"		TASK_PLAY_SEQUENCE				ACTIVITY:ACT_TEMP_FASTZOMBIE_FRENZY"
 		"		TASK_SET_FAIL_SCHEDULE			SCHEDULE:SCHED_CHASE_ENEMY"
 		"		TASK_FASTZOMBIE_VERIFY_ATTACK	0"
-		"		TASK_PLAY_SEQUENCE_FACE_ENEMY	ACTIVITY:ACT_FASTZOMBIE_BIG_SLASH"
+		"		TASK_PLAY_SEQUENCE_FACE_ENEMY	ACTIVITY:ACT_TEMP_FASTZOMBIE_BIG_SLASH"
 
 		""
 		"	Interrupts"

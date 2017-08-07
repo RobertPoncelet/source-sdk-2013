@@ -76,6 +76,7 @@ sp/src/materialsystem/stdshaders/vcslist.txt
 sp/game/mod_episodic/save/*
 sp/game/mod_episodic/screenshots/*
 sp/game/mod_episodic/*.dat
+sp/game/ssdk_2013_bin
 *.sav
 *.cache
 
@@ -83,3 +84,9 @@ sp/game/mod_episodic/*.dat
 *.ain
 *.bsp
 *.prt
+
+# MS speech API
+sp/src/utils/sapi51
+
+#idk
+*.vpc_crc
