@@ -695,6 +695,9 @@ void CAbhDemon::Spawn(void)
 	AddClassRelationship(CLASS_CITIZEN_PASSIVE, D_NU, 100);
 
 	BaseClass::Spawn();
+
+	// SIRE: test i guess
+	LeapAttack();
 }
 
 //-----------------------------------------------------------------------------
@@ -1052,7 +1055,6 @@ int CAbhDemon::RangeAttack1Conditions(float flDot, float flDist)
 //-----------------------------------------------------------------------------
 void CAbhDemon::HandleAnimEvent(animevent_t *pEvent)
 {
-	Msg("anim event: %i\n", pEvent->event);
 	if (pEvent->event == AE_FASTZOMBIE_CLIMB_LEFT || pEvent->event == AE_FASTZOMBIE_CLIMB_RIGHT)
 	{
 		if (++m_iClimbCount % 3 == 0)
@@ -1066,7 +1068,6 @@ void CAbhDemon::HandleAnimEvent(animevent_t *pEvent)
 
 	if (pEvent->event == AE_FASTZOMBIE_LEAP)
 	{
-		Msg("Leaping\n");
 		LeapAttack();
 		return;
 	}
@@ -1173,7 +1174,6 @@ void CAbhDemon::LeapAttack(void)
 
 	if (pEnemy)
 	{
-		Msg("starting leap\n");
 		Vector vecEnemyPos = pEnemy->WorldSpaceCenter();
 
 		float gravity = GetCurrentGravity();
@@ -1222,10 +1222,6 @@ void CAbhDemon::LeapAttack(void)
 		// try speeding up a bit.
 		SetAbsVelocity(vecJumpDir);
 		m_flNextAttack = gpGlobals->curtime + 2;
-	}
-	else
-	{
-		Msg("no enemy :(\n");
 	}
 }
 

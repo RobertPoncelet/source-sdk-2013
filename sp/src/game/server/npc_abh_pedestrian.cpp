@@ -34,6 +34,7 @@
 #include "ai_looktarget.h"
 #include "sceneentity.h"
 #include "tier0/icommandline.h"
+#include "npc_fastzombie.h"
 
 // memdbgon must be the last include file in a .cpp file!!!
 #include "tier0/memdbgon.h"
@@ -223,6 +224,7 @@ void CAbhPedestrian::Spawn(void)
 	m_timeBecameDemon = 0.0f;
 	Precache();
 	SetRenderColor(0, 0, 0);
+	AddClassRelationship(CLASS_ZOMBIE, D_NU, 100);
 	BaseClass::Spawn();
 }
 
@@ -306,7 +308,15 @@ void CAbhPedestrian::InputBecomeDemon(inputdata_t &inputData)
 	demonEnt->SetOwnerEntity(this);
 
 	demonEnt->SetAbsOrigin(GetAbsOrigin());
-	demonEnt->SetAbsAngles(GetAbsAngles());
+
+	// make me face the player
+	CBaseEntity *pEnemy = UTIL_GetLocalPlayer();
+	Vector dir = (pEnemy->GetAbsOrigin() - GetAbsOrigin()).Normalized();
+	QAngle angFacing;
+	VectorAngles(dir, angFacing);
+	// only use the yaw
+	angFacing.x = angFacing.y = 0;
+	demonEnt->SetAbsAngles(angFacing);
 	DispatchSpawn(demonEnt);
 
 	demonEnt->GetMotor()->SetIdealYaw(GetAbsAngles().y);
@@ -316,11 +326,7 @@ void CAbhPedestrian::InputBecomeDemon(inputdata_t &inputData)
 	demonEnt->PhysicsSimulate();
 	//demonEnt->SetAbsVelocity(vecVelocity);
 
-	// if I have an enemy, stuff that to the headcrab.
-	CBaseEntity *pEnemy;
-	pEnemy = GetEnemy();
-
-	demonEnt->m_flNextAttack = gpGlobals->curtime + 1.0f;
+	demonEnt->SetEnemy(pEnemy);
 
 	demonEnt->Activate();
 	

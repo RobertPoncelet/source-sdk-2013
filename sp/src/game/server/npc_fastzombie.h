@@ -27,9 +27,9 @@
 
 #ifdef HL2_EPISODIC
 
-int AE_PASSENGER_PHYSICS_PUSH;
+/*int AE_PASSENGER_PHYSICS_PUSH;
 int AE_FASTZOMBIE_VEHICLE_LEAP;
-int AE_FASTZOMBIE_VEHICLE_SS_DIE;	// Killed while doing scripted sequence on vehicle
+int AE_FASTZOMBIE_VEHICLE_SS_DIE;*/	// Killed while doing scripted sequence on vehicle
 
 #endif // HL2_EPISODIC
 
@@ -38,7 +38,7 @@ enum
 	COND_FASTZOMBIE_CLIMB_TOUCH = LAST_BASE_ZOMBIE_CONDITION,
 };
 
-envelopePoint_t envFastZombieVolumeJump[] =
+/*envelopePoint_t envFastZombieVolumeJump[] =
 {
 	{ 1.0f, 1.0f,
 	0.1f, 0.1f,
@@ -129,17 +129,17 @@ envelopePoint_t envFastZombieVolumeFrenzy[] =
 	{ 0.0f, 0.0f,
 	2.0f, 2.0f,
 	},
-};
+};*/
 
 
 //=========================================================
 // animation events
 //=========================================================
-int AE_FASTZOMBIE_LEAP;
+/*int AE_FASTZOMBIE_LEAP;
 int AE_FASTZOMBIE_GALLOP_LEFT;
 int AE_FASTZOMBIE_GALLOP_RIGHT;
 int AE_FASTZOMBIE_CLIMB_LEFT;
-int AE_FASTZOMBIE_CLIMB_RIGHT;
+int AE_FASTZOMBIE_CLIMB_RIGHT;*/
 
 //=========================================================
 // tasks
@@ -156,12 +156,12 @@ enum
 //=========================================================
 // activities
 //=========================================================
-int ACT_FASTZOMBIE_LEAP_SOAR;
+/*int ACT_FASTZOMBIE_LEAP_SOAR;
 int ACT_FASTZOMBIE_LEAP_STRIKE;
 int ACT_FASTZOMBIE_LAND_RIGHT;
 int ACT_FASTZOMBIE_LAND_LEFT;
 int ACT_FASTZOMBIE_FRENZY;
-int ACT_FASTZOMBIE_BIG_SLASH;
+int ACT_FASTZOMBIE_BIG_SLASH;*/
 
 //=========================================================
 // schedules
@@ -284,7 +284,7 @@ private:
 	void			VehicleLeapAttack(void);
 	bool			CanEnterVehicle(CPropJeepEpisodic *pVehicle);
 
-	CAI_PassengerBehaviorZombie		m_PassengerBehavior;
+	//CAI_PassengerBehaviorZombie		m_PassengerBehavior;
 
 #endif	// HL2_EPISODIC
 	//=============================================================================
