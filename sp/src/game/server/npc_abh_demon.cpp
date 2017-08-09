@@ -31,182 +31,18 @@
 #include "episodic/ai_behavior_passenger_zombie.h"
 #endif	// HL2_EPISODIC
 
+#include "npc_fastzombie.h"
+
 // memdbgon must be the last include file in a .cpp file!!!
 #include "tier0/memdbgon.h"
 
-#define ABHDEMON_IDLE_PITCH			35
-#define ABHDEMON_MIN_PITCH			70
-#define ABHDEMON_MAX_PITCH			130
-#define ABHDEMON_SOUND_UPDATE_FREQ	0.5
-
-#define ABHDEMON_MAXLEAP_Z		128
-
-#define ABHDEMON_EXCITE_DIST 480.0
-
-#define ABHDEMON_BASE_FREQ 1.5
-
-// If flying at an enemy, and this close or closer, start playing the maul animation!!
-#define ABHDEMON_MAUL_RANGE	300
-
-#ifdef HL2_EPISODIC
-
-int AE_ABH_PASSENGER_PHYSICS_PUSH;
-int AE_FASTZOMBIE_VEHICLE_LEAP;
-int AE_FASTZOMBIE_VEHICLE_SS_DIE;	// Killed while doing scripted sequence on vehicle
-
-#endif // HL2_EPISODIC
-
-enum
-{
-	COND_ABHDEMON_CLIMB_TOUCH = LAST_BASE_ZOMBIE_CONDITION,
-};
-
-envelopePoint_t envAbhDemonVolumeJump[] =
-{
-	{ 1.0f, 1.0f,
-	0.1f, 0.1f,
-	},
-	{ 0.0f, 0.0f,
-	1.0f, 1.2f,
-	},
-};
-
-envelopePoint_t envAbhDemonVolumePain[] =
-{
-	{ 1.0f, 1.0f,
-	0.1f, 0.1f,
-	},
-	{ 0.0f, 0.0f,
-	1.0f, 1.0f,
-	},
-};
-
-envelopePoint_t envAbhDemonInverseVolumePain[] =
-{
-	{ 0.0f, 0.0f,
-	0.1f, 0.1f,
-	},
-	{ 1.0f, 1.0f,
-	1.0f, 1.0f,
-	},
-};
-
-envelopePoint_t envAbhDemonVolumeJumpPostApex[] =
-{
-	{ 1.0f, 1.0f,
-	0.1f, 0.1f,
-	},
-	{ 0.0f, 0.0f,
-	1.0f, 1.2f,
-	},
-};
-
-envelopePoint_t envAbhDemonVolumeClimb[] =
-{
-	{ 1.0f, 1.0f,
-	0.1f, 0.1f,
-	},
-	{ 0.0f, 0.0f,
-	0.2f, 0.2f,
-	},
-};
-
-envelopePoint_t envAbhDemonMoanVolumeFast[] =
-{
-	{ 1.0f, 1.0f,
-	0.1f, 0.1f,
-	},
-	{ 0.0f, 0.0f,
-	0.2f, 0.3f,
-	},
-};
-
-envelopePoint_t envAbhDemonMoanVolume[] =
-{
-	{ 1.0f, 1.0f,
-	0.1f, 0.1f,
-	},
-	{ 1.0f, 1.0f,
-	0.2f, 0.2f,
-	},
-	{ 0.0f, 0.0f,
-	1.0f, 0.4f,
-	},
-};
-
-envelopePoint_t envAbhDemonFootstepVolume[] =
-{
-	{ 1.0f, 1.0f,
-	0.1f, 0.1f,
-	},
-	{ 0.7f, 0.7f,
-	0.2f, 0.2f,
-	},
-};
-
-envelopePoint_t envAbhDemonVolumeFrenzy[] =
-{
-	{ 1.0f, 1.0f,
-	0.1f, 0.1f,
-	},
-	{ 0.0f, 0.0f,
-	2.0f, 2.0f,
-	},
-};
-
-
-//=========================================================
-// animation events
-//=========================================================
-int AE_FASTZOMBIE_LEAP;
-int AE_FASTZOMBIE_GALLOP_LEFT;
-int AE_FASTZOMBIE_GALLOP_RIGHT;
-int AE_FASTZOMBIE_CLIMB_LEFT;
-int AE_FASTZOMBIE_CLIMB_RIGHT;
-
-//=========================================================
-// tasks
-//=========================================================
-enum
-{
-	TASK_ABHDEMON_DO_ATTACK = LAST_SHARED_TASK + 100,	// again, my !!!HACKHACK
-	TASK_ABHDEMON_LAND_RECOVER,
-	TASK_ABHDEMON_UNSTICK_JUMP,
-	TASK_ABHDEMON_JUMP_BACK,
-	TASK_ABHDEMON_VERIFY_ATTACK,
-};
-
-//=========================================================
-// activities
-//=========================================================
-int ACT_FASTZOMBIE_LEAP_SOAR;
-int ACT_FASTZOMBIE_LEAP_STRIKE;
-int ACT_FASTZOMBIE_LAND_RIGHT;
-int ACT_FASTZOMBIE_LAND_LEFT;
-int ACT_FASTZOMBIE_FRENZY;
-int ACT_FASTZOMBIE_BIG_SLASH;
-
-//=========================================================
-// schedules
-//=========================================================
-enum
-{
-	SCHED_ABHDEMON_RANGE_ATTACK1 = LAST_SHARED_SCHEDULE + 100, // hack to get past the base zombie's schedules
-	SCHED_ABHDEMON_UNSTICK_JUMP,
-	SCHED_ABHDEMON_CLIMBING_UNSTICK_JUMP,
-	SCHED_ABHDEMON_MELEE_ATTACK1,
-	SCHED_ABHDEMON_TORSO_MELEE_ATTACK1,
-};
-
-
-
 //=========================================================
 //=========================================================
-class CAbhDemon : public CNPC_BaseZombie
+class CAbhDemon : public CFastZombie
 {
-	DECLARE_CLASS(CAbhDemon, CNPC_BaseZombie);
+	DECLARE_CLASS(CAbhDemon, CFastZombie);
 
-public:
+public:/*
 	void Spawn(void);
 	void Precache(void);
 
@@ -336,7 +172,7 @@ private:
 	CSoundPatch	*m_pLayer2; // used for climbing ladders, and when jumping (pre apex)
 
 public:
-	DEFINE_CUSTOM_AI;
+	DEFINE_CUSTOM_AI;*/
 	DECLARE_DATADESC();
 };
 
@@ -370,24 +206,12 @@ DEFINE_INPUTFUNC(FIELD_STRING, "AttachToVehicle", InputAttachToVehicle),
 
 END_DATADESC()
 
-
-const char *CAbhDemon::pMoanSounds[] =
-{
-	"NPC_FastZombie.Moan1",
-};
-
-//-----------------------------------------------------------------------------
-// The model we use for our legs when we get blowed up.
-//-----------------------------------------------------------------------------
-static const char *s_pLegsModel = "models/gibs/fast_zombie_legs.mdl";
-
-
 //-----------------------------------------------------------------------------
 // Purpose: 
 //
 //
 //-----------------------------------------------------------------------------
-void CAbhDemon::Precache(void)
+/*void CAbhDemon::Precache(void)
 {
 	PrecacheModel("models/zombie/fast.mdl");
 #ifdef HL2_EPISODIC
@@ -675,7 +499,7 @@ void CAbhDemon::Spawn(void)
 	m_flFieldOfView = 0.2;
 
 	CapabilitiesClear();
-	CapabilitiesAdd(bits_CAP_MOVE_CLIMB | bits_CAP_MOVE_JUMP | bits_CAP_MOVE_GROUND | bits_CAP_INNATE_RANGE_ATTACK1 /* | bits_CAP_INNATE_MELEE_ATTACK1 */);
+	CapabilitiesAdd(bits_CAP_MOVE_CLIMB | bits_CAP_MOVE_JUMP | bits_CAP_MOVE_GROUND | bits_CAP_INNATE_RANGE_ATTACK1);
 
 	if (m_fIsTorso == true)
 	{
@@ -770,7 +594,7 @@ void CAbhDemon::SetZombieModel(void)
 		SetHullType(HULL_HUMAN);
 	}
 
-	SetBodygroup(ZOMBIE_BODYGROUP_HEADCRAB, /*!m_fIsHeadless*/ 0); // SIRE: no headcrabs allowed
+	SetBodygroup(ZOMBIE_BODYGROUP_HEADCRAB, 0); // SIRE: no headcrabs allowed
 
 	SetHullSizeNormal(true);
 	SetDefaultEyeOffset();
@@ -1819,39 +1643,6 @@ void CAbhDemon::Event_Killed(const CTakeDamageInfo &info)
 
 	CTakeDamageInfo dInfo = info;
 
-#if 0
-
-	// Become a server-side ragdoll and create a constraint at the hand
-	if (m_PassengerBehavior.GetPassengerState() == PASSENGER_STATE_INSIDE)
-	{
-		IPhysicsObject *pVehiclePhys = m_PassengerBehavior.GetTargetVehicle()->GetServerVehicle()->GetVehicleEnt()->VPhysicsGetObject();
-		CBaseAnimating *pVehicleAnimating = m_PassengerBehavior.GetTargetVehicle()->GetServerVehicle()->GetVehicleEnt()->GetBaseAnimating();
-		int nRightHandBone = 31;//GetBaseAnimating()->LookupBone( "ValveBiped.Bip01_R_Finger2" );
-		Vector vecRightHandPos;
-		QAngle vecRightHandAngle;
-		GetAttachment(LookupAttachment("Blood_Right"), vecRightHandPos, vecRightHandAngle);
-		//CTakeDamageInfo dInfo( GetEnemy(), GetEnemy(), RandomVector( -200, 200 ), WorldSpaceCenter(), 50.0f, DMG_CRUSH );
-		dInfo.SetDamageType(info.GetDamageType() | DMG_REMOVENORAGDOLL);
-		dInfo.ScaleDamageForce(10.0f);
-		CBaseEntity *pRagdoll = CreateServerRagdoll(GetBaseAnimating(), 0, info, COLLISION_GROUP_DEBRIS);
-
-		/*
-		GetBaseAnimating()->GetBonePosition( nRightHandBone, vecRightHandPos, vecRightHandAngle );
-
-		CBaseEntity *pRagdoll = CreateServerRagdollAttached(	GetBaseAnimating(),
-		vec3_origin,
-		-1,
-		COLLISION_GROUP_DEBRIS,
-		pVehiclePhys,
-		pVehicleAnimating,
-		0,
-		vecRightHandPos,
-		nRightHandBone,
-		vec3_origin );*/
-
-	}
-#endif
-
 	BaseClass::Event_Killed(dInfo);
 }
 
@@ -2169,6 +1960,6 @@ SCHED_ABHDEMON_TORSO_MELEE_ATTACK1,
 "		COND_ENEMY_OCCLUDED"
 );
 
-AI_END_CUSTOM_NPC()
+AI_END_CUSTOM_NPC()*/
 
 

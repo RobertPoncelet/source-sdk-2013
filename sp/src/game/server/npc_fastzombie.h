@@ -11,6 +11,8 @@
 #pragma once
 #endif
 
+#include "ai_behavior_passenger_zombie.h"
+
 #define FASTZOMBIE_IDLE_PITCH			35
 #define FASTZOMBIE_MIN_PITCH			70
 #define FASTZOMBIE_MAX_PITCH			130
@@ -284,7 +286,7 @@ private:
 	void			VehicleLeapAttack(void);
 	bool			CanEnterVehicle(CPropJeepEpisodic *pVehicle);
 
-	//CAI_PassengerBehaviorZombie		m_PassengerBehavior;
+	CAI_PassengerBehaviorZombie		m_PassengerBehavior;
 
 #endif	// HL2_EPISODIC
 	//=============================================================================
