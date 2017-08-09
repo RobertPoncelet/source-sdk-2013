@@ -158,12 +158,12 @@ enum
 //=========================================================
 // activities
 //=========================================================
-/*int ACT_FASTZOMBIE_LEAP_SOAR;
-int ACT_FASTZOMBIE_LEAP_STRIKE;
-int ACT_FASTZOMBIE_LAND_RIGHT;
-int ACT_FASTZOMBIE_LAND_LEFT;
-int ACT_FASTZOMBIE_FRENZY;
-int ACT_FASTZOMBIE_BIG_SLASH;*/
+extern int ACT_FASTZOMBIE_LEAP_SOAR;
+extern int ACT_FASTZOMBIE_LEAP_STRIKE;
+extern int ACT_FASTZOMBIE_LAND_RIGHT;
+extern int ACT_FASTZOMBIE_LAND_LEFT;
+extern int ACT_FASTZOMBIE_FRENZY;
+extern int ACT_FASTZOMBIE_BIG_SLASH;
 
 //=========================================================
 // schedules
@@ -186,10 +186,10 @@ class CFastZombie : public CNPC_BaseZombie
 	DECLARE_CLASS(CFastZombie, CNPC_BaseZombie);
 
 public:
-	void Spawn(void);
+	virtual void Spawn(void);
 	void Precache(void);
 
-	void SetZombieModel(void);
+	virtual void SetZombieModel(void);
 	bool CanSwatPhysicsObjects(void) { return false; }
 
 	int	TranslateSchedule(int scheduleType);

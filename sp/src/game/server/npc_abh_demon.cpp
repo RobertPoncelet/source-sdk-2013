@@ -42,137 +42,13 @@ class CAbhDemon : public CFastZombie
 {
 	DECLARE_CLASS(CAbhDemon, CFastZombie);
 
-public:/*
+public:
 	void Spawn(void);
-	void Precache(void);
 
 	void SetZombieModel(void);
-	bool CanSwatPhysicsObjects(void) { return false; }
-
-	int	TranslateSchedule(int scheduleType);
-
-	Activity NPC_TranslateActivity(Activity baseAct);
-
-	void LeapAttackTouch(CBaseEntity *pOther);
-	void ClimbTouch(CBaseEntity *pOther);
-
-	void StartTask(const Task_t *pTask);
-	void RunTask(const Task_t *pTask);
-	int SelectSchedule(void);
-	void OnScheduleChange(void);
-
-	void PrescheduleThink(void);
-
-	float InnateRange1MaxRange(void);
-	int RangeAttack1Conditions(float flDot, float flDist);
-	int MeleeAttack1Conditions(float flDot, float flDist);
-
-	virtual float GetClawAttackRange() const { return 50; }
-
-	bool ShouldPlayFootstepMoan(void) { return false; }
-
-	void HandleAnimEvent(animevent_t *pEvent);
-
-	void PostNPCInit(void);
-
-	void LeapAttack(void);
-	void LeapAttackSound(void);
-
-	void BecomeTorso(const Vector &vecTorsoForce, const Vector &vecLegsForce);
-
-	bool IsJumpLegal(const Vector &startPos, const Vector &apex, const Vector &endPos) const;
-	bool MovementCost(int moveType, const Vector &vecStart, const Vector &vecEnd, float *pCost);
-	bool ShouldFailNav(bool bMovementFailed);
-
-	int	SelectFailSchedule(int failedSchedule, int failedTask, AI_TaskFailureCode_t taskFailCode);
-
-	const char *GetMoanSound(int nSound);
-
-	void OnChangeActivity(Activity NewActivity);
-	void OnStateChange(NPC_STATE OldState, NPC_STATE NewState);
-	void Event_Killed(const CTakeDamageInfo &info);
-	bool ShouldBecomeTorso(const CTakeDamageInfo &info, float flDamageThreshold);
-
-	virtual Vector GetAutoAimCenter() { return WorldSpaceCenter() - Vector(0, 0, 12.0f); }
-
-	void PainSound(const CTakeDamageInfo &info);
-	void DeathSound(const CTakeDamageInfo &info);
-	void AlertSound(void);
-	void IdleSound(void);
-	void AttackSound(void);
-	void AttackHitSound(void);
-	void AttackMissSound(void);
-	void FootstepSound(bool fRightFoot);
-	void FootscuffSound(bool fRightFoot) {}; // fast guy doesn't scuff
-	void StopLoopingSounds(void);
-
-	void SoundInit(void);
-	void SetIdleSoundState(void);
-	void SetAngrySoundState(void);
-
-	void BuildScheduleTestBits(void);
-
-	void BeginNavJump(void);
-	void EndNavJump(void);
-
-	bool IsNavJumping(void) { return m_fIsNavJumping; }
-	void OnNavJumpHitApex(void);
-
-	void BeginAttackJump(void);
-	void EndAttackJump(void);
-
-	float		MaxYawSpeed(void);
 
 	virtual void ReleaseHeadcrab(const Vector &vecOrigin, const Vector &vecVelocity, bool fRemoveHead, bool fRagdollBody, bool fRagdollCrab = false);
-	virtual const char *GetHeadcrabClassname(void);
-	virtual const char *GetHeadcrabModel(void);
-	virtual const char *GetLegsModel(void);
-	virtual const char *GetTorsoModel(void);
 
-	//=============================================================================
-#ifdef HL2_EPISODIC
-
-public:
-	virtual bool	CreateBehaviors(void);
-	virtual void	VPhysicsCollision(int index, gamevcollisionevent_t *pEvent);
-	virtual	void	UpdateEfficiency(bool bInPVS);
-	virtual bool	IsInAVehicle(void);
-	void			InputAttachToVehicle(inputdata_t &inputdata);
-	void			VehicleLeapAttackTouch(CBaseEntity *pOther);
-
-private:
-	void			VehicleLeapAttack(void);
-	bool			CanEnterVehicle(CPropJeepEpisodic *pVehicle);
-
-	CAI_PassengerBehaviorZombie		m_PassengerBehavior;
-
-#endif	// HL2_EPISODIC
-	//=============================================================================
-
-protected:
-
-	static const char *pMoanSounds[];
-
-	// Sound stuff
-	float			m_flDistFactor;
-	unsigned char	m_iClimbCount; // counts rungs climbed (for sound)
-	bool			m_fIsNavJumping;
-	bool			m_fIsAttackJumping;
-	bool			m_fHitApex;
-	mutable float	m_flJumpDist;
-
-	bool			m_fHasScreamed;
-
-private:
-	float	m_flNextMeleeAttack;
-	bool	m_fJustJumped;
-	float	m_flJumpStartAltitude;
-	float	m_flTimeUpdateSound;
-
-	CSoundPatch	*m_pLayer2; // used for climbing ladders, and when jumping (pre apex)
-
-public:
-	DEFINE_CUSTOM_AI;*/
 	DECLARE_DATADESC();
 };
 
@@ -464,7 +340,7 @@ void CAbhDemon::SetAngrySoundState(void)
 	// Second Layer
 	ENVELOPE_CONTROLLER.SoundChangePitch(m_pLayer2, 100, 1.0);
 	ENVELOPE_CONTROLLER.SoundChangeVolume(m_pLayer2, 0.0, 1.0);
-}
+}*/
 
 //-----------------------------------------------------------------------------
 // Purpose: 
@@ -473,57 +349,12 @@ void CAbhDemon::SetAngrySoundState(void)
 //-----------------------------------------------------------------------------
 void CAbhDemon::Spawn(void)
 {
-	Precache();
-
-	m_fJustJumped = false;
-
-	m_fIsTorso = m_fIsHeadless = false;
-
-	if (FClassnameIs(this, "npc_abhdemon"))
-	{
-		m_fIsTorso = false;
-	}
-	else
-	{
-		// This was placed as an npc_fastzombie_torso
-		m_fIsTorso = true;
-	}
-
-#ifdef HL2_EPISODIC
-	SetBloodColor(BLOOD_COLOR_ZOMBIE);
-#else
-	SetBloodColor(BLOOD_COLOR_YELLOW);
-#endif // HL2_EPISODIC
-
-	m_iHealth = 50;
-	m_flFieldOfView = 0.2;
-
-	CapabilitiesClear();
-	CapabilitiesAdd(bits_CAP_MOVE_CLIMB | bits_CAP_MOVE_JUMP | bits_CAP_MOVE_GROUND | bits_CAP_INNATE_RANGE_ATTACK1);
-
-	if (m_fIsTorso == true)
-	{
-		CapabilitiesRemove(bits_CAP_MOVE_JUMP | bits_CAP_INNATE_RANGE_ATTACK1);
-	}
-
-	m_flNextAttack = gpGlobals->curtime;
-
-	m_pLayer2 = NULL;
-	m_iClimbCount = 0;
-
-	EndNavJump();
-
-	m_flDistFactor = 1.0;
-
-	// SIRE: Don't attack mommy
-	AddClassRelationship(CLASS_CITIZEN_PASSIVE, D_NU, 100);
-
 	BaseClass::Spawn();
 
-	// SIRE: test i guess
-	LeapAttack();
+	// Don't attack mommy
+	AddClassRelationship(CLASS_CITIZEN_PASSIVE, D_NU, 100);
 }
-
+/*
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 void CAbhDemon::PostNPCInit(void)
@@ -573,7 +404,7 @@ float CAbhDemon::MaxYawSpeed(void)
 	}
 }
 
-
+*/
 //-----------------------------------------------------------------------------
 // Purpose: 
 //
@@ -581,37 +412,10 @@ float CAbhDemon::MaxYawSpeed(void)
 //-----------------------------------------------------------------------------
 void CAbhDemon::SetZombieModel(void)
 {
-	Hull_t lastHull = GetHullType();
-
-	if (m_fIsTorso)
-	{
-		SetModel("models/zombie/fast_torso.mdl");
-		SetHullType(HULL_TINY);
-	}
-	else
-	{
-		SetModel("models/zombie/fast.mdl");
-		SetHullType(HULL_HUMAN);
-	}
-
-	SetBodygroup(ZOMBIE_BODYGROUP_HEADCRAB, 0); // SIRE: no headcrabs allowed
-
-	SetHullSizeNormal(true);
-	SetDefaultEyeOffset();
-	SetActivity(ACT_IDLE);
-
-	// hull changed size, notify vphysics
-	// UNDONE: Solve this generally, systematically so other
-	// NPCs can change size
-	if (lastHull != GetHullType())
-	{
-		if (VPhysicsGetObject())
-		{
-			SetupVPhysicsHull();
-		}
-	}
+	BaseClass::SetZombieModel();
+	SetBodygroup(ZOMBIE_BODYGROUP_HEADCRAB, 0); // no headcrabs allowed
 }
-
+/*
 
 //-----------------------------------------------------------------------------
 // Purpose: Returns the model to use for our legs ragdoll when we are blown in twain.
@@ -1824,18 +1628,18 @@ void CAbhDemon::UpdateEfficiency(bool bInPVS)
 
 #endif	// HL2_EPISODIC
 //=============================================================================
-
+*/
 //-----------------------------------------------------------------------------
 // Purpose: No headcrab, so just flop
 //-----------------------------------------------------------------------------
 void CAbhDemon::ReleaseHeadcrab(const Vector &vecOrigin, const Vector &vecVelocity, bool fRemoveHead, bool fRagdollBody, bool fRagdollCrab)
 {
-	if (fRagdollBody)
+	/*if (fRagdollBody)
 	{
 		BecomeRagdollOnClient(vec3_origin);
-	}
+	}*/
 }
-
+/*
 //-----------------------------------------------------------------------------
 
 AI_BEGIN_CUSTOM_NPC(npc_abhdemon, CAbhDemon)

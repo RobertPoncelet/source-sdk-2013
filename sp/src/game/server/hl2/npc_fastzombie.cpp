@@ -656,7 +656,7 @@ void CFastZombie::Spawn( void )
 
 	m_fIsTorso = m_fIsHeadless = false;
 
-	if( FClassnameIs( this, "npc_fastzombie" ) )
+	if (FClassnameIs(this, "npc_fastzombie") || FClassnameIs(this, "npc_abhdemon")) // SIRE: haaaaaaaaack
 	{
 		m_fIsTorso = false;
 	}

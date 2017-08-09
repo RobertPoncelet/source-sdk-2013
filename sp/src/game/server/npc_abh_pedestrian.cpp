@@ -288,18 +288,15 @@ void CAbhPedestrian::InputBecomeDemon(inputdata_t &inputData)
 	}
 
 	// Spawn the demon
-	CAI_BaseNPC	*demonEnt;
+	CFastZombie	*demonEnt;
 
-	demonEnt = (CAI_BaseNPC*)CreateEntityByName("npc_abhdemon");
+	demonEnt = (CFastZombie*)CreateEntityByName("npc_abhdemon");
 
 	if (!demonEnt)
 	{
 		Warning("**%s: Can't make %s!\n", GetClassname(), "npc_abhdemon");
 		return;
 	}
-
-	// Stick the crab in whatever squad the zombie was in.
-	//demonEnt->SetSquadName(m_SquadName);
 
 	// don't pop to floor, fall
 	demonEnt->AddSpawnFlags(SF_NPC_FALL_TO_GROUND);
@@ -311,17 +308,17 @@ void CAbhPedestrian::InputBecomeDemon(inputdata_t &inputData)
 
 	// make me face the player
 	CBaseEntity *pEnemy = UTIL_GetLocalPlayer();
-	Vector dir = (pEnemy->GetAbsOrigin() - GetAbsOrigin()).Normalized();
+	Vector dir = pEnemy->GetAbsOrigin() - demonEnt->GetAbsOrigin();
 	QAngle angFacing;
 	VectorAngles(dir, angFacing);
 	// only use the yaw
-	angFacing.x = angFacing.y = 0;
+	//angFacing.x = angFacing.y = 0;
 	demonEnt->SetAbsAngles(angFacing);
 	DispatchSpawn(demonEnt);
 
-	demonEnt->GetMotor()->SetIdealYaw(GetAbsAngles().y);
+	demonEnt->GetMotor()->SetIdealYaw(angFacing.y);
 
-	demonEnt->SetActivity(ACT_IDLE);
+	demonEnt->SetActivity((Activity)ACT_FASTZOMBIE_LEAP_STRIKE);
 	demonEnt->SetNextThink(gpGlobals->curtime);
 	demonEnt->PhysicsSimulate();
 	//demonEnt->SetAbsVelocity(vecVelocity);
@@ -329,6 +326,9 @@ void CAbhPedestrian::InputBecomeDemon(inputdata_t &inputData)
 	demonEnt->SetEnemy(pEnemy);
 
 	demonEnt->Activate();
+
+	demonEnt->LeapAttack();
+	//demonEnt->EmitSound("NPC_FastZombie.Scream");
 	
 	m_demonHandle.Set(demonEnt);
 }
@@ -344,11 +344,13 @@ void CAbhPedestrian::InputStopBeingDemon(inputdata_t &inputData)
 	}
 
 	// stfu
-	CAI_BaseNPC* demon = (CAI_BaseNPC*)m_demonHandle.Get();
-	CTakeDamageInfo info;
-	demon->Event_Killed(info);
+	CFastZombie* demon = dynamic_cast<CFastZombie*>(m_demonHandle.Get());
+	if (demon)
+	{
+		demon->StopLoopingSounds();
+	}
 
-	//UTIL_Remove(m_demonHandle);
+	UTIL_Remove(m_demonHandle);
 }
 
 Class_T	CAbhPedestrian::Classify()
