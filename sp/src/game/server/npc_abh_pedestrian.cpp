@@ -130,13 +130,18 @@ public:
 	void PrescheduleThink();
 	void InputBecomeDemon(inputdata_t &inputData);
 	void InputStopBeingDemon(inputdata_t &inputData);
+	void SpotlightCreate();
+	void SpotlightDestroy();
+	void SpotlightUpdate();
 	Class_T Classify();
 
 private:
-	bool bIsDemon;
+	bool m_bIsDemon;
 	float m_timeBecameDemon;
 	// Don't talk to me or my demon son ever again
 	EHANDLE m_demonHandle;
+	CHandle<CBeam>	m_hSpotlight;
+	int m_nHaloSprite;
 
 public:
 	//DEFINE_CUSTOM_AI;
@@ -215,16 +220,21 @@ DEFINE_USEFUNC(SimpleUse),
 
 END_DATADESC()
 
+IMPLEMENT_SERVERCLASS_ST(CAbhPedestrian, DT_AbhPedestrian)
+	SendPropBool(SENDINFO(m_bIsDemon)),
+END_SEND_TABLE();
+
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
 void CAbhPedestrian::Spawn(void) 
 {
-	bIsDemon = false;
+	m_bIsDemon = false;
 	m_timeBecameDemon = 0.0f;
 	Precache();
 	SetRenderColor(0, 0, 0);
 	AddClassRelationship(CLASS_ZOMBIE, D_NU, 100);
+	SpotlightCreate();
 	BaseClass::Spawn();
 }
 
@@ -272,12 +282,16 @@ void CAbhPedestrian::Precache(void)
 
 	PrecacheParticleSystem("blood_impact_zombie_01");
 
+	// Sprites
+	m_nHaloSprite = PrecacheModel("sprites/light_glow03.vmt");
+	PrecacheModel("sprites/glow_test02.vmt");
+
 	BaseClass::Precache();
 }
 
 void CAbhPedestrian::InputBecomeDemon(inputdata_t &inputData) 
 {
-	bIsDemon = true;
+	m_bIsDemon = true;
 	m_timeBecameDemon = gpGlobals->curtime;
 
 	SetRenderMode(kRenderNone);
@@ -286,6 +300,8 @@ void CAbhPedestrian::InputBecomeDemon(inputdata_t &inputData)
 	{
 		ToggleFreeze();
 	}
+
+	SpotlightDestroy();
 
 	// Spawn the demon
 	CFastZombie	*demonEnt;
@@ -337,10 +353,12 @@ void CAbhPedestrian::InputStopBeingDemon(inputdata_t &inputData)
 {
 	SetRenderMode(kRenderNormal);
 	SetCollisionGroup(COLLISION_GROUP_NPC);
-	if (bIsDemon) // TODO: Fix this
+	SpotlightCreate();
+
+	if (m_bIsDemon) // TODO: Fix this
 	{
 		ToggleFreeze();
-		bIsDemon = false;
+		m_bIsDemon = false;
 	}
 
 	// stfu
@@ -362,7 +380,7 @@ void CAbhPedestrian::PrescheduleThink()
 {
 	BaseClass::PrescheduleThink();
 
-	if (bIsDemon)
+	if (m_bIsDemon)
 	{
 		if (gpGlobals->curtime > m_timeBecameDemon + abh_pedestrian_demon_time.GetFloat())
 		{
@@ -376,6 +394,8 @@ void CAbhPedestrian::PrescheduleThink()
 	{
 		return;
 	}
+
+	SpotlightUpdate();
  
 	float flThreshold = abh_pedestrian_radius.GetFloat();
 	flThreshold *= flThreshold;
@@ -393,4 +413,46 @@ void CAbhPedestrian::PrescheduleThink()
 			InputBecomeDemon(data);
 		}
 	}
+}
+
+void CAbhPedestrian::SpotlightDestroy(void)
+{
+	if (m_hSpotlight)
+	{
+		UTIL_Remove(m_hSpotlight);
+		m_hSpotlight = NULL;
+	}
+}
+
+
+//------------------------------------------------------------------------------
+// Purpose:
+//------------------------------------------------------------------------------
+void CAbhPedestrian::SpotlightCreate(void)
+{
+	// Make sure we don't already have one
+	if (m_hSpotlight != NULL)
+		return;
+
+	m_hSpotlight = CBeam::BeamCreate("sprites/glow_test02.vmt", 32); // TODO: change later
+	// Set the temporary spawnflag on the beam so it doesn't save (we'll recreate it on restore)
+	m_hSpotlight->AddSpawnFlags(SF_BEAM_TEMPORARY);
+	m_hSpotlight->SetColor(255, 255, 255);
+	m_hSpotlight->SetHaloTexture(m_nHaloSprite);
+	m_hSpotlight->SetHaloScale(32);
+	m_hSpotlight->SetEndWidth(m_hSpotlight->GetWidth());
+	m_hSpotlight->SetBeamFlags((FBEAM_SHADEOUT | FBEAM_NOTILE));
+	m_hSpotlight->SetBrightness(32);
+	m_hSpotlight->SetNoise(0);
+	m_hSpotlight->SetHDRColorScale(0.75f);	// Scale this back a bit on HDR maps
+}
+
+void CAbhPedestrian::SpotlightUpdate()
+{
+	// attach to head
+	int eyes = LookupAttachment("eyes");
+	Vector pos, dir;
+	GetAttachment(eyes, pos, &dir);
+	m_hSpotlight->PointsInit(pos, pos + dir * 128.0f);
+	m_hSpotlight->SetStartAttachment(eyes);
 }
