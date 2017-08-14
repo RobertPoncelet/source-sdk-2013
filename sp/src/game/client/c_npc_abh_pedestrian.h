@@ -34,6 +34,9 @@ public:
 public:
 
 	void Simulate(void);
+	void SpotlightCreate();
+	void SpotlightDestroy();
+	void SpotlightUpdate();
 
 private:
 

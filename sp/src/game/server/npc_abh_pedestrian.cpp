@@ -49,6 +49,10 @@
 extern ConVar sk_healthkit;
 extern ConVar sk_healthvial;
 
+ConVar	abh_pedestrian_radius("abh_pedestrian_radius", "128");
+ConVar	abh_pedestrian_fov("abh_pedestrian_fov", "120");
+ConVar	abh_pedestrian_demon_time("abh_pedestrian_demon_time", "10");
+
 const int MAX_PLAYER_SQUAD = 4;
 
 
@@ -115,14 +119,12 @@ static const char *g_ppszModelLocs[] =
 
 #define IsExcludedHead( type, bMedic, iHead) false // see XBox codeline for an implementation
 
-ConVar	abh_pedestrian_radius("abh_pedestrian_radius", "128");
-ConVar	abh_pedestrian_demon_time("abh_pedestrian_demon_time", "10");
-
 //---------------------------------------------------------
 
 class CAbhPedestrian : public CNPC_Citizen
 {
 	DECLARE_CLASS(CAbhPedestrian, CNPC_Citizen);
+	DECLARE_SERVERCLASS();
 
 public:
 	void Spawn();
@@ -136,7 +138,7 @@ public:
 	Class_T Classify();
 
 private:
-	bool m_bIsDemon;
+	CNetworkVar(bool, m_bIsDemon);
 	float m_timeBecameDemon;
 	// Don't talk to me or my demon son ever again
 	EHANDLE m_demonHandle;
@@ -405,9 +407,23 @@ void CAbhPedestrian::PrescheduleThink()
 
 	if (pPlayer && !(pPlayer->GetFlags() & FL_NOTARGET))
 	{
-		float flDist = (pPlayer->GetAbsOrigin() - GetAbsOrigin()).LengthSqr();
+		Vector between = pPlayer->GetAbsOrigin() - GetAbsOrigin();
+		float flDist = between.LengthSqr();
 
-		if (flDist < flThreshold && FInViewCone(pPlayer))//FVisible(pPlayer, MASK_SOLID_BRUSHONLY))
+		if (flDist > flThreshold)
+		{
+			return;
+		}
+
+		float angle = abh_pedestrian_fov.GetFloat() / 2.0;
+		angle *= M_PI / 360.0f;
+		float cosAngle = cos(angle);
+
+		int eyes = LookupAttachment("eyes");
+		Vector eyePos, eyeDir;
+		GetAttachment(eyes, eyePos, &eyeDir);
+
+		if (eyeDir.Dot(between.Normalized()) > cosAngle)//FVisible(pPlayer, MASK_SOLID_BRUSHONLY))
 		{
 			inputdata_t data;
 			InputBecomeDemon(data);
@@ -439,8 +455,9 @@ void CAbhPedestrian::SpotlightCreate(void)
 	m_hSpotlight->AddSpawnFlags(SF_BEAM_TEMPORARY);
 	m_hSpotlight->SetColor(255, 255, 255);
 	m_hSpotlight->SetHaloTexture(m_nHaloSprite);
-	m_hSpotlight->SetHaloScale(32);
-	m_hSpotlight->SetEndWidth(m_hSpotlight->GetWidth());
+	m_hSpotlight->SetHaloScale(24);
+	//m_hSpotlight->SetEndWidth(256);
+	m_hSpotlight->SetWidth(64);
 	m_hSpotlight->SetBeamFlags((FBEAM_SHADEOUT | FBEAM_NOTILE));
 	m_hSpotlight->SetBrightness(32);
 	m_hSpotlight->SetNoise(0);
@@ -453,6 +470,6 @@ void CAbhPedestrian::SpotlightUpdate()
 	int eyes = LookupAttachment("eyes");
 	Vector pos, dir;
 	GetAttachment(eyes, pos, &dir);
-	m_hSpotlight->PointsInit(pos, pos + dir * 128.0f);
+	m_hSpotlight->PointsInit(pos, pos + dir * 192.0f);
 	m_hSpotlight->SetStartAttachment(eyes);
 }

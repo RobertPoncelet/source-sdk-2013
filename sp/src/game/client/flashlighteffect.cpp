@@ -525,6 +525,12 @@ void CHeadlightEffect::UpdateLight( const Vector &vecPos, const Vector &vecDir, 
 	state.m_bEnableShadows = true;
 	state.m_pSpotlightTexture = m_FlashlightTexture;
 	state.m_nSpotlightTextureFrame = 0;
+
+	// SIRE: do this better
+	state.m_bEnableShadows = false;
+	state.m_fHorizontalFOVDegrees = 120.0;// abh_pedestrian_fov.GetFloat();
+	state.m_fVerticalFOVDegrees = state.m_fHorizontalFOVDegrees;
+	state.m_FarZ = 128;// abh_pedestrian_radius.GetFloat();
 	
 	if( GetFlashlightHandle() == CLIENTSHADOW_INVALID_HANDLE )
 	{

@@ -46,6 +46,9 @@
     <Filter Include="VPC Scripts">
       <UniqueIdentifier>{A40EE377-781A-C6B9-0C7C-B3BE118D248E}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ABH">
+      <UniqueIdentifier>{bcc9fd4d-c288-4449-bf07-e6643f9762c0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Library Include="..\..\lib\public\bitmap.lib">
@@ -1890,7 +1893,7 @@
       <Filter>Tool Framework</Filter>
     </ClInclude>
     <ClInclude Include="c_npc_abh_pedestrian.h">
-      <Filter>Header Files</Filter>
+      <Filter>ABH</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -3416,7 +3419,7 @@
       <Filter>Tool Framework</Filter>
     </ClCompile>
     <ClCompile Include="c_npc_abh_pedestrian.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>ABH</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

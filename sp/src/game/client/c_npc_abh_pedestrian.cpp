@@ -11,11 +11,8 @@
 // memdbgon must be the last include file in a .cpp file!!!
 #include "tier0/memdbgon.h"
 
-//ConVar r_JeepViewBlendTo("r_JeepViewBlendTo", "1", FCVAR_CHEAT);
-
-#define JEEP_DELTA_LENGTH_MAX	12.0f			// 1 foot
-#define JEEP_FRAMETIME_MIN		1e-6
-#define JEEP_HEADLIGHT_DISTANCE 1000
+//extern ConVar abh_pedestrian_radius;
+//extern ConVar abh_pedestrian_fov;
 
 IMPLEMENT_CLIENTCLASS_DT(C_AbhPedestrian, DT_AbhPedestrian, CAbhPedestrian)
 	RecvPropBool(RECVINFO(m_bIsDemon)),
@@ -43,7 +40,7 @@ C_AbhPedestrian::~C_AbhPedestrian()
 void C_AbhPedestrian::Simulate(void)
 {
 	// The dim light is the flashlight.
-	if (m_bIsDemon)
+	if (!m_bIsDemon)
 	{
 		if (m_pHeadlight == NULL)
 		{
@@ -51,7 +48,25 @@ void C_AbhPedestrian::Simulate(void)
 			m_pHeadlight = new CHeadlightEffect;
 
 			if (m_pHeadlight == NULL)
+			{
 				return;
+			}
+
+			FlashlightState_t state;
+			state.m_bEnableShadows = false;
+			state.m_fHorizontalFOVDegrees = 120.0;// abh_pedestrian_fov.GetFloat();
+			state.m_fVerticalFOVDegrees = state.m_fHorizontalFOVDegrees;
+			state.m_FarZ = 128;// abh_pedestrian_radius.GetFloat();
+
+			if (m_pHeadlight->GetFlashlightHandle() == CLIENTSHADOW_INVALID_HANDLE)
+			{
+				m_pHeadlight->SetFlashlightHandle(g_pClientShadowMgr->CreateFlashlight(state));
+			}
+			else
+			{
+				g_pClientShadowMgr->UpdateFlashlightState(m_pHeadlight->GetFlashlightHandle(), state);
+			}
+			g_pClientShadowMgr->UpdateProjectedTexture(m_pHeadlight->GetFlashlightHandle(), true);
 
 			m_pHeadlight->TurnOn();
 		}
@@ -60,14 +75,14 @@ void C_AbhPedestrian::Simulate(void)
 		Vector vVector;
 		Vector vecForward, vecRight, vecUp;
 
-		int iAttachment = LookupAttachment("headlight");
+		int iAttachment = LookupAttachment("eyes");
 
 		if (iAttachment != INVALID_PARTICLE_ATTACHMENT)
 		{
 			GetAttachment(iAttachment, vVector, vAngle);
 			AngleVectors(vAngle, &vecForward, &vecRight, &vecUp);
 
-			m_pHeadlight->UpdateLight(vVector, vecForward, vecRight, vecUp, JEEP_HEADLIGHT_DISTANCE);
+			m_pHeadlight->UpdateLight(vVector, vecForward, vecRight, vecUp, 128.0);// abh_pedestrian_radius.GetFloat());
 		}
 	}
 	else if (m_pHeadlight)
