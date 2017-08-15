@@ -493,12 +493,58 @@ CHeadlightEffect::~CHeadlightEffect()
 	
 }
 
-void CHeadlightEffect::UpdateLight( const Vector &vecPos, const Vector &vecDir, const Vector &vecRight, const Vector &vecUp, int nDistance )
+void CHeadlightEffect::UpdateLight(const Vector &vecPos, const Vector &vecDir, const Vector &vecRight, const Vector &vecUp, int nDistance, FlashlightState_t state)
 {
 	if ( IsOn() == false )
 		 return;
 
-	FlashlightState_t state;
+	state.m_fQuadraticAtten = r_flashlightquadratic.GetFloat();
+	state.m_fLinearAtten = r_flashlightlinear.GetFloat();
+	state.m_fConstantAtten = r_flashlightconstant.GetFloat();
+	state.m_Color[0] = 1.0f;
+	state.m_Color[1] = 1.0f;
+	state.m_Color[2] = 1.0f;
+	state.m_Color[3] = r_flashlightambient.GetFloat();
+	state.m_pSpotlightTexture = m_FlashlightTexture;
+	state.m_nSpotlightTextureFrame = 0;
+
+	/*FlashlightState_t state;
+
+	if (inState == NULL)
+	{
+		state.m_fHorizontalFOVDegrees = 45.0f;
+		state.m_fVerticalFOVDegrees = 30.0f;
+		state.m_fQuadraticAtten = r_flashlightquadratic.GetFloat();
+		state.m_fLinearAtten = r_flashlightlinear.GetFloat();
+		state.m_fConstantAtten = r_flashlightconstant.GetFloat();
+		state.m_Color[0] = 1.0f;
+		state.m_Color[1] = 1.0f;
+		state.m_Color[2] = 1.0f;
+		state.m_Color[3] = r_flashlightambient.GetFloat();
+		state.m_NearZ = r_flashlightnear.GetFloat();
+		state.m_FarZ = r_flashlightfar.GetFloat();
+		state.m_bEnableShadows = true;
+		state.m_pSpotlightTexture = m_FlashlightTexture;
+		state.m_nSpotlightTextureFrame = 0;
+	}
+	else
+	{
+		state.m_fHorizontalFOVDegrees = inState->m_fHorizontalFOVDegrees;
+		state.m_fVerticalFOVDegrees = inState->m_fVerticalFOVDegrees;
+		state.m_fQuadraticAtten = inState->m_fQuadraticAtten;
+		state.m_fLinearAtten = inState->m_fLinearAtten;
+		state.m_fConstantAtten = inState->m_fConstantAtten;
+		state.m_Color[0] = 1.0f; // inState->m_Color[0];
+		state.m_Color[1] = 1.0f; // inState->m_Color[1];
+		state.m_Color[2] = 1.0f; // inState->m_Color[2];
+		state.m_Color[3] = r_flashlightambient.GetFloat(); // inState->m_Color[3];
+		state.m_NearZ = inState->m_NearZ;
+		state.m_FarZ = inState->m_FarZ;
+		state.m_bEnableShadows = inState->m_bEnableShadows;
+		state.m_pSpotlightTexture = m_FlashlightTexture; // inState->m_pSpotlightTexture;
+		state.m_nSpotlightTextureFrame = inState->m_nSpotlightTextureFrame;
+	}*/
+
 	Vector basisX, basisY, basisZ;
 	basisX = vecDir;
 	basisY = vecRight;
@@ -510,27 +556,6 @@ void CHeadlightEffect::UpdateLight( const Vector &vecPos, const Vector &vecDir, 
 	BasisToQuaternion( basisX, basisY, basisZ, state.m_quatOrientation );
 		
 	state.m_vecLightOrigin = vecPos;
-
-	state.m_fHorizontalFOVDegrees = 45.0f;
-	state.m_fVerticalFOVDegrees = 30.0f;
-	state.m_fQuadraticAtten = r_flashlightquadratic.GetFloat();
-	state.m_fLinearAtten = r_flashlightlinear.GetFloat();
-	state.m_fConstantAtten = r_flashlightconstant.GetFloat();
-	state.m_Color[0] = 1.0f;
-	state.m_Color[1] = 1.0f;
-	state.m_Color[2] = 1.0f;
-	state.m_Color[3] = r_flashlightambient.GetFloat();
-	state.m_NearZ = r_flashlightnear.GetFloat();
-	state.m_FarZ = r_flashlightfar.GetFloat();
-	state.m_bEnableShadows = true;
-	state.m_pSpotlightTexture = m_FlashlightTexture;
-	state.m_nSpotlightTextureFrame = 0;
-
-	// SIRE: do this better
-	state.m_bEnableShadows = false;
-	state.m_fHorizontalFOVDegrees = 120.0;// abh_pedestrian_fov.GetFloat();
-	state.m_fVerticalFOVDegrees = state.m_fHorizontalFOVDegrees;
-	state.m_FarZ = 128;// abh_pedestrian_radius.GetFloat();
 	
 	if( GetFlashlightHandle() == CLIENTSHADOW_INVALID_HANDLE )
 	{

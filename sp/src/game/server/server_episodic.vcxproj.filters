@@ -31,7 +31,7 @@
     <Filter Include="VPC Scripts">
       <UniqueIdentifier>{A40EE377-781A-C6B9-0C7C-B3BE118D248E}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sire">
+    <Filter Include="ABH">
       <UniqueIdentifier>{169210ea-5ed4-4950-8c4d-8666552eb34a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -1787,6 +1787,9 @@
     <ClInclude Include="toolframework_server.h">
       <Filter>Tools Framework</Filter>
     </ClInclude>
+    <ClInclude Include="npc_fastzombie.h">
+      <Filter>Source Files\HL2 DLL</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="gamedll_replay.cpp">
@@ -3508,14 +3511,14 @@
     <ClCompile Include="toolframework_server.cpp">
       <Filter>Tools Framework</Filter>
     </ClCompile>
-    <ClCompile Include="sdk_modelentity.cpp">
-      <Filter>Sire</Filter>
+    <ClCompile Include="npc_abh_pedestrian.cpp">
+      <Filter>ABH</Filter>
     </ClCompile>
     <ClCompile Include="npc_abh_demon.cpp">
-      <Filter>Sire</Filter>
+      <Filter>ABH</Filter>
     </ClCompile>
-    <ClCompile Include="npc_abh_pedestrian.cpp">
-      <Filter>Sire</Filter>
+    <ClCompile Include="sdk_modelentity.cpp">
+      <Filter>ABH</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

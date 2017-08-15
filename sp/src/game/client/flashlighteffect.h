@@ -56,7 +56,7 @@ public:
 	CHeadlightEffect();
 	~CHeadlightEffect();
 
-	virtual void UpdateLight(const Vector &vecPos, const Vector &vecDir, const Vector &vecRight, const Vector &vecUp, int nDistance);
+	virtual void UpdateLight(const Vector &vecPos, const Vector &vecDir, const Vector &vecRight, const Vector &vecUp, int nDistance, FlashlightState_t state = FlashlightState_t());
 };
 
 

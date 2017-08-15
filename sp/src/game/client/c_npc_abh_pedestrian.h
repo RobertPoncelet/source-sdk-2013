@@ -41,7 +41,9 @@ public:
 private:
 
 	CHeadlightEffect *m_pHeadlight;
-	bool		m_bIsDemon;
+	bool m_bIsDemon;
+	float m_radius;
+	float m_fov;
 };
 
 #endif // C_ABH_PEDESTRIAN_H

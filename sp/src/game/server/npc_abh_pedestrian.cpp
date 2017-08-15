@@ -139,6 +139,8 @@ public:
 
 private:
 	CNetworkVar(bool, m_bIsDemon);
+	CNetworkVar(float, m_radius);
+	CNetworkVar(float, m_fov);
 	float m_timeBecameDemon;
 	// Don't talk to me or my demon son ever again
 	EHANDLE m_demonHandle;
@@ -224,6 +226,8 @@ END_DATADESC()
 
 IMPLEMENT_SERVERCLASS_ST(CAbhPedestrian, DT_AbhPedestrian)
 	SendPropBool(SENDINFO(m_bIsDemon)),
+	SendPropFloat(SENDINFO(m_radius)),
+	SendPropFloat(SENDINFO(m_fov)),
 END_SEND_TABLE();
 
 //-----------------------------------------------------------------------------
@@ -398,8 +402,11 @@ void CAbhPedestrian::PrescheduleThink()
 	}
 
 	SpotlightUpdate();
+
+	m_radius = abh_pedestrian_radius.GetFloat();
+	m_fov = abh_pedestrian_fov.GetFloat();
  
-	float flThreshold = abh_pedestrian_radius.GetFloat();
+	float flThreshold = m_radius;
 	flThreshold *= flThreshold;
 
 	// check the player.
@@ -415,7 +422,7 @@ void CAbhPedestrian::PrescheduleThink()
 			return;
 		}
 
-		float angle = abh_pedestrian_fov.GetFloat() / 2.0;
+		float angle = m_fov; // / 2.0;
 		angle *= M_PI / 360.0f;
 		float cosAngle = cos(angle);
 

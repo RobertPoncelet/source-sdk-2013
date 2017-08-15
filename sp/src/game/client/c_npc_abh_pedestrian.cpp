@@ -11,11 +11,10 @@
 // memdbgon must be the last include file in a .cpp file!!!
 #include "tier0/memdbgon.h"
 
-//extern ConVar abh_pedestrian_radius;
-//extern ConVar abh_pedestrian_fov;
-
 IMPLEMENT_CLIENTCLASS_DT(C_AbhPedestrian, DT_AbhPedestrian, CAbhPedestrian)
 	RecvPropBool(RECVINFO(m_bIsDemon)),
+	RecvPropFloat(RECVINFO(m_radius)),
+	RecvPropFloat(RECVINFO(m_fov)),
 END_RECV_TABLE()
 
 //-----------------------------------------------------------------------------
@@ -42,6 +41,13 @@ void C_AbhPedestrian::Simulate(void)
 	// The dim light is the flashlight.
 	if (!m_bIsDemon)
 	{
+		FlashlightState_t state;
+		state.m_bEnableShadows = false;
+		state.m_fHorizontalFOVDegrees = m_fov;
+		state.m_fVerticalFOVDegrees = state.m_fHorizontalFOVDegrees;
+		state.m_FarZ = m_radius;
+		state.m_NearZ = 16.0f;
+
 		if (m_pHeadlight == NULL)
 		{
 			// Turned on the headlight; create it.
@@ -51,12 +57,6 @@ void C_AbhPedestrian::Simulate(void)
 			{
 				return;
 			}
-
-			FlashlightState_t state;
-			state.m_bEnableShadows = false;
-			state.m_fHorizontalFOVDegrees = 120.0;// abh_pedestrian_fov.GetFloat();
-			state.m_fVerticalFOVDegrees = state.m_fHorizontalFOVDegrees;
-			state.m_FarZ = 128;// abh_pedestrian_radius.GetFloat();
 
 			if (m_pHeadlight->GetFlashlightHandle() == CLIENTSHADOW_INVALID_HANDLE)
 			{
@@ -82,7 +82,7 @@ void C_AbhPedestrian::Simulate(void)
 			GetAttachment(iAttachment, vVector, vAngle);
 			AngleVectors(vAngle, &vecForward, &vecRight, &vecUp);
 
-			m_pHeadlight->UpdateLight(vVector, vecForward, vecRight, vecUp, 128.0);// abh_pedestrian_radius.GetFloat());
+			m_pHeadlight->UpdateLight(vVector, vecForward, vecRight, vecUp, m_radius, state);
 		}
 	}
 	else if (m_pHeadlight)
