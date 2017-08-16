@@ -16,6 +16,7 @@
 #include "weapon_rpg.h"
 #include "hl2_player.h"
 #include "items.h"
+#include "ai_spotlight.h"
 
 
 #ifdef HL2MP
@@ -119,6 +120,8 @@ static const char *g_ppszModelLocs[] =
 
 #define IsExcludedHead( type, bMedic, iHead) false // see XBox codeline for an implementation
 
+static const char *s_pSpotlightThinkContext = "SpotlightThink";
+
 //---------------------------------------------------------
 
 class CAbhPedestrian : public CNPC_Citizen
@@ -132,9 +135,11 @@ public:
 	void PrescheduleThink();
 	void InputBecomeDemon(inputdata_t &inputData);
 	void InputStopBeingDemon(inputdata_t &inputData);
-	void SpotlightCreate();
-	void SpotlightDestroy();
-	void SpotlightUpdate();
+	//void SpotlightCreate();
+	//void SpotlightDestroy();
+	//void SpotlightUpdate();
+	bool CreateComponents();
+	void Activate();
 	Class_T Classify();
 
 private:
@@ -144,8 +149,15 @@ private:
 	float m_timeBecameDemon;
 	// Don't talk to me or my demon son ever again
 	EHANDLE m_demonHandle;
-	CHandle<CBeam>	m_hSpotlight;
-	int m_nHaloSprite;
+	//CHandle<CBeam>	m_hSpotlight;
+	CAI_Spotlight	m_Spotlight;
+	int m_nSpotlightAttachment;
+	//int m_nHaloSprite;
+
+	// Spotlights
+	void SpotlightThink();
+	void SpotlightStartup();
+	void SpotlightShutdown();
 
 public:
 	//DEFINE_CUSTOM_AI;
@@ -160,6 +172,7 @@ LINK_ENTITY_TO_CLASS(npc_abhpedestrian, CAbhPedestrian);
 
 BEGIN_DATADESC(CAbhPedestrian)
 
+DEFINE_EMBEDDED(m_Spotlight),
 DEFINE_CUSTOM_FIELD(m_nInspectActivity, ActivityDataOps()),
 DEFINE_FIELD(m_flNextFearSoundTime, FIELD_TIME),
 DEFINE_FIELD(m_flStopManhackFlinch, FIELD_TIME),
@@ -222,6 +235,8 @@ DEFINE_INPUTFUNC(FIELD_VOID, "ThrowHealthKit", InputForceHealthKitToss),
 DEFINE_USEFUNC(CommanderUse),
 DEFINE_USEFUNC(SimpleUse),
 
+DEFINE_THINKFUNC(SpotlightThink),
+
 END_DATADESC()
 
 IMPLEMENT_SERVERCLASS_ST(CAbhPedestrian, DT_AbhPedestrian)
@@ -240,8 +255,25 @@ void CAbhPedestrian::Spawn(void)
 	Precache();
 	SetRenderColor(0, 0, 0);
 	AddClassRelationship(CLASS_ZOMBIE, D_NU, 100);
-	SpotlightCreate();
+	//SpotlightCreate();
+	SpotlightStartup();
 	BaseClass::Spawn();
+}
+
+bool CAbhPedestrian::CreateComponents()
+{
+	if (!BaseClass::CreateComponents())
+		return false;
+
+	m_Spotlight.Init(this, AI_SPOTLIGHT_NO_DLIGHTS, 45.0f, 64.0f);
+	return true;
+}
+
+void CAbhPedestrian::Activate(void)
+{
+	BaseClass::Activate();
+	m_nSpotlightAttachment = LookupAttachment("eyes");
+	Msg("Activated, attachment = %d\n", m_nSpotlightAttachment);
 }
 
 void CAbhPedestrian::Precache(void) 
@@ -289,7 +321,7 @@ void CAbhPedestrian::Precache(void)
 	PrecacheParticleSystem("blood_impact_zombie_01");
 
 	// Sprites
-	m_nHaloSprite = PrecacheModel("sprites/light_glow03.vmt");
+	//m_nHaloSprite = PrecacheModel("sprites/light_glow03.vmt");
 	PrecacheModel("sprites/glow_test02.vmt");
 
 	BaseClass::Precache();
@@ -301,13 +333,14 @@ void CAbhPedestrian::InputBecomeDemon(inputdata_t &inputData)
 	m_timeBecameDemon = gpGlobals->curtime;
 
 	SetRenderMode(kRenderNone);
-	SetCollisionGroup(COLLISION_GROUP_NONE);
+	SetCollisionGroup(COLLISION_GROUP_DEBRIS);
 	if (!IsCurSchedule(SCHED_NPC_FREEZE))
 	{
 		ToggleFreeze();
 	}
 
-	SpotlightDestroy();
+	//SpotlightDestroy();
+	SpotlightShutdown();
 
 	// Spawn the demon
 	CFastZombie	*demonEnt;
@@ -359,7 +392,8 @@ void CAbhPedestrian::InputStopBeingDemon(inputdata_t &inputData)
 {
 	SetRenderMode(kRenderNormal);
 	SetCollisionGroup(COLLISION_GROUP_NPC);
-	SpotlightCreate();
+	//SpotlightCreate();
+	SpotlightStartup();
 
 	if (m_bIsDemon) // TODO: Fix this
 	{
@@ -401,7 +435,7 @@ void CAbhPedestrian::PrescheduleThink()
 		return;
 	}
 
-	SpotlightUpdate();
+	//SpotlightUpdate();
 
 	m_radius = abh_pedestrian_radius.GetFloat();
 	m_fov = abh_pedestrian_fov.GetFloat();
@@ -438,7 +472,60 @@ void CAbhPedestrian::PrescheduleThink()
 	}
 }
 
-void CAbhPedestrian::SpotlightDestroy(void)
+//------------------------------------------------------------------------------
+// Start up spotlights
+//------------------------------------------------------------------------------
+void CAbhPedestrian::SpotlightStartup()
+{
+	Vector vecForward;
+	Vector vecOrigin;
+	GetAttachment(m_nSpotlightAttachment, vecOrigin, &vecForward);
+	m_Spotlight.SpotlightCreate(m_nSpotlightAttachment, vecForward);
+	SpotlightThink();
+}
+
+
+//------------------------------------------------------------------------------
+// Shutdown spotlights
+//------------------------------------------------------------------------------
+void CAbhPedestrian::SpotlightShutdown()
+{
+	m_Spotlight.SpotlightDestroy();
+	SetContextThink(NULL, gpGlobals->curtime, s_pSpotlightThinkContext);
+}
+
+
+//------------------------------------------------------------------------------
+// Spotlights
+//------------------------------------------------------------------------------
+void CAbhPedestrian::SpotlightThink()
+{
+	// NOTE: This function should deal with all deactivation cases
+	if (m_lifeState != LIFE_ALIVE)
+	{
+		SpotlightShutdown();
+		return;
+	}
+
+	if (!m_bIsDemon)
+	{
+		Vector vecForward;
+		Vector vecOrigin;
+		GetAttachment(m_nSpotlightAttachment, vecOrigin, &vecForward);
+		m_Spotlight.SetSpotlightTargetDirection(vecForward);
+		m_Spotlight.m_hSpotlight->PointsInit(vecOrigin, vecOrigin + vecForward * 192.0f);
+	}
+	else
+	{
+		SpotlightShutdown();
+		return;
+	}
+
+	m_Spotlight.Update();
+	SetContextThink(&CAbhPedestrian::SpotlightThink, gpGlobals->curtime + 0.01/*TICK_INTERVAL*/, s_pSpotlightThinkContext);
+}
+
+/*void CAbhPedestrian::SpotlightDestroy(void)
 {
 	if (m_hSpotlight)
 	{
@@ -479,4 +566,4 @@ void CAbhPedestrian::SpotlightUpdate()
 	GetAttachment(eyes, pos, &dir);
 	m_hSpotlight->PointsInit(pos, pos + dir * 192.0f);
 	m_hSpotlight->SetStartAttachment(eyes);
-}
+}*/

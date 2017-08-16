@@ -179,6 +179,7 @@ void CAI_Spotlight::CreateSpotlightEntities( void )
 	m_hSpotlight->SetNoise( 0 );
 	m_hSpotlight->EntsInit( GetOuter(), m_hSpotlightTarget );
 	m_hSpotlight->SetStartAttachment( m_nSpotlightAttachment );
+	Msg("created\n");
 }
 
 
@@ -407,5 +408,6 @@ void CAI_Spotlight::Update(void)
 	// Update the beam direction
 	UpdateSpotlightDirection();
 	UpdateSpotlightEndpoint();
+	Msg("position: %f, %f, %f\n", m_hSpotlight.Get()->GetAbsOrigin().x, m_hSpotlight.Get()->GetAbsOrigin().y, m_hSpotlight.Get()->GetAbsOrigin().z);
 }
 

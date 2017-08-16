@@ -62,10 +62,12 @@ private:
 	// Computes the spotlight endpoint
 	void ComputeEndpoint( const Vector &vecStartPoint, Vector *pEndPoint );
 
-private:
+	// SIRE: ugh just let me change these manually
+public:
 	CHandle<CBeam>	m_hSpotlight;
 	CHandle<CSpotlightEnd>	m_hSpotlightTarget;
 
+private:
 	Vector			m_vSpotlightTargetPos;
 	Vector			m_vSpotlightDir;
 	float			m_flSpotlightCurLength;
