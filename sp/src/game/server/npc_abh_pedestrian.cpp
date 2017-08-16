@@ -255,6 +255,8 @@ void CAbhPedestrian::Spawn(void)
 	Precache();
 	SetRenderColor(0, 0, 0);
 	AddClassRelationship(CLASS_ZOMBIE, D_NU, 100);
+	RegisterThinkContext(s_pSpotlightThinkContext);
+	SetContextThink(&CAbhPedestrian::SpotlightThink, gpGlobals->curtime, s_pSpotlightThinkContext);
 	//SpotlightCreate();
 	SpotlightStartup();
 	BaseClass::Spawn();
@@ -419,6 +421,7 @@ Class_T	CAbhPedestrian::Classify()
 void CAbhPedestrian::PrescheduleThink()
 {
 	BaseClass::PrescheduleThink();
+	Msg("think\n");
 
 	if (m_bIsDemon)
 	{
@@ -522,7 +525,8 @@ void CAbhPedestrian::SpotlightThink()
 	}
 
 	m_Spotlight.Update();
-	SetContextThink(&CAbhPedestrian::SpotlightThink, gpGlobals->curtime + 0.01/*TICK_INTERVAL*/, s_pSpotlightThinkContext);
+	SetContextThink(&CAbhPedestrian::SpotlightThink, gpGlobals->curtime + TICK_INTERVAL, s_pSpotlightThinkContext);
+	Msg("Spotlight think\n");
 }
 
 /*void CAbhPedestrian::SpotlightDestroy(void)
