@@ -179,7 +179,6 @@ void CAI_Spotlight::CreateSpotlightEntities( void )
 	m_hSpotlight->SetNoise( 0 );
 	m_hSpotlight->EntsInit( GetOuter(), m_hSpotlightTarget );
 	m_hSpotlight->SetStartAttachment( m_nSpotlightAttachment );
-	Msg("created\n");
 }
 
 

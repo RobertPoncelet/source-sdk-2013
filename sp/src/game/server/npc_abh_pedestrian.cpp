@@ -275,7 +275,6 @@ void CAbhPedestrian::Activate(void)
 {
 	BaseClass::Activate();
 	m_nSpotlightAttachment = LookupAttachment("eyes");
-	Msg("Activated, attachment = %d\n", m_nSpotlightAttachment);
 }
 
 void CAbhPedestrian::Precache(void) 
@@ -334,6 +333,7 @@ void CAbhPedestrian::InputBecomeDemon(inputdata_t &inputData)
 	m_bIsDemon = true;
 	m_timeBecameDemon = gpGlobals->curtime;
 
+	InputDisableShadow(inputdata_t());
 	SetRenderMode(kRenderNone);
 	SetCollisionGroup(COLLISION_GROUP_DEBRIS);
 	if (!IsCurSchedule(SCHED_NPC_FREEZE))
@@ -356,7 +356,7 @@ void CAbhPedestrian::InputBecomeDemon(inputdata_t &inputData)
 	}
 
 	// don't pop to floor, fall
-	demonEnt->AddSpawnFlags(SF_NPC_FALL_TO_GROUND);
+	//demonEnt->AddSpawnFlags(SF_NPC_FALL_TO_GROUND);
 
 	// make me the crab's owner to avoid collision issues
 	demonEnt->SetOwnerEntity(this);
@@ -376,6 +376,7 @@ void CAbhPedestrian::InputBecomeDemon(inputdata_t &inputData)
 	demonEnt->GetMotor()->SetIdealYaw(angFacing.y);
 
 	demonEnt->SetActivity((Activity)ACT_FASTZOMBIE_LEAP_STRIKE);
+	demonEnt->SetSchedule(SCHED_RANGE_ATTACK1);
 	demonEnt->SetNextThink(gpGlobals->curtime);
 	demonEnt->PhysicsSimulate();
 	//demonEnt->SetAbsVelocity(vecVelocity);
@@ -384,7 +385,7 @@ void CAbhPedestrian::InputBecomeDemon(inputdata_t &inputData)
 
 	demonEnt->Activate();
 
-	demonEnt->LeapAttack();
+	//demonEnt->LeapAttack();
 	//demonEnt->EmitSound("NPC_FastZombie.Scream");
 	
 	m_demonHandle.Set(demonEnt);
@@ -392,16 +393,20 @@ void CAbhPedestrian::InputBecomeDemon(inputdata_t &inputData)
 
 void CAbhPedestrian::InputStopBeingDemon(inputdata_t &inputData) 
 {
+	m_bIsDemon = false;
+
+	InputEnableShadow(inputdata_t());
 	SetRenderMode(kRenderNormal);
 	SetCollisionGroup(COLLISION_GROUP_NPC);
 	//SpotlightCreate();
 	SpotlightStartup();
 
-	if (m_bIsDemon) // TODO: Fix this
+	if (IsCurSchedule(SCHED_NPC_FREEZE)) // TODO: Fix this
 	{
 		ToggleFreeze();
-		m_bIsDemon = false;
 	}
+
+	SetSchedule(SCHED_IDLE_WALK);
 
 	// stfu
 	CFastZombie* demon = dynamic_cast<CFastZombie*>(m_demonHandle.Get());
@@ -420,8 +425,8 @@ Class_T	CAbhPedestrian::Classify()
 
 void CAbhPedestrian::PrescheduleThink()
 {
+	Msg("thinking at: %f\n", gpGlobals->curtime);
 	BaseClass::PrescheduleThink();
-	Msg("think\n");
 
 	if (m_bIsDemon)
 	{
@@ -503,6 +508,7 @@ void CAbhPedestrian::SpotlightShutdown()
 //------------------------------------------------------------------------------
 void CAbhPedestrian::SpotlightThink()
 {
+	Msg("spotlight think at: %f\n", gpGlobals->curtime);
 	// NOTE: This function should deal with all deactivation cases
 	if (m_lifeState != LIFE_ALIVE)
 	{
@@ -515,8 +521,10 @@ void CAbhPedestrian::SpotlightThink()
 		Vector vecForward;
 		Vector vecOrigin;
 		GetAttachment(m_nSpotlightAttachment, vecOrigin, &vecForward);
+		Vector velocity = GetAbsVelocity();
+		float thisTime = gpGlobals->curtime - GetLastThink();
 		m_Spotlight.SetSpotlightTargetDirection(vecForward);
-		m_Spotlight.m_hSpotlight->PointsInit(vecOrigin, vecOrigin + vecForward * 192.0f);
+		m_Spotlight.m_hSpotlight->PointsInit(vecOrigin + velocity * thisTime, vecOrigin + vecForward * 192.0f);
 	}
 	else
 	{
@@ -526,7 +534,6 @@ void CAbhPedestrian::SpotlightThink()
 
 	m_Spotlight.Update();
 	SetContextThink(&CAbhPedestrian::SpotlightThink, gpGlobals->curtime + TICK_INTERVAL, s_pSpotlightThinkContext);
-	Msg("Spotlight think\n");
 }
 
 /*void CAbhPedestrian::SpotlightDestroy(void)
