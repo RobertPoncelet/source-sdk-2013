@@ -964,16 +964,19 @@ int CFastZombie::RangeAttack1Conditions( float flDot, float flDist )
 
 	if (GetEnemy() == NULL)
 	{
+		//Msg("No enemy\n");
 		return( COND_NONE );
 	}
 
 	if( !(GetFlags() & FL_ONGROUND) )
 	{
+		//Msg("Not on the ground\n");
 		return COND_NONE;
 	}
 
 	if( gpGlobals->curtime < m_flNextAttack )
 	{
+		//Msg("Can't attack yet\n");
 		return( COND_NONE );
 	}
 
@@ -982,26 +985,31 @@ int CFastZombie::RangeAttack1Conditions( float flDot, float flDist )
 	flZDist = fabs( GetEnemy()->GetLocalOrigin().z - GetLocalOrigin().z );
 	if( flZDist > FASTZOMBIE_MAXLEAP_Z )
 	{
+		//Msg("Too far vertically\n");
 		return COND_TOO_FAR_TO_ATTACK;
 	}
 
 	if( flDist > InnateRange1MaxRange() )
 	{
+		//Msg("Too far\n");
 		return COND_TOO_FAR_TO_ATTACK;
 	}
 
 	if( flDist < FASTZOMBIE_MINLEAP )
 	{
+		//Msg("Too close\n");
 		return COND_NONE;
 	}
 
 	if (flDot < 0.8) 
 	{
+		//Msg("Not facing\n");
 		return COND_NONE;
 	}
 
 	if ( !IsMoving() )
 	{
+		//Msg("Not moving\n");
 		// I Have to be running!!!
 		return COND_NONE;
 	}
@@ -1015,6 +1023,7 @@ int CFastZombie::RangeAttack1Conditions( float flDot, float flDist )
 		// If the enemy is a player, don't attack from behind!
 		if( !pPlayer->FInViewCone( this ) )
 		{
+			//Msg("Player isn't facing me\n");
 			return COND_NONE;
 		}
 	}
@@ -1036,10 +1045,12 @@ int CFastZombie::RangeAttack1Conditions( float flDot, float flDist )
 
 	if( tr.fraction != 1.0 )
 	{
+		//Msg("There's an obstacle\n");
 		// There's some sort of obstacle pretty much right in front of me.
 		return COND_NONE;
 	}
 
+	//Msg("Success!\n");
 	return COND_CAN_RANGE_ATTACK1;
 }
 

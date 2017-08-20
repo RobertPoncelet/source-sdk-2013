@@ -152,6 +152,7 @@ private:
 	//CHandle<CBeam>	m_hSpotlight;
 	CAI_Spotlight	m_Spotlight;
 	int m_nSpotlightAttachment;
+	CBaseEntity* m_pathCorner;
 	//int m_nHaloSprite;
 
 	// Spotlights
@@ -336,6 +337,8 @@ void CAbhPedestrian::InputBecomeDemon(inputdata_t &inputData)
 	InputDisableShadow(inputdata_t());
 	SetRenderMode(kRenderNone);
 	SetCollisionGroup(COLLISION_GROUP_DEBRIS);
+
+	m_pathCorner = GetGoalEnt();
 	if (!IsCurSchedule(SCHED_NPC_FREEZE))
 	{
 		ToggleFreeze();
@@ -375,7 +378,8 @@ void CAbhPedestrian::InputBecomeDemon(inputdata_t &inputData)
 
 	demonEnt->GetMotor()->SetIdealYaw(angFacing.y);
 
-	demonEnt->SetActivity((Activity)ACT_FASTZOMBIE_LEAP_STRIKE);
+	//demonEnt->SetActivity((Activity)ACT_FASTZOMBIE_LEAP_STRIKE);
+	demonEnt->ScheduledMoveToGoalEntity(SCHED_FASTZOMBIE_RANGE_ATTACK1, pEnemy, (Activity)ACT_FASTZOMBIE_LEAP_STRIKE);
 	demonEnt->SetSchedule(SCHED_RANGE_ATTACK1);
 	demonEnt->SetNextThink(gpGlobals->curtime);
 	demonEnt->PhysicsSimulate();
@@ -401,12 +405,20 @@ void CAbhPedestrian::InputStopBeingDemon(inputdata_t &inputData)
 	//SpotlightCreate();
 	SpotlightStartup();
 
-	if (IsCurSchedule(SCHED_NPC_FREEZE)) // TODO: Fix this
+	if (IsCurSchedule(SCHED_NPC_FREEZE))
 	{
 		ToggleFreeze();
 	}
 
-	SetSchedule(SCHED_IDLE_WALK);
+	if (m_pathCorner)
+	{
+		ScheduledMoveToGoalEntity(SCHED_IDLE_WALK, m_pathCorner, ACT_WALK);
+		SetSchedule(SCHED_IDLE_WALK);
+	}
+	else
+	{
+		Msg("No path_corner for this pedestrian!\n");
+	}
 
 	// stfu
 	CFastZombie* demon = dynamic_cast<CFastZombie*>(m_demonHandle.Get());
@@ -425,7 +437,6 @@ Class_T	CAbhPedestrian::Classify()
 
 void CAbhPedestrian::PrescheduleThink()
 {
-	Msg("thinking at: %f\n", gpGlobals->curtime);
 	BaseClass::PrescheduleThink();
 
 	if (m_bIsDemon)
@@ -508,7 +519,6 @@ void CAbhPedestrian::SpotlightShutdown()
 //------------------------------------------------------------------------------
 void CAbhPedestrian::SpotlightThink()
 {
-	Msg("spotlight think at: %f\n", gpGlobals->curtime);
 	// NOTE: This function should deal with all deactivation cases
 	if (m_lifeState != LIFE_ALIVE)
 	{
