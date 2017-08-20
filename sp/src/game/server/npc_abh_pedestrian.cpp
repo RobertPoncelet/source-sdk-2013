@@ -341,7 +341,12 @@ void CAbhPedestrian::InputBecomeDemon(inputdata_t &inputData)
 	m_pathCorner = GetGoalEnt();
 	if (!IsCurSchedule(SCHED_NPC_FREEZE))
 	{
-		ToggleFreeze();
+		//ToggleFreeze();
+		//SetCondition(COND_NPC_FREEZE);
+		//SetMoveType(MOVETYPE_NONE);
+		//SetGravity(0);
+		SetLocalAngularVelocity(vec3_angle);
+		SetAbsVelocity(vec3_origin);
 	}
 
 	//SpotlightDestroy();
@@ -357,9 +362,6 @@ void CAbhPedestrian::InputBecomeDemon(inputdata_t &inputData)
 		Warning("**%s: Can't make %s!\n", GetClassname(), "npc_abhdemon");
 		return;
 	}
-
-	// don't pop to floor, fall
-	//demonEnt->AddSpawnFlags(SF_NPC_FALL_TO_GROUND);
 
 	// make me the crab's owner to avoid collision issues
 	demonEnt->SetOwnerEntity(this);
@@ -378,19 +380,14 @@ void CAbhPedestrian::InputBecomeDemon(inputdata_t &inputData)
 
 	demonEnt->GetMotor()->SetIdealYaw(angFacing.y);
 
-	//demonEnt->SetActivity((Activity)ACT_FASTZOMBIE_LEAP_STRIKE);
 	demonEnt->ScheduledMoveToGoalEntity(SCHED_FASTZOMBIE_RANGE_ATTACK1, pEnemy, (Activity)ACT_FASTZOMBIE_LEAP_STRIKE);
 	demonEnt->SetSchedule(SCHED_RANGE_ATTACK1);
 	demonEnt->SetNextThink(gpGlobals->curtime);
 	demonEnt->PhysicsSimulate();
-	//demonEnt->SetAbsVelocity(vecVelocity);
 
 	demonEnt->SetEnemy(pEnemy);
 
 	demonEnt->Activate();
-
-	//demonEnt->LeapAttack();
-	//demonEnt->EmitSound("NPC_FastZombie.Scream");
 	
 	m_demonHandle.Set(demonEnt);
 }
@@ -407,7 +404,15 @@ void CAbhPedestrian::InputStopBeingDemon(inputdata_t &inputData)
 
 	if (IsCurSchedule(SCHED_NPC_FREEZE))
 	{
-		ToggleFreeze();
+		//ToggleFreeze();
+		// Unfreeze them.
+		//SetCondition(COND_NPC_UNFREEZE);
+
+		// BUGBUG: this might not be the correct movetype!
+		//SetMoveType(MOVETYPE_STEP);
+
+		// Doesn't restore gravity to the original value, but who cares?
+		//SetGravity(1);
 	}
 
 	if (m_pathCorner)
