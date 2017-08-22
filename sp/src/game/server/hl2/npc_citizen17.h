@@ -104,7 +104,7 @@ public:
 	void 			GatherConditions();
 	void			PredictPlayerPush();
 	virtual void 	PrescheduleThink(); // SIRE: this too
-	void			BuildScheduleTestBits();
+	virtual void	BuildScheduleTestBits(); // SIRE: this too
 
 	bool			FInViewCone( CBaseEntity *pEntity );
 

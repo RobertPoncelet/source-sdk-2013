@@ -139,6 +139,7 @@ public:
 	//void SpotlightDestroy();
 	//void SpotlightUpdate();
 	bool CreateComponents();
+	void BuildScheduleTestBits();
 	void Activate();
 	Class_T Classify();
 
@@ -349,6 +350,8 @@ void CAbhPedestrian::InputBecomeDemon(inputdata_t &inputData)
 		SetAbsVelocity(vec3_origin);
 	}
 
+	SetNextThink(gpGlobals->curtime + abh_pedestrian_demon_time.GetFloat());
+
 	//SpotlightDestroy();
 	SpotlightShutdown();
 
@@ -494,6 +497,25 @@ void CAbhPedestrian::PrescheduleThink()
 			InputBecomeDemon(data);
 		}
 	}
+}
+
+void CAbhPedestrian::BuildScheduleTestBits()
+{
+	BaseClass::BuildScheduleTestBits();
+
+	ClearCustomInterruptCondition(COND_SEE_HATE);
+	ClearCustomInterruptCondition(COND_SEE_FEAR);
+	ClearCustomInterruptCondition(COND_SEE_ENEMY);
+	ClearCustomInterruptCondition(COND_HEAR_DANGER);
+	ClearCustomInterruptCondition(COND_HEAR_COMBAT);
+	ClearCustomInterruptCondition(COND_HEAR_PLAYER);
+	ClearCustomInterruptCondition(COND_HEAR_BULLET_IMPACT);
+	ClearCustomInterruptCondition(COND_HEAR_PHYSICS_DANGER);
+	ClearCustomInterruptCondition(COND_HEAR_SPOOKY);
+	ClearCustomInterruptCondition(COND_LIGHT_DAMAGE);
+	ClearCustomInterruptCondition(COND_HEAVY_DAMAGE);
+	ClearCustomInterruptCondition(COND_NEW_ENEMY);
+	ClearCustomInterruptCondition(79); // COND_CIT_HURTBYFIRE
 }
 
 //------------------------------------------------------------------------------
