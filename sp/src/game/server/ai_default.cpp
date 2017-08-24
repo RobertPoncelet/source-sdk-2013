@@ -593,15 +593,15 @@ AI_DEFINE_SCHEDULE
 	"		TASK_WAIT_FOR_MOVEMENT	0"
 	"		TASK_WAIT_PVS			0"
 	""
-	"	Interrupts"
-	"		COND_NEW_ENEMY"
-	"		COND_SEE_ENEMY"	// in deference to scripted schedule where the enemy was slammed, thus no COND_NEW_ENEMY
-	"		COND_LIGHT_DAMAGE"
-	"		COND_HEAVY_DAMAGE"
-	"		COND_SMELL"
-	"		COND_PROVOKED"
-	"		COND_HEAR_COMBAT"
-	"		COND_HEAR_BULLET_IMPACT"
+	"	Interrupts" // SIRE: let's not use these for now
+	//"		COND_NEW_ENEMY"
+	//"		COND_SEE_ENEMY"	// in deference to scripted schedule where the enemy was slammed, thus no COND_NEW_ENEMY
+	//"		COND_LIGHT_DAMAGE"
+	//"		COND_HEAVY_DAMAGE"
+	//"		COND_SMELL"
+	//"		COND_PROVOKED"
+	//"		COND_HEAR_COMBAT"
+	//"		COND_HEAR_BULLET_IMPACT"
 );
 
 //===============================================

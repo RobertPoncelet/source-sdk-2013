@@ -336,18 +336,18 @@ void CAbhPedestrian::InputBecomeDemon(inputdata_t &inputData)
 	m_timeBecameDemon = gpGlobals->curtime;
 
 	InputDisableShadow(inputdata_t());
-	SetRenderMode(kRenderNone);
-	SetCollisionGroup(COLLISION_GROUP_DEBRIS);
+	//SetRenderMode(kRenderNone);
+	//SetCollisionGroup(COLLISION_GROUP_DEBRIS);
 
 	m_pathCorner = GetGoalEnt();
 	if (!IsCurSchedule(SCHED_NPC_FREEZE))
 	{
-		//ToggleFreeze();
+		ToggleFreeze();
 		//SetCondition(COND_NPC_FREEZE);
 		//SetMoveType(MOVETYPE_NONE);
 		//SetGravity(0);
-		SetLocalAngularVelocity(vec3_angle);
-		SetAbsVelocity(vec3_origin);
+		//SetLocalAngularVelocity(vec3_angle);
+		//SetAbsVelocity(vec3_origin);
 	}
 
 	SetNextThink(gpGlobals->curtime + abh_pedestrian_demon_time.GetFloat());
@@ -401,13 +401,13 @@ void CAbhPedestrian::InputStopBeingDemon(inputdata_t &inputData)
 
 	InputEnableShadow(inputdata_t());
 	SetRenderMode(kRenderNormal);
-	SetCollisionGroup(COLLISION_GROUP_NPC);
+	//SetCollisionGroup(COLLISION_GROUP_NPC);
 	//SpotlightCreate();
 	SpotlightStartup();
 
 	if (IsCurSchedule(SCHED_NPC_FREEZE))
 	{
-		//ToggleFreeze();
+		ToggleFreeze();
 		// Unfreeze them.
 		//SetCondition(COND_NPC_UNFREEZE);
 
@@ -420,7 +420,7 @@ void CAbhPedestrian::InputStopBeingDemon(inputdata_t &inputData)
 
 	if (m_pathCorner)
 	{
-		ScheduledMoveToGoalEntity(SCHED_IDLE_WALK, m_pathCorner, ACT_WALK);
+		//ScheduledMoveToGoalEntity(SCHED_IDLE_WALK, m_pathCorner, ACT_WALK);
 		SetSchedule(SCHED_IDLE_WALK);
 	}
 	else
@@ -446,6 +446,13 @@ Class_T	CAbhPedestrian::Classify()
 void CAbhPedestrian::PrescheduleThink()
 {
 	BaseClass::PrescheduleThink();
+
+	if (m_lifeState != LIFE_ALIVE)
+	{
+		UTIL_Remove(m_demonHandle);
+		SpotlightShutdown();
+		return;
+	}
 
 	if (m_bIsDemon)
 	{

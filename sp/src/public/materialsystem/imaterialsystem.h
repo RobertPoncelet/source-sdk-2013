@@ -424,8 +424,8 @@ struct FlashlightState_t
 		m_bDrawShadowFrustum = false;
 		m_flShadowMapResolution = 1024.0f;
 		m_flShadowFilterSize = 1.0f;
-		m_flShadowSlopeScaleDepthBias = 16.0f;
-		m_flShadowDepthBias = 0.0005f;
+		m_flShadowSlopeScaleDepthBias = 4.0f; // SIRE: Changed the default to make it more suitable for environment lights
+		m_flShadowDepthBias = 0.00001f; // SIRE: This one too
 		m_flShadowJitterSeed = 0.0f;
 		m_flShadowAtten = 0.0f;
 		m_bScissor = false; 

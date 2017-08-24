@@ -4400,13 +4400,18 @@ int CAI_BaseNPC::SelectIdleSchedule()
 		 HasCondition ( COND_HEAR_BULLET_IMPACT ) ||
 		 HasCondition ( COND_HEAR_PLAYER ) )
 	{
+		DevMsg("Oh shit what was that\n");
 		return SCHED_ALERT_FACE_BESTSOUND;
 	}
 	
 	// no valid route!
 	if (GetNavigator()->GetGoalType() == GOALTYPE_NONE)
+	{
+		DevMsg("No goal!\n");
 		return SCHED_IDLE_STAND;
+	}
 
+	DevMsg("Gonna go walk\n");
 	// valid route. Get moving
 	return SCHED_IDLE_WALK;
 }
