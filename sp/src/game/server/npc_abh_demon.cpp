@@ -48,6 +48,7 @@ public:
 	void SetZombieModel(void);
 
 	virtual void ReleaseHeadcrab(const Vector &vecOrigin, const Vector &vecVelocity, bool fRemoveHead, bool fRagdollBody, bool fRagdollCrab = false);
+	virtual CBaseEntity* ClawAttack(float flDist, int iDamage, QAngle &qaViewPunch, Vector &vecVelocityPunch, int BloodOrigin);
 
 	DECLARE_DATADESC();
 };
@@ -1639,6 +1640,13 @@ void CAbhDemon::ReleaseHeadcrab(const Vector &vecOrigin, const Vector &vecVeloci
 		BecomeRagdollOnClient(vec3_origin);
 	}*/
 }
+
+CBaseEntity* CAbhDemon::ClawAttack(float flDist, int iDamage, QAngle &qaViewPunch, Vector &vecVelocityPunch, int BloodOrigin)
+{
+	// Always do a shitload of damage
+	return BaseClass::ClawAttack(flDist, iDamage * 10, qaViewPunch, vecVelocityPunch, BloodOrigin);
+}
+
 /*
 //-----------------------------------------------------------------------------
 

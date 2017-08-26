@@ -336,13 +336,13 @@ void CAbhPedestrian::InputBecomeDemon(inputdata_t &inputData)
 	m_timeBecameDemon = gpGlobals->curtime;
 
 	InputDisableShadow(inputdata_t());
-	//SetRenderMode(kRenderNone);
-	//SetCollisionGroup(COLLISION_GROUP_DEBRIS);
+	SetRenderMode(kRenderNone);
+	SetCollisionGroup(COLLISION_GROUP_DEBRIS);
 
 	m_pathCorner = GetGoalEnt();
 	if (!IsCurSchedule(SCHED_NPC_FREEZE))
 	{
-		ToggleFreeze();
+		//ToggleFreeze();
 		//SetCondition(COND_NPC_FREEZE);
 		//SetMoveType(MOVETYPE_NONE);
 		//SetGravity(0);
@@ -407,7 +407,7 @@ void CAbhPedestrian::InputStopBeingDemon(inputdata_t &inputData)
 
 	if (IsCurSchedule(SCHED_NPC_FREEZE))
 	{
-		ToggleFreeze();
+		//ToggleFreeze();
 		// Unfreeze them.
 		//SetCondition(COND_NPC_UNFREEZE);
 
