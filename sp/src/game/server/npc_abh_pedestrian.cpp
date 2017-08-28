@@ -156,6 +156,8 @@ private:
 	CBaseEntity* m_pathCorner;
 	//int m_nHaloSprite;
 
+	bool CanSeePlayer();
+
 	// Spotlights
 	void SpotlightThink();
 	void SpotlightStartup();
@@ -458,8 +460,7 @@ void CAbhPedestrian::PrescheduleThink()
 	{
 		if (gpGlobals->curtime > m_timeBecameDemon + abh_pedestrian_demon_time.GetFloat())
 		{
-			inputdata_t data;
-			InputStopBeingDemon(data);
+			InputStopBeingDemon(inputdata_t());
 		}
 		return;
 	}
@@ -469,40 +470,9 @@ void CAbhPedestrian::PrescheduleThink()
 		return;
 	}
 
-	//SpotlightUpdate();
-
-	m_radius = abh_pedestrian_radius.GetFloat();
-	m_fov = abh_pedestrian_fov.GetFloat();
- 
-	float flThreshold = m_radius;
-	flThreshold *= flThreshold;
-
-	// check the player.
-	CBasePlayer *pPlayer = UTIL_GetLocalPlayer();
-
-	if (pPlayer && !(pPlayer->GetFlags() & FL_NOTARGET))
+	if (CanSeePlayer())
 	{
-		Vector between = pPlayer->GetAbsOrigin() - GetAbsOrigin();
-		float flDist = between.LengthSqr();
-
-		if (flDist > flThreshold)
-		{
-			return;
-		}
-
-		float angle = m_fov; // / 2.0;
-		angle *= M_PI / 360.0f;
-		float cosAngle = cos(angle);
-
-		int eyes = LookupAttachment("eyes");
-		Vector eyePos, eyeDir;
-		GetAttachment(eyes, eyePos, &eyeDir);
-
-		if (eyeDir.Dot(between.Normalized()) > cosAngle)//FVisible(pPlayer, MASK_SOLID_BRUSHONLY))
-		{
-			inputdata_t data;
-			InputBecomeDemon(data);
-		}
+		InputBecomeDemon(inputdata_t());
 	}
 }
 
@@ -580,45 +550,40 @@ void CAbhPedestrian::SpotlightThink()
 	SetContextThink(&CAbhPedestrian::SpotlightThink, gpGlobals->curtime + TICK_INTERVAL, s_pSpotlightThinkContext);
 }
 
-/*void CAbhPedestrian::SpotlightDestroy(void)
+bool CAbhPedestrian::CanSeePlayer()
 {
-	if (m_hSpotlight)
+	m_radius = abh_pedestrian_radius.GetFloat();
+	m_fov = abh_pedestrian_fov.GetFloat();
+
+	float flThreshold = m_radius;
+	flThreshold *= flThreshold;
+
+	// check the player.
+	CBasePlayer *pPlayer = UTIL_GetLocalPlayer();
+
+	if (pPlayer && !(pPlayer->GetFlags() & FL_NOTARGET))
 	{
-		UTIL_Remove(m_hSpotlight);
-		m_hSpotlight = NULL;
+		Vector between = pPlayer->GetAbsOrigin() - GetAbsOrigin();
+		float flDist = between.LengthSqr();
+
+		if (flDist > flThreshold)
+		{
+			return false;
+		}
+
+		float angle = m_fov; // / 2.0;
+		angle *= M_PI / 360.0f;
+		float cosAngle = cos(angle);
+
+		int eyes = LookupAttachment("eyes");
+		Vector eyePos, eyeDir;
+		GetAttachment(eyes, eyePos, &eyeDir);
+
+		if (eyeDir.Dot(between.Normalized()) > cosAngle && FVisible(pPlayer, MASK_SOLID_BRUSHONLY))
+		{
+			return true;
+		}
 	}
+
+	return false;
 }
-
-
-//------------------------------------------------------------------------------
-// Purpose:
-//------------------------------------------------------------------------------
-void CAbhPedestrian::SpotlightCreate(void)
-{
-	// Make sure we don't already have one
-	if (m_hSpotlight != NULL)
-		return;
-
-	m_hSpotlight = CBeam::BeamCreate("sprites/glow_test02.vmt", 32); // TODO: change later
-	// Set the temporary spawnflag on the beam so it doesn't save (we'll recreate it on restore)
-	m_hSpotlight->AddSpawnFlags(SF_BEAM_TEMPORARY);
-	m_hSpotlight->SetColor(255, 255, 255);
-	m_hSpotlight->SetHaloTexture(m_nHaloSprite);
-	m_hSpotlight->SetHaloScale(24);
-	//m_hSpotlight->SetEndWidth(256);
-	m_hSpotlight->SetWidth(64);
-	m_hSpotlight->SetBeamFlags((FBEAM_SHADEOUT | FBEAM_NOTILE));
-	m_hSpotlight->SetBrightness(32);
-	m_hSpotlight->SetNoise(0);
-	m_hSpotlight->SetHDRColorScale(0.75f);	// Scale this back a bit on HDR maps
-}
-
-void CAbhPedestrian::SpotlightUpdate()
-{
-	// attach to head
-	int eyes = LookupAttachment("eyes");
-	Vector pos, dir;
-	GetAttachment(eyes, pos, &dir);
-	m_hSpotlight->PointsInit(pos, pos + dir * 192.0f);
-	m_hSpotlight->SetStartAttachment(eyes);
-}*/
