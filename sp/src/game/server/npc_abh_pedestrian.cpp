@@ -52,7 +52,9 @@ extern ConVar sk_healthvial;
 
 ConVar	abh_pedestrian_radius("abh_pedestrian_radius", "128");
 ConVar	abh_pedestrian_fov("abh_pedestrian_fov", "120");
-ConVar	abh_pedestrian_demon_time("abh_pedestrian_demon_time", "10");
+ConVar	abh_pedestrian_demon_time("abh_pedestrian_demon_time", "5");
+ConVar	abh_pedestrian_ignore_notarget("abh_pedestrian_ignore_notarget", "0");
+ConVar	abh_pedestrian_look_at_player("abh_pedestrian_look_at_player", "0");
 
 const int MAX_PLAYER_SQUAD = 4;
 
@@ -135,6 +137,9 @@ public:
 	void PrescheduleThink();
 	void InputBecomeDemon(inputdata_t &inputData);
 	void InputStopBeingDemon(inputdata_t &inputData);
+	float PickLookTarget(CAI_InterestTarget &queue, bool bExcludePlayers = false, float minTime = 1.5, float maxTime = 2.5);
+	bool PickTacticalLookTarget(AILookTargetArgs_t *pArgs);
+	bool PickRandomLookTarget(AILookTargetArgs_t *pArgs);
 	//void SpotlightCreate();
 	//void SpotlightDestroy();
 	//void SpotlightUpdate();
@@ -561,7 +566,8 @@ bool CAbhPedestrian::CanSeePlayer()
 	// check the player.
 	CBasePlayer *pPlayer = UTIL_GetLocalPlayer();
 
-	if (pPlayer && !(pPlayer->GetFlags() & FL_NOTARGET))
+	// If we have a valid player and either we don't care about notarget or notarget is off
+	if (pPlayer && (abh_pedestrian_ignore_notarget.GetBool() || !(pPlayer->GetFlags() & FL_NOTARGET)))
 	{
 		Vector between = pPlayer->GetAbsOrigin() - GetAbsOrigin();
 		float flDist = between.LengthSqr();
@@ -586,4 +592,21 @@ bool CAbhPedestrian::CanSeePlayer()
 	}
 
 	return false;
+}
+
+float CAbhPedestrian::PickLookTarget(CAI_InterestTarget &queue, bool bExcludePlayers, float minTime, float maxTime)
+{
+	return BaseClass::PickLookTarget(queue, !abh_pedestrian_look_at_player.GetBool(), minTime, maxTime);
+}
+
+bool CAbhPedestrian::PickTacticalLookTarget(AILookTargetArgs_t *pArgs)
+{
+	pArgs->bExcludePlayers = !abh_pedestrian_look_at_player.GetBool();
+	return BaseClass::PickTacticalLookTarget(pArgs);
+}
+
+bool CAbhPedestrian::PickRandomLookTarget(AILookTargetArgs_t *pArgs)
+{
+	pArgs->bExcludePlayers = !abh_pedestrian_look_at_player.GetBool();
+	return BaseClass::PickRandomLookTarget(pArgs);
 }

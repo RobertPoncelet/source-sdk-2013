@@ -1176,7 +1176,7 @@ float CAI_BaseActor::PickLookTarget( CAI_InterestTarget &queue, bool bExcludePla
 	
 	if ( !foundLookTarget )
 	{
-		// DevMsg("nothing to see\n" );
+		DevMsg("nothing to see\n" );
 		MakeRandomLookTarget( &args, minTime, maxTime );
 	}
 	
@@ -1244,6 +1244,7 @@ bool CAI_BaseActor::PickRandomLookTarget( AILookTargetArgs_t *pArgs )
 				pArgs->flDuration = random->RandomFloat( 1.0, 2.0 );
 			}
 			pArgs->flRamp = 0.2;
+			DevMsg("weird navigation look\n");
 			return true;
 		}
 	}
@@ -1269,6 +1270,7 @@ bool CAI_BaseActor::PickRandomLookTarget( AILookTargetArgs_t *pArgs )
 		if ( pArgs->bExcludePlayers && pEntity->GetFlags() & FL_CLIENT )
 		{
 			// Don't look at any players.
+			DevMsg("Excluding player\n");
 			continue;
 		}
 
@@ -1363,8 +1365,8 @@ bool CAI_BaseActor::PickRandomLookTarget( AILookTargetArgs_t *pArgs )
 
 	if (pBestEntity)
 	{
-		//Msg("looking at %s\n", pBestEntity->GetClassname() );
-		//NDebugOverlay::Line( EyePosition(), pBestEntity->WorldSpaceCenter(), 255, 0, 0, false, 5 );
+		Msg("looking at %s\n", pBestEntity->GetClassname() );
+		NDebugOverlay::Line( EyePosition(), pBestEntity->WorldSpaceCenter(), 255, 0, 0, false, 5 );
 		pArgs->hTarget = pBestEntity;
 		return true;
 	}

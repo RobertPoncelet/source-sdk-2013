@@ -1416,7 +1416,7 @@ int CFastZombie::TranslateSchedule( int scheduleType )
 			if( !m_fHasScreamed )
 			{
 				// Only play that over-the-top attack scream once per combat state.
-				//EmitSound( "NPC_FastZombie.Scream" );
+				EmitSound( "NPC_FastZombie.Scream" );
 				m_fHasScreamed = true;
 			}
 			else
@@ -2130,7 +2130,7 @@ AI_BEGIN_CUSTOM_NPC( npc_fastzombie, CFastZombie )
 		"		TASK_FACE_ENEMY					0"
 		"		TASK_MELEE_ATTACK1				0"
 		"		TASK_MELEE_ATTACK1				0"
-		//"		TASK_PLAY_SEQUENCE				ACTIVITY:ACT_FASTZOMBIE_FRENZY"
+		//"		TASK_PLAY_SEQUENCE				ACTIVITY:ACT_FASTZOMBIE_FRENZY" // SIRE: kind of a hack for now
 		"		TASK_SET_FAIL_SCHEDULE			SCHEDULE:SCHED_CHASE_ENEMY"
 		"		TASK_FASTZOMBIE_VERIFY_ATTACK	0"
 		"		TASK_PLAY_SEQUENCE_FACE_ENEMY	ACTIVITY:ACT_FASTZOMBIE_BIG_SLASH"

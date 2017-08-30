@@ -36,6 +36,8 @@
 // memdbgon must be the last include file in a .cpp file!!!
 #include "tier0/memdbgon.h"
 
+ConVar	abh_demon_shutup("abh_demon_shutup", "0");
+
 //=========================================================
 //=========================================================
 class CAbhDemon : public CFastZombie
@@ -44,9 +46,10 @@ class CAbhDemon : public CFastZombie
 
 public:
 	void Spawn(void);
-
 	void SetZombieModel(void);
 
+	virtual int TranslateSchedule(int scheduleType);
+	virtual void Activate();
 	virtual void ReleaseHeadcrab(const Vector &vecOrigin, const Vector &vecVelocity, bool fRemoveHead, bool fRagdollBody, bool fRagdollCrab = false);
 	virtual CBaseEntity* ClawAttack(float flDist, int iDamage, QAngle &qaViewPunch, Vector &vecVelocityPunch, int BloodOrigin);
 
@@ -96,6 +99,15 @@ void CAbhDemon::Spawn(void)
 	AddClassRelationship(CLASS_CITIZEN_PASSIVE, D_NU, 100);
 }
 
+void CAbhDemon::Activate()
+{
+	BaseClass::Activate();
+	if (abh_demon_shutup.GetBool())
+	{
+		StopLoopingSounds();
+	}
+}
+
 //-----------------------------------------------------------------------------
 // Purpose: 
 //
@@ -120,4 +132,12 @@ CBaseEntity* CAbhDemon::ClawAttack(float flDist, int iDamage, QAngle &qaViewPunc
 	return BaseClass::ClawAttack(flDist, iDamage * 10, qaViewPunch, vecVelocityPunch, BloodOrigin);
 }
 
+int CAbhDemon::TranslateSchedule(int scheduleType)
+{
+	if (scheduleType == SCHED_RANGE_ATTACK1 && abh_demon_shutup.GetBool())
+	{
+		m_fHasScreamed = true;
+	}
+	return BaseClass::TranslateSchedule(scheduleType);
+}
 
