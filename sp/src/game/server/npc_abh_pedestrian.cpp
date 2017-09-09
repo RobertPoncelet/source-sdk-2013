@@ -485,6 +485,15 @@ void CAbhPedestrian::BuildScheduleTestBits()
 {
 	BaseClass::BuildScheduleTestBits();
 
+	if (abh_pedestrian_look_at_player.GetBool())
+	{
+		SetCondition(COND_SEE_PLAYER);
+	}
+	else
+	{
+		ClearCondition(COND_SEE_PLAYER);
+	}
+
 	ClearCustomInterruptCondition(COND_SEE_HATE);
 	ClearCustomInterruptCondition(COND_SEE_FEAR);
 	ClearCustomInterruptCondition(COND_SEE_ENEMY);
