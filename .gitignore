@@ -90,3 +90,6 @@ sp/src/utils/sapi51
 
 #idk
 *.vpc_crc
+sp/src/materialsystem/stdshaders/filelist.txt
+sp/src/materialsystem/stdshaders/filelistgen.txt
+sp/src/materialsystem/stdshaders/filestocopy.txt

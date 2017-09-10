@@ -2085,6 +2085,13 @@ void CBaseVSShader::DrawFlashlight_dx90( IMaterialVar** params, IShaderDynamicAP
 		atten[3] = flashlightState.m_FarZ;
 		s_pShaderAPI->SetPixelShaderConstant(PSREG_FLASHLIGHT_ATTENUATION, atten, 1);
 
+		float pos[4];										// Set the flashlight position
+		pos[0] = flashlightState.m_vecLightOrigin.x;
+		pos[1] = flashlightState.m_vecLightOrigin.y;
+		pos[2] = flashlightState.m_vecLightOrigin.z;
+		pos[3] = 0.0f;
+		s_pShaderAPI->SetPixelShaderConstant(PSREG_FLASHLIGHT_POSITION, pos, 1);
+
 		SetFlashlightVertexShaderConstants( vars.m_bBump, vars.m_nBumpTransform, bDetail, vars.m_nDetailScale,  bSeamless ? false : true );
 	}
 	Draw();

@@ -32,6 +32,7 @@ const float4 g_vShadowTweaks				: register( PSREG_ENVMAP_TINT__SHADOW_TWEAKS );
 const float4 g_FogParams					: register( PSREG_FOG_PARAMS );
 const float4 g_EyePos						: register( PSREG_EYEPOS_SPEC_EXPONENT );
 const float4 g_FlashlightAttenuation		: register( PSREG_FLASHLIGHT_ATTENUATION );
+const float4 g_FlashlightPosition			: register( PSREG_FLASHLIGHT_POSITION );
 const float4 g_DetailConstants				: register( c0 );
 
 #if PHONG
@@ -181,9 +182,10 @@ float4 main( PS_INPUT i ) : COLOR
 	spotColor.rgb *= cFlashlightColor.rgb;
 
 	// Compute per-pixel distance attenuation
-	float3 delta = g_EyePos.xyz - i.worldPos_worldTransition.xyz;
+	float3 delta = g_FlashlightPosition - i.worldPos_worldTransition.xyz;
 	//float distSquared = dot( delta, delta );
-	float dist = i.spotTexCoord.w; //sqrt( distSquared );
+	//float dist = i.spotTexCoord.w; //sqrt( distSquared );
+	float dist = length(delta);
 	float distSquared = dist*dist;
 	float farZ = g_FlashlightAttenuation.w;
 	float endFalloffFactor = RemapValClamped( dist, farZ, 0.6f * farZ, 0.0f, 1.0f );
