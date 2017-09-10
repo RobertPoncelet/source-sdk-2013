@@ -189,7 +189,7 @@ float4 main( PS_INPUT i ) : COLOR
 	float distSquared = dist*dist;
 	float farZ = g_FlashlightAttenuation.w;
 	float endFalloffFactor = RemapValClamped( dist, farZ, 0.6f * farZ, 0.0f, 1.0f );
-	float flAtten = saturate(endFalloffFactor * dot( g_FlashlightAttenuation.xyz, float3( 1.0f, 1.0f/dist, 1.0f/distSquared ) ) );
+	float flAtten = saturate(sign(i.spotTexCoord.z) * endFalloffFactor * dot( g_FlashlightAttenuation.xyz, float3( 1.0f, 1.0f/dist, 1.0f/distSquared ) ) );
 
 #if FLASHLIGHTSHADOWS && ( defined( SHADER_MODEL_PS_2_B ) || defined( SHADER_MODEL_PS_3_0 ) )
 	float flShadow = DoFlashlightShadow( FlashlightDepthSampler, RandomRotationSampler, vProjCoords, i.projPos.xy / i.projPos.z, FLASHLIGHTDEPTHFILTERMODE, g_vShadowTweaks, false );
@@ -237,7 +237,7 @@ float3 vLightDir;
 float3 outColor;
 
 #if PHONG && ( FLASHLIGHTSHADOWS && ( defined( SHADER_MODEL_PS_2_B ) || defined( SHADER_MODEL_PS_3_0 ) ) )
-	float3 specular = g_PhongParams.y * vNormal.a * spotColor * saturate(nDotL) * SpecularLight(vNormal.xyz, vLightDir, g_PhongParams.x * vNormal.a, normalize(delta), false, NULL, 1.0); // SIRE: woo
+	float3 specular = g_PhongParams.y * vNormal.a * spotColor * saturate(nDotL) * SpecularLight(vNormal.xyz, vLightDir, g_PhongParams.x * vNormal.a, normalize(g_EyePos - i.worldPos_worldTransition.xyz), false, NULL, 1.0); // SIRE: woo
 	outColor = spotColor * baseColor.xyz * saturate( nDotL ) + specular;
 #else
 	outColor = spotColor * baseColor.xyz * saturate( nDotL );
