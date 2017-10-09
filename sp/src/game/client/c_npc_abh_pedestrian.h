@@ -41,6 +41,7 @@ public:
 private:
 
 	CHeadlightEffect *m_pHeadlight;
+	CNewParticleEffect *m_pHeadX;
 	bool m_bIsDemon;
 	float m_radius;
 	float m_fov;

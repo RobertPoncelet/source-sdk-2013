@@ -38,6 +38,9 @@ C_AbhPedestrian::~C_AbhPedestrian()
 
 void C_AbhPedestrian::Simulate(void)
 {
+	// get my particles
+	CParticleProperty * pProp = ParticleProp();
+
 	// The dim light is the flashlight.
 	if (!m_bIsDemon)
 	{
@@ -47,6 +50,9 @@ void C_AbhPedestrian::Simulate(void)
 		state.m_fVerticalFOVDegrees = state.m_fHorizontalFOVDegrees;
 		state.m_FarZ = m_radius;
 		state.m_NearZ = 16.0f;
+		state.m_Color[0] = 0.8f;
+		state.m_Color[1] = 0.1f;
+		state.m_Color[2] = 0.2f;
 
 		if (m_pHeadlight == NULL)
 		{
@@ -84,12 +90,31 @@ void C_AbhPedestrian::Simulate(void)
 
 			m_pHeadlight->UpdateLight(vVector, vecForward, vecRight, vecUp, m_radius, state);
 		}
+
+		if (!m_pHeadX)
+		{
+			m_pHeadX = pProp->Create("pedestrian_headx", PATTACH_POINT_FOLLOW, LookupAttachment("forward"));
+			AssertMsg1(m_pHeadX, "Particle system couldn't make %s", "pedestrian_headx");
+			if (m_pHeadX)
+			{
+				pProp->AddControlPoint(m_pHeadX, 1, this, PATTACH_POINT_FOLLOW, "forward");
+			}
+		}
 	}
-	else if (m_pHeadlight)
+	else 
 	{
-		// Turned off the flashlight; delete it.
-		delete m_pHeadlight;
-		m_pHeadlight = NULL;
+		if (m_pHeadlight)
+		{
+			// Turned off the flashlight; delete it.
+			delete m_pHeadlight;
+			m_pHeadlight = NULL;
+		}
+		// squelch the prior effect if it exists
+		if (m_pHeadX)
+		{
+			pProp->StopEmission(m_pHeadX);
+			m_pHeadX = NULL;
+		}
 	}
 
 	BaseClass::Simulate();

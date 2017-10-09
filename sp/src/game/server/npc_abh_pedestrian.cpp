@@ -37,6 +37,9 @@
 #include "tier0/icommandline.h"
 #include "npc_fastzombie.h"
 
+//#include "particle_parse.h"
+//#include "particle_system.h"
+
 // memdbgon must be the last include file in a .cpp file!!!
 #include "tier0/memdbgon.h"
 
@@ -329,6 +332,8 @@ void CAbhPedestrian::Precache(void)
 	PrecacheScriptSound("NPC_BaseZombie.Swat");
 
 	PrecacheParticleSystem("blood_impact_zombie_01");
+
+	PrecacheParticleSystem("pedestrian_headx");
 
 	// Sprites
 	//m_nHaloSprite = PrecacheModel("sprites/light_glow03.vmt");
