@@ -558,6 +558,7 @@ void CAbhPedestrian::SpotlightThink()
 		float thisTime = gpGlobals->curtime - GetLastThink();
 		m_Spotlight.SetSpotlightTargetDirection(vecForward);
 		m_Spotlight.m_hSpotlight->PointsInit(vecOrigin + velocity * thisTime, vecOrigin + vecForward * 192.0f);
+		m_Spotlight.m_hSpotlight->SetRenderColor(255, 20, 10);
 	}
 	else
 	{
