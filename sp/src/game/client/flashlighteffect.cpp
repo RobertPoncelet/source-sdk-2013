@@ -503,8 +503,8 @@ void CHeadlightEffect::UpdateLight(const Vector &vecPos, const Vector &vecDir, c
 	state.m_fConstantAtten = r_flashlightconstant.GetFloat();
 	// SIRE: terrible hack that means headlight effects will ~always~ be red :^)
 	state.m_Color[0] = 1.0f;
-	state.m_Color[1] = 0.04f;
-	state.m_Color[2] = 0.08f;
+	state.m_Color[1] = 0.03f;
+	state.m_Color[2] = 0.05f;
 	state.m_Color[3] = r_flashlightambient.GetFloat();
 	state.m_pSpotlightTexture = m_FlashlightTexture;
 	state.m_nSpotlightTextureFrame = 0;

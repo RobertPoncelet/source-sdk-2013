@@ -4,5 +4,9 @@
 	$vertexcolor 1
 	$vertexalpha 1
 	$translucent 1
-	//$DEPTHBLEND 1
+	$DEPTHBLEND 0
+	$minsize 0.15
+	$maxdistance 256
+	$farfadeinterval 32
+	$overbrightfactor 1.5
 }

@@ -81,11 +81,12 @@ void C_AbhPedestrian::Simulate(void)
 		Vector vVector;
 		Vector vecForward, vecRight, vecUp;
 
-		int iAttachment = LookupAttachment("eyes");
+		int iEyeAttachment = LookupAttachment("eyes");
+		int iHeadAttachment = LookupAttachment("forward");
 
-		if (iAttachment != INVALID_PARTICLE_ATTACHMENT)
+		if (iEyeAttachment != INVALID_PARTICLE_ATTACHMENT)
 		{
-			GetAttachment(iAttachment, vVector, vAngle);
+			GetAttachment(iEyeAttachment, vVector, vAngle);
 			AngleVectors(vAngle, &vecForward, &vecRight, &vecUp);
 
 			m_pHeadlight->UpdateLight(vVector, vecForward, vecRight, vecUp, m_radius, state);
@@ -93,11 +94,30 @@ void C_AbhPedestrian::Simulate(void)
 
 		if (!m_pHeadX)
 		{
-			m_pHeadX = pProp->Create("pedestrian_headx", PATTACH_POINT_FOLLOW, LookupAttachment("forward"));
+			m_pHeadX = pProp->Create("pedestrian_headx", PATTACH_CUSTOMORIGIN, iHeadAttachment);
 			AssertMsg1(m_pHeadX, "Particle system couldn't make %s", "pedestrian_headx");
-			if (m_pHeadX)
+			/*if (m_pHeadX)
 			{
-				pProp->AddControlPoint(m_pHeadX, 1, this, PATTACH_POINT_FOLLOW, "forward");
+			pProp->AddControlPoint(m_pHeadX, 1, this, PATTACH_POINT_FOLLOW, "forward");
+			}*/
+		}
+
+		if (m_pHeadX)
+		{
+			Vector headPos;
+			bool validPos = GetAttachment(iHeadAttachment, headPos);
+			if (validPos) {
+				C_BasePlayer* player = UTIL_PlayerByIndex(GetLocalPlayerIndex());
+				Vector playerEye;
+				QAngle tmpAng;
+				float tmpFloat;
+				player->CalcView(playerEye, tmpAng, tmpFloat, tmpFloat, tmpFloat);
+				Vector dir = (playerEye - headPos).Normalized();
+				m_pHeadX->SetControlPoint(0, headPos + (dir * 16.0f));
+			}
+			else
+			{
+				AssertMsg1(m_pHeadX, "Invalid attachment point for %s", "pedestrian_headx");
 			}
 		}
 	}
