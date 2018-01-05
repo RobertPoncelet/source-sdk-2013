@@ -650,6 +650,23 @@ float3 SpecularLight( const float3 vWorldNormal, const float3 vLightDir, const f
 	return vSpecular;
 }
 
+float3 SpecularLightBlinn(const float3 vWorldNormal, const float3 vLightDir, const float fSpecularExponent,
+	const float3 vEyeDir, const bool bDoSpecularWarp, in sampler specularWarpSampler, float fFresnel)
+{
+	float3 result = float3(0.0f, 0.0f, 0.0f);
+
+	float3 vReflect = 2 * vWorldNormal * dot(vWorldNormal, vEyeDir) - vEyeDir; // Reflect view through normal
+	float3 vHalfway = normalize(vLightDir + vEyeDir);
+	float3 vSpecular = saturate(dot(vWorldNormal, vLightDir));		// L.R	(use half-angle instead?)
+	vSpecular = pow(vSpecular.x, fSpecularExponent);				// Raise to specular power
+
+	// Optionally warp as function of scalar specular and fresnel
+	if (bDoSpecularWarp)
+		vSpecular *= tex2D(specularWarpSampler, float2(vSpecular.x, fFresnel)); // Sample at { (L.R)^k, fresnel }
+
+	return vSpecular;
+}
+
 void DoSpecularFlashlight( float3 flashlightPos, float3 worldPos, float4 flashlightSpacePosition, float3 worldNormal,  
 					float3 attenuationFactors, float farZ, sampler FlashlightSampler, sampler FlashlightDepthSampler, sampler RandomRotationSampler,
 					int nShadowLevel, bool bDoShadows, bool bAllowHighQuality, const float2 vScreenPos, const float fSpecularExponent, const float3 vEyeDir,

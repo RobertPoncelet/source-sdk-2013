@@ -22,7 +22,8 @@
 // SKIP: !$WORLDVERTEXTRANSITION && $NORMALMAP2
 // SKIP: !$NORMALMAP && $NORMALMAP2
 // SKIP: !$DETAILTEXTURE && ( $DETAIL_BLEND_MODE != 0 )
-// SKIP: PHONG && defined( SHADER_MODEL_PS_2_0 )
+// SKIP: $PHONG && $SHADER_MODEL_PS_2_0
+// SKIP: $SHADER_MODEL_PS_2_0
 
 #include "shader_constant_register_map.h"
 #include "common_flashlight_fxc.h"
@@ -101,6 +102,23 @@ float4 SampleNormal( sampler s, PS_INPUT i )
 
 }
 
+float3 SpecularLightBlinn2(const float3 vWorldNormal, const float3 vLightDir, const float fSpecularExponent,
+	const float3 vEyeDir, const bool bDoSpecularWarp, in sampler specularWarpSampler, float fFresnel)
+{
+	float3 result = float3(0.0f, 0.0f, 0.0f);
+
+	float3 vReflect = 2 * vWorldNormal * dot(vWorldNormal, vEyeDir) - vEyeDir; // Reflect view through normal
+	float3 vHalfway = normalize(vLightDir + vEyeDir);
+	float3 vSpecular = saturate(dot(vWorldNormal, vHalfway));		// L.R	(use half-angle instead?)
+	vSpecular = pow(vSpecular.x, fSpecularExponent);				// Raise to specular power
+
+	// Optionally warp as function of scalar specular and fresnel
+	if (bDoSpecularWarp)
+		vSpecular *= tex2D(specularWarpSampler, float2(vSpecular.x, fFresnel)); // Sample at { (L.R)^k, fresnel }
+
+	return vSpecular;
+}
+
 float4 main( PS_INPUT i ) : COLOR
 {
 	bool bBase2 = WORLDVERTEXTRANSITION ? true : false;
@@ -169,11 +187,11 @@ float4 main( PS_INPUT i ) : COLOR
 
 // ssbump
 #if ( NORMALMAP == 2 )
-
-#if NORMALMAP2
-	float3 normal2 = SampleNormal( NormalMap2Sampler, i );
-	vNormal.xyz = lerp( normal2, vNormal.xyz, lerpAlpha );
-#endif
+	#if NORMALMAP2
+		float3 normal2 = SampleNormal( NormalMap2Sampler, i );
+		vNormal.xyz = lerp( normal2, vNormal.xyz, lerpAlpha );
+	#endif
+	float3 vNormalReflect = normalize( bumpBasis[0]*vNormal.x + bumpBasis[1]*vNormal.y + bumpBasis[2]*vNormal.z);
 #else
 	// Normalize normal after all of the lerps above (including the tri/bilinear texel fetches)
 	vNormal.xyz = normalize( vNormal.xyz );
@@ -215,7 +233,7 @@ float3 vLightDir;
 	float nDotL = dot( worldPosToLightVector, vNormal.xyz );
 #endif
 
-#if NORMALMAP == 1
+#if NORMALMAP == 1 || NORMALMAP == 2
 	// flashlightfixme: wrap this!
 	float3 tangentPosToLightVector = texCUBE( NormalizingCubemapSampler, i.tangentPosToLightVector ) * 2.0f - 1.0f;
 	//vLightDir = tangentPosToLightVector;
@@ -224,20 +242,21 @@ float3 vLightDir;
 	float nDotL = dot( tangentPosToLightVector, vNormal.xyz );
 #endif
 
-#if NORMALMAP == 2
+/*#if NORMALMAP == 2
 	float3 tangentPosToLightVector = normalize( i.tangentPosToLightVector );
 	//vLightDir = tangentPosToLightVector;
 	vLightDir = float3(dot(tangentPosToLightVector,bumpBasis[0]), dot(tangentPosToLightVector,bumpBasis[1]), dot(tangentPosToLightVector,bumpBasis[2]));
 	float nDotL = dot(vNormal, vLightDir);
-		//vNormal.x*dot( tangentPosToLightVector, bumpBasis[0]) +
-		//vNormal.y*dot( tangentPosToLightVector, bumpBasis[1]) +
-		//vNormal.z*dot( tangentPosToLightVector, bumpBasis[2]);
-#endif
+#endif*/
 
 float3 outColor;
 
 #if PHONG && ( FLASHLIGHTSHADOWS && ( defined( SHADER_MODEL_PS_2_B ) || defined( SHADER_MODEL_PS_3_0 ) ) )
-	float3 specular = g_PhongParams.y * vNormal.a * spotColor * saturate(nDotL) * SpecularLight(vNormal.xyz, vLightDir, g_PhongParams.x * vNormal.a, normalize(g_EyePos - i.worldPos_worldTransition.xyz), false, NULL, 1.0); // SIRE: woo
+	#if NORMALMAP == 2
+		float3 specular = g_PhongParams.y * vNormal.a * spotColor * saturate(nDotL) * SpecularLightBlinn2(vNormalReflect, vLightDir, g_PhongParams.x * vNormal.a, normalize(g_EyePos - i.worldPos_worldTransition.xyz), false, NULL, 1.0); // SIRE: woo
+	#else
+		float3 specular = g_PhongParams.y * vNormal.a * spotColor * saturate(nDotL) * SpecularLightBlinn2(vNormal.xyz, vLightDir, g_PhongParams.x * vNormal.a, normalize(g_EyePos - i.worldPos_worldTransition.xyz), false, NULL, 1.0); // SIRE: woo
+	#endif
 	outColor = spotColor * baseColor.xyz * saturate( nDotL ) + specular;
 #else
 	outColor = spotColor * baseColor.xyz * saturate( nDotL );
