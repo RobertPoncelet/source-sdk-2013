@@ -76,6 +76,7 @@ sp/src/materialsystem/stdshaders/vcslist.txt
 sp/game/mod_episodic/save/*
 sp/game/mod_episodic/screenshots/*
 sp/game/mod_episodic/*.dat
+sp/game/mod_episodic/custom/*
 sp/game/ssdk_2013_bin
 *.sav
 *.cache

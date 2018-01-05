@@ -43,10 +43,12 @@ ConVar	abh_demon_shutup("abh_demon_shutup", "0");
 class CAbhDemon : public CFastZombie
 {
 	DECLARE_CLASS(CAbhDemon, CFastZombie);
+	DECLARE_SERVERCLASS();
 
 public:
 	void Spawn(void);
 	void SetZombieModel(void);
+	void Precache(void);
 
 	virtual int TranslateSchedule(int scheduleType);
 	virtual void Activate();
@@ -86,6 +88,9 @@ DEFINE_INPUTFUNC(FIELD_STRING, "AttachToVehicle", InputAttachToVehicle),
 
 END_DATADESC()
 
+IMPLEMENT_SERVERCLASS_ST(CAbhDemon, DT_AbhDemon)
+END_SEND_TABLE();
+
 //-----------------------------------------------------------------------------
 // Purpose: 
 //
@@ -97,6 +102,12 @@ void CAbhDemon::Spawn(void)
 
 	// Don't attack mommy
 	AddClassRelationship(CLASS_CITIZEN_PASSIVE, D_NU, 100);
+}
+
+void CAbhDemon::Precache(void)
+{
+	PrecacheParticleSystem("pedestrian_headx");
+	BaseClass::Precache();
 }
 
 void CAbhDemon::Activate()
