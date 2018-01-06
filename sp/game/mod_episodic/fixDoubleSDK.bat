@@ -1,0 +1,1 @@
+powershell -Command "Get-ChildItem -path . -Recurse -Include *.vmt | Foreach-Object { (gc $_) -replace 'SDK_SDK_LightmappedGeneric', 'SDK_LightmappedGeneric' | Out-File $_" }
